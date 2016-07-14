@@ -100,9 +100,18 @@
 		D21EE7D91D322278008AE0B7 /* SybWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EE7D81D322278008AE0B7 /* SybWebViewController.m */; };
 		D21EE7DD1D3225E7008AE0B7 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EE7DC1D3225E7008AE0B7 /* MyOrderViewController.m */; };
 		D21EE7E01D3245CF008AE0B7 /* MyAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EE7DF1D3245CF008AE0B7 /* MyAttentionViewController.m */; };
-		D21EE7E31D324685008AE0B7 /* MyIntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EE7E21D324685008AE0B7 /* MyIntegralViewController.m */; };
-		F259B66A1D379654000410B3 /* MyIntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B6691D379654000410B3 /* MyIntegralViewController.xib */; };
 		F259B66E1D37A088000410B3 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B66D1D37A088000410B3 /* UIView+Extension.m */; };
+		F259B67B1D37DD6C000410B3 /* MyIntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B6791D37DD6C000410B3 /* MyIntegralViewController.m */; };
+		F259B67C1D37DD6C000410B3 /* MyIntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B67A1D37DD6C000410B3 /* MyIntegralViewController.xib */; };
+		F259B6801D37E1BE000410B3 /* BalanceOfPaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B67E1D37E1BE000410B3 /* BalanceOfPaymentsViewController.m */; };
+		F259B6811D37E1BE000410B3 /* BalanceOfPaymentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B67F1D37E1BE000410B3 /* BalanceOfPaymentsViewController.xib */; };
+		F259B6851D37E592000410B3 /* BalanceOfPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B6831D37E592000410B3 /* BalanceOfPaymentTableViewCell.m */; };
+		F259B6861D37E592000410B3 /* BalanceOfPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B6841D37E592000410B3 /* BalanceOfPaymentTableViewCell.xib */; };
+		F259B6891D37E5B2000410B3 /* BalanceOfPaymentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B6881D37E5B2000410B3 /* BalanceOfPaymentModel.m */; };
+		F259B68D1D37ED39000410B3 /* CashingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B68B1D37ED39000410B3 /* CashingViewController.m */; };
+		F259B68E1D37ED39000410B3 /* CashingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B68C1D37ED39000410B3 /* CashingViewController.xib */; };
+		F259B6951D380BC2000410B3 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B6931D380BC2000410B3 /* AddAccountViewController.m */; };
+		F259B6961D380BC2000410B3 /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B6941D380BC2000410B3 /* AddAccountViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,12 +319,26 @@
 		D21EE7DC1D3225E7008AE0B7 /* MyOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderViewController.m; sourceTree = "<group>"; };
 		D21EE7DE1D3245CF008AE0B7 /* MyAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAttentionViewController.h; sourceTree = "<group>"; };
 		D21EE7DF1D3245CF008AE0B7 /* MyAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAttentionViewController.m; sourceTree = "<group>"; };
-		D21EE7E11D324685008AE0B7 /* MyIntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIntegralViewController.h; sourceTree = "<group>"; };
-		D21EE7E21D324685008AE0B7 /* MyIntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIntegralViewController.m; sourceTree = "<group>"; };
 		D7C3699B88F3AE309E260902 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		F259B6691D379654000410B3 /* MyIntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyIntegralViewController.xib; sourceTree = "<group>"; };
 		F259B66C1D37A088000410B3 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		F259B66D1D37A088000410B3 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		F259B6781D37DD6C000410B3 /* MyIntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIntegralViewController.h; sourceTree = "<group>"; };
+		F259B6791D37DD6C000410B3 /* MyIntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIntegralViewController.m; sourceTree = "<group>"; };
+		F259B67A1D37DD6C000410B3 /* MyIntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyIntegralViewController.xib; sourceTree = "<group>"; };
+		F259B67D1D37E1BE000410B3 /* BalanceOfPaymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceOfPaymentsViewController.h; sourceTree = "<group>"; };
+		F259B67E1D37E1BE000410B3 /* BalanceOfPaymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceOfPaymentsViewController.m; sourceTree = "<group>"; };
+		F259B67F1D37E1BE000410B3 /* BalanceOfPaymentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BalanceOfPaymentsViewController.xib; sourceTree = "<group>"; };
+		F259B6821D37E592000410B3 /* BalanceOfPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceOfPaymentTableViewCell.h; sourceTree = "<group>"; };
+		F259B6831D37E592000410B3 /* BalanceOfPaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceOfPaymentTableViewCell.m; sourceTree = "<group>"; };
+		F259B6841D37E592000410B3 /* BalanceOfPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BalanceOfPaymentTableViewCell.xib; sourceTree = "<group>"; };
+		F259B6871D37E5B2000410B3 /* BalanceOfPaymentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceOfPaymentModel.h; sourceTree = "<group>"; };
+		F259B6881D37E5B2000410B3 /* BalanceOfPaymentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceOfPaymentModel.m; sourceTree = "<group>"; };
+		F259B68A1D37ED39000410B3 /* CashingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashingViewController.h; sourceTree = "<group>"; };
+		F259B68B1D37ED39000410B3 /* CashingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashingViewController.m; sourceTree = "<group>"; };
+		F259B68C1D37ED39000410B3 /* CashingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashingViewController.xib; sourceTree = "<group>"; };
+		F259B6921D380BC2000410B3 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
+		F259B6931D380BC2000410B3 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
+		F259B6941D380BC2000410B3 /* AddAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +478,7 @@
 		18B483E01D2E19C7001703C0 /* syb */ = {
 			isa = PBXGroup;
 			children = (
+				F259B66F1D37DCB2000410B3 /* MyIntegration */,
 				F259B66B1D37A088000410B3 /* Tools */,
 				18B484411D2E259D001703C0 /* Src */,
 				18B484291D2E23CF001703C0 /* Base */,
@@ -714,9 +738,6 @@
 				18730A9C1D2F68A300A0BF35 /* ChangePassWordViewController.m */,
 				D21EE7DE1D3245CF008AE0B7 /* MyAttentionViewController.h */,
 				D21EE7DF1D3245CF008AE0B7 /* MyAttentionViewController.m */,
-				D21EE7E11D324685008AE0B7 /* MyIntegralViewController.h */,
-				D21EE7E21D324685008AE0B7 /* MyIntegralViewController.m */,
-				F259B6691D379654000410B3 /* MyIntegralViewController.xib */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -879,6 +900,54 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		F259B66F1D37DCB2000410B3 /* MyIntegration */ = {
+			isa = PBXGroup;
+			children = (
+				F259B6751D37DD6C000410B3 /* Model */,
+				F259B6761D37DD6C000410B3 /* View */,
+				F259B6771D37DD6C000410B3 /* ViewController */,
+			);
+			path = MyIntegration;
+			sourceTree = "<group>";
+		};
+		F259B6751D37DD6C000410B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F259B6871D37E5B2000410B3 /* BalanceOfPaymentModel.h */,
+				F259B6881D37E5B2000410B3 /* BalanceOfPaymentModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F259B6761D37DD6C000410B3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F259B6821D37E592000410B3 /* BalanceOfPaymentTableViewCell.h */,
+				F259B6831D37E592000410B3 /* BalanceOfPaymentTableViewCell.m */,
+				F259B6841D37E592000410B3 /* BalanceOfPaymentTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F259B6771D37DD6C000410B3 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F259B6781D37DD6C000410B3 /* MyIntegralViewController.h */,
+				F259B6791D37DD6C000410B3 /* MyIntegralViewController.m */,
+				F259B67A1D37DD6C000410B3 /* MyIntegralViewController.xib */,
+				F259B67D1D37E1BE000410B3 /* BalanceOfPaymentsViewController.h */,
+				F259B67E1D37E1BE000410B3 /* BalanceOfPaymentsViewController.m */,
+				F259B67F1D37E1BE000410B3 /* BalanceOfPaymentsViewController.xib */,
+				F259B68A1D37ED39000410B3 /* CashingViewController.h */,
+				F259B68B1D37ED39000410B3 /* CashingViewController.m */,
+				F259B68C1D37ED39000410B3 /* CashingViewController.xib */,
+				F259B6921D380BC2000410B3 /* AddAccountViewController.h */,
+				F259B6931D380BC2000410B3 /* AddAccountViewController.m */,
+				F259B6941D380BC2000410B3 /* AddAccountViewController.xib */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -985,11 +1054,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F259B6861D37E592000410B3 /* BalanceOfPaymentTableViewCell.xib in Resources */,
 				18B483F11D2E19C7001703C0 /* LaunchScreen.storyboard in Resources */,
-				F259B66A1D379654000410B3 /* MyIntegralViewController.xib in Resources */,
+				F259B67C1D37DD6C000410B3 /* MyIntegralViewController.xib in Resources */,
 				18B483EE1D2E19C7001703C0 /* Assets.xcassets in Resources */,
+				F259B6961D380BC2000410B3 /* AddAccountViewController.xib in Resources */,
 				18B484251D2E2183001703C0 /* Podfile in Resources */,
 				18B483EC1D2E19C7001703C0 /* Main.storyboard in Resources */,
+				F259B68E1D37ED39000410B3 /* CashingViewController.xib in Resources */,
+				F259B6811D37E1BE000410B3 /* BalanceOfPaymentsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,6 +1137,7 @@
 			files = (
 				18D34FC51D339902002CE8E0 /* GoodsSearchResultViewController.m in Sources */,
 				18730A9F1D2F68A300A0BF35 /* FeedBackViewController.m in Sources */,
+				F259B6851D37E592000410B3 /* BalanceOfPaymentTableViewCell.m in Sources */,
 				18B484C11D2E411A001703C0 /* good320Model.m in Sources */,
 				18B484591D2E262D001703C0 /* MeViewController.m in Sources */,
 				18B483E91D2E19C7001703C0 /* ViewController.m in Sources */,
@@ -1072,6 +1146,7 @@
 				18730A881D2F685700A0BF35 /* VerificationViewController.m in Sources */,
 				18B484321D2E247F001703C0 /* BaseViewController.m in Sources */,
 				18B484991D2E2A5B001703C0 /* UILabel+Additional.m in Sources */,
+				F259B6891D37E5B2000410B3 /* BalanceOfPaymentModel.m in Sources */,
 				D21EE7E01D3245CF008AE0B7 /* MyAttentionViewController.m in Sources */,
 				18B484C01D2E411A001703C0 /* brandModel.m in Sources */,
 				18D34FB81D3398EC002CE8E0 /* ShopsSearchModel.m in Sources */,
@@ -1118,6 +1193,7 @@
 				18922B291D37311900B82890 /* AppDelegate+Request.m in Sources */,
 				18B4849E1D2E2A5B001703C0 /* NSDate+Additions.m in Sources */,
 				181A663A1D34B6C500ABDE29 /* OrderItem.m in Sources */,
+				F259B68D1D37ED39000410B3 /* CashingViewController.m in Sources */,
 				181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */,
 				18B484501D2E260C001703C0 /* ShopsViewController.m in Sources */,
 				18730AA91D2F68B800A0BF35 /* GeneralTextFiledViewController.m in Sources */,
@@ -1126,6 +1202,7 @@
 				D21EE7D21D320E56008AE0B7 /* MeHeaderLoginView.m in Sources */,
 				18B4849B1D2E2A5B001703C0 /* NSString+MD5.m in Sources */,
 				18B4844D1D2E2603001703C0 /* GoodsViewController.m in Sources */,
+				F259B67B1D37DD6C000410B3 /* MyIntegralViewController.m in Sources */,
 				18730A9E1D2F68A300A0BF35 /* ContactUsViewController.m in Sources */,
 				18730A8F1D2F686500A0BF35 /* VerifyViewController.m in Sources */,
 				18B484A41D2E2A5B001703C0 /* NSTimer+Addition.m in Sources */,
@@ -1136,19 +1213,20 @@
 				18730AA01D2F68A300A0BF35 /* ChangePassWordViewController.m in Sources */,
 				18922B1D1D372FB300B82890 /* ShopsCell.m in Sources */,
 				18730AAD1D2F68D900A0BF35 /* MessageModel.m in Sources */,
+				F259B6951D380BC2000410B3 /* AddAccountViewController.m in Sources */,
 				18B484561D2E2623001703C0 /* CartViewController.m in Sources */,
 				18B484A31D2E2A5B001703C0 /* NSString+FontAwesome.m in Sources */,
 				181A66341D34A59700ABDE29 /* OrderCell.m in Sources */,
 				18B483E61D2E19C7001703C0 /* AppDelegate.m in Sources */,
 				18D34FB41D3398EC002CE8E0 /* SearchTextField.m in Sources */,
 				18D34FC41D339902002CE8E0 /* GoodsSearchModel.m in Sources */,
+				F259B6801D37E1BE000410B3 /* BalanceOfPaymentsViewController.m in Sources */,
 				18730AB51D2F691A00A0BF35 /* SingleManage.m in Sources */,
 				18293A041D339223003ACD40 /* AppDelegate+KeyboardManager.m in Sources */,
 				18730ABC1D2F69AE00A0BF35 /* TimeTool.m in Sources */,
 				18B484981D2E2A5B001703C0 /* UIView+Additional.m in Sources */,
 				18730A8E1D2F686500A0BF35 /* ForgetPasswordViewController.m in Sources */,
 				18730AB91D2F694600A0BF35 /* CustomTextField.m in Sources */,
-				D21EE7E31D324685008AE0B7 /* MyIntegralViewController.m in Sources */,
 				18B483E31D2E19C7001703C0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

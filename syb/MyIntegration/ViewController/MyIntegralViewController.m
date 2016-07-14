@@ -8,6 +8,8 @@
 //
 
 #import "MyIntegralViewController.h"
+#import "BalanceOfPaymentsViewController.h"
+#import "CashingViewController.h"
 #import <UIImageView+WebCache.h>
 #import "SybSession.h"
 @interface MyIntegralViewController()
@@ -47,6 +49,8 @@
     [self showBackButton:YES];
     user = [SybSession sharedSession];
     
+    [self.RightBtn addTarget:self action:@selector(toBalanceVC:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 -(void)viewDidLayoutSubviews
@@ -74,7 +78,8 @@
 #pragma mark - btnAction
 - (IBAction)cash:(UIButton *)sender
 {
-    
+    CashingViewController *pushVC = [[CashingViewController alloc] initWithNibName:@"CashingViewController" bundle:nil];
+    [self.navigationController pushViewController:pushVC animated:YES];
 }
 - (IBAction)payTheTelephone:(UIButton *)sender
 {
@@ -83,6 +88,12 @@
 - (IBAction)payTheGasoline:(UIButton *)sender
 {
     
+}
+
+-(void)toBalanceVC:(UIButton *)sender
+{
+    BalanceOfPaymentsViewController *pushVC = [[BalanceOfPaymentsViewController alloc] initWithNibName:@"BalanceOfPaymentsViewController" bundle:nil];
+    [self.navigationController pushViewController:pushVC animated:YES];
 }
 #pragma mark - end btnAction
 @end
