@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *userIV;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *lineHeights;
@@ -47,18 +46,17 @@
     [self setNavTitle:@"我的积分"];
     [self showBackButton:YES];
     user = [SybSession sharedSession];
-    [self setUpUI];
+    
 }
 
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
+    [self setUpUI];
 }
 - (void)setUpUI
 {
     self.contentViewWidth.constant = [UIScreen mainScreen].bounds.size.width;
-    self.contentViewHeight.constant = 1000;
     // Do any additional setup after loading the view.
     self.Customview.backgroundColor = [UIColor clearColor];
     [self.RightBtn setTitle:@"收支明细" forState:UIControlStateNormal];
@@ -70,5 +68,21 @@
     self.userName.text = user.userName;
     
     [self.lineHeights setValue:@0.5 forKey:@"constant"];
+    [self.contentView sizeToFit];
+    
 }
+#pragma mark - btnAction
+- (IBAction)cash:(UIButton *)sender
+{
+    
+}
+- (IBAction)payTheTelephone:(UIButton *)sender
+{
+    
+}
+- (IBAction)payTheGasoline:(UIButton *)sender
+{
+    
+}
+#pragma mark - end btnAction
 @end
