@@ -14,64 +14,28 @@
 {
     self = [super init];
     if (self) {
-       self.title = @"个人资料";
+       
     }
     return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self initBackButton];
+
      [MobClick beginLogPageView:@"个人资料"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTabbarButton" object:@YES];
-    
+  
+    [self setTabBarHide:YES];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
-    [saveButton removeFromSuperview];
+   
     [MobClick endLogPageView:@"个人资料"];
  
 }
 //页面设置的相关方法
--(void)PageSetup
-{
-    self.navigationController.navigationBarHidden = NO;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.tabBarController.tabBar.hidden = YES;
-    self.navigationItem.hidesBackButton = YES;
-}
--(void)initBackButton
-{
-    if(!backButton)
-    {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
 
-    }
-    [self.navigationController.navigationBar addSubview:backButton];
-    
-    if (!saveButton) {
-        saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        saveButton.frame = CGRectMake(SCREEN_WIDTH-54, 0, 44, 44);
-        [saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        [saveButton setTitleColor:ThemeColor forState:UIControlStateNormal];
-        [saveButton addTarget:self action:@selector(saveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:saveButton];
-  
-}
--(void)backButtonClick:(UIButton*)sender
-{
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
-}
+
 -(void)saveButtonClick:(UIButton*)sender
 {
     UILabel * label1 = (UILabel*)[self.view viewWithTag:1001];
@@ -109,44 +73,53 @@
 
     NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:label1.text,@"nickname",sex,@"sex",label3.text,@"user_desc",label4.text,@"baby_name",babysex,@"baby_sex",label6.text,@"baby_birthday", nil];
         NSLog(@"%@",postDict);
-        [HDHud showHUDInView:self.view title:@"修改中..."];
-        
-        GXHttpRequest * request = [[GXHttpRequest alloc]init];
-        [request StartWorkPostWithurlstr:URL_ChangeUserInfo pragma:postDict ImageData:_imgData];
-        request.successGetData = ^(id obj){
-            //加载框消失
+  
+    [HDHud showHUDInView:self.view title:@"保存中"];
+    
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_ChangeUserInfo pragma:postDict ImageDatas:_imgData imageName:@"user_photo"];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            
             [HDHud hideHUDInView:self.view];
             
-            NSString * code = [obj valueForKey:@"code"];
-            NSString * message = [obj valueForKey:@"message"];
-            
-            if ([code isEqualToString:@"1"]) {
-                
-                [HDHud showMessageInView:self.view title:message];
-                [self saveUserInfo:[obj valueForKey:@"result"]];
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:[obj valueForKey:@"result"]];
-                
-                [self performSelector:@selector(backMine) withObject:nil afterDelay:1.5];
-                
-            }else if ([code isEqualToString:@"0"])
-            {
-                [HDHud showMessageInView:self.view title:message];
+        
+            if (!userSession) {
+                    userSession = [SybSession sharedSession];
             }
+            NSMutableDictionary * userDict = [response valueForKey:@"result"];
             
+            [self saveUserInfo:userDict];
+                
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:userDict];
+                
+            [self performSelector:@selector(backMine) withObject:nil afterDelay:1.5];
+         
             
-        };
-        request.failureGetData = ^(void){
-            
-            [HDHud hideHUDInView:self.view];
-            [HDHud showNetWorkErrorInView:self.view];
-        };
+        }
         
-}
+    } DataFaiure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showMessageInView:self.view title:error];
+    } Failure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showNetWorkErrorInView:self.view];
+    }];
+    
 
+    
+    
+    
+    
+}
 -(void)saveUserInfo:(NSMutableDictionary*)dict
 {
     NSLog(@"……………………^_^ %@",dict);
-
+    
     [UserDefaultsUtils saveValue:[dict valueForKey:@"user_name"] forKey:@"user_name"];
     [UserDefaultsUtils saveValue:[dict valueForKey:@"user_photo"] forKey:@"user_photo"];
     [UserDefaultsUtils saveValue:[dict valueForKey:@"nickname"] forKey:@"nickname"];
@@ -160,20 +133,23 @@
     
     
     //单例取值
-    SM = [SingleManage shareManage];
-    SM.userName = [UserDefaultsUtils valueWithKey:@"user_name"];
-    SM.imageURL = [UserDefaultsUtils valueWithKey:@"user_photo"];
-    SM.nickName  = [UserDefaultsUtils valueWithKey:@"nickname"];
-    SM.birthday = [UserDefaultsUtils valueWithKey:@"birthday"];
-    SM.userSex = [UserDefaultsUtils valueWithKey:@"sex"];
-    SM.userMoney = [UserDefaultsUtils valueWithKey:@"user_money"];
-    SM.userdesc = [UserDefaultsUtils valueWithKey:@"user_desc"];
-    SM.babyName = [UserDefaultsUtils valueWithKey:@"baby_name"];
-    SM.babySex = [UserDefaultsUtils valueWithKey:@"baby_sex"];
-    SM.babyBirthday = [UserDefaultsUtils valueWithKey:@"baby_birthday"];
-    SM.isLogin = YES;
-
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
+    userSession.userName = [UserDefaultsUtils valueWithKey:@"user_name"];
+    userSession.imageURL = [UserDefaultsUtils valueWithKey:@"user_photo"];
+    userSession.nickName  = [UserDefaultsUtils valueWithKey:@"nickname"];
+    userSession.birthday = [UserDefaultsUtils valueWithKey:@"birthday"];
+    userSession.userSex = [UserDefaultsUtils valueWithKey:@"sex"];
+    userSession.userMoney = [UserDefaultsUtils valueWithKey:@"user_money"];
+    userSession.userdesc = [UserDefaultsUtils valueWithKey:@"user_desc"];
+    userSession.babyName = [UserDefaultsUtils valueWithKey:@"baby_name"];
+    userSession.babySex = [UserDefaultsUtils valueWithKey:@"baby_sex"];
+    userSession.babyBirthday = [UserDefaultsUtils valueWithKey:@"baby_birthday"];
+    userSession.isLogin = YES;
+    
 }
+
 
 //初始化相关控件
 - (void)viewDidLoad {
@@ -186,6 +162,16 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(introduceChange:) name:@"introduceChange" object:nil];
     [self initSM];
     [self setlayout];
+    
+     [self setNavTitle:@"个人资料"];
+    [self showBackButton:YES];
+    
+    [self.RightBtn setTitle:@"保存" forState:UIControlStateNormal
+     ];
+    self.RightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [self.RightBtn addTarget:self action:@selector(saveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     
 }
 -(void)nickNameChange:(NSNotification*)notification
@@ -209,15 +195,17 @@
 }
 -(void)initSM
 {
-    SM = [SingleManage shareManage];
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     
-    _userphoto = [NSString stringWithFormat:@"%@",SM.imageURL];
-    _nickName  = SM.nickName;
-    _userSex   = SM.userSex;
-    _babyName = SM.babyName;
-    _babySex  = SM.babySex;
-    _babyBirthDay   = SM.babyBirthday;
-    _userdesc = SM.userdesc;
+    _userphoto = [NSString stringWithFormat:@"%@",userSession.imageURL];
+    _nickName  = userSession.nickName;
+    _userSex   = userSession.userSex;
+    _babyName = userSession.babyName;
+    _babySex  = userSession.babySex;
+    _babyBirthDay   = userSession.babyBirthday;
+    _userdesc = userSession.userdesc;
     
     
 }
@@ -335,7 +323,10 @@
         
     }
     
-    SM = [SingleManage shareManage];
+    
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     
     switch (indexPath.section) {
         case 0:
@@ -355,7 +346,7 @@
             if (!_upload_image) {
                 
                 if ([_userphoto isEmpty]) {
-                    userPhoto.image = [UIImage imageNamed:@"face"];
+                    userPhoto.image = [UIImage imageNamed:@"touxiang"];
                 }else
                 {
                     NSString * imageURL = _userphoto;
@@ -492,7 +483,9 @@
                     GeneralTextFiledViewController * genralTextFiledVc = [[GeneralTextFiledViewController alloc]init];
                     genralTextFiledVc.title = @"昵称";
                     genralTextFiledVc.TFtype = @"昵称";
+                    genralTextFiledVc.isPresent = YES;
                     UINavigationController * genralTextFiledNc = [[UINavigationController alloc]initWithRootViewController:genralTextFiledVc];
+        
                     [self.navigationController presentViewController:genralTextFiledNc animated:YES completion:nil];
            
                 }
@@ -509,6 +502,7 @@
                     case 2:
                 {
                     IntroductionViewController * introductionVC = [[IntroductionViewController alloc]init];
+                    introductionVC.isPresent = YES;
                     introductionVC.title = @"自我介绍";
                     UINavigationController * introductionNC = [[UINavigationController alloc]initWithRootViewController:introductionVC];
                     [self.navigationController presentViewController:introductionNC animated:YES completion:nil];
@@ -527,6 +521,7 @@
                     GeneralTextFiledViewController * genralTextFiledVc = [[GeneralTextFiledViewController alloc]init];
                     genralTextFiledVc.title = @"宝贝昵称";
                     genralTextFiledVc.TFtype = @"宝贝昵称";
+                    genralTextFiledVc.isPresent = YES;
                     UINavigationController * genralTextFiledNc = [[UINavigationController alloc]initWithRootViewController:genralTextFiledVc];
                     [self.navigationController presentViewController:genralTextFiledNc animated:YES completion:nil];
                     

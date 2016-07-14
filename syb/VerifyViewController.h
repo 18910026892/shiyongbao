@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
-@interface VerifyViewController : UIViewController
+@interface VerifyViewController : BaseViewController
 {
-    UIButton * backButton;
+
     UILabel * phoneNumberLabel;
     UILabel * verficationCodeLabel;
     UIView * TFView;

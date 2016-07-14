@@ -11,13 +11,13 @@
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVMediaFormat.h>
 #import <UIImageView+WebCache.h>
-@interface UserInfoViewController : UIViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface UserInfoViewController : BaseViewController<UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 {
-    UIButton * backButton;
-    UIButton * saveButton;
+  
     
-    SingleManage * SM;
-    UIBarButtonItem * right;
+   SybSession * userSession;
+    
+
     UITableView * table;
     UIImageView * userPhoto;
     UILabel * cellTitle;

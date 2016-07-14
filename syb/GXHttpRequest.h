@@ -1,23 +1,44 @@
 //
 //  GXHttpRequest.h
-//  ShiHuoBang
+//  syb
 //
-//  Created by 光明天下 on 15/3/27.
-//  Copyright (c) 2015年 Gongxin. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <AFHTTPRequestOperation.h>
-#import <AFHTTPRequestOperationManager.h>
+#import "OpenUDID.h"
+#import "SybSession.h"
+#import "NSString+MD5.h"
 @interface GXHttpRequest : NSObject
 
--(void)StartWorkWithUrlstr:(NSString *)str;
--(void)StartWorkPostWithurlstr:(NSString *)str pragma:(NSDictionary *)dict ImageData:(NSData *)data;
-@property(nonatomic,copy)void(^successGetData)(id);
-@property(nonatomic,copy)void(^failureGetData)();
+typedef void(^successGetData)(id response);
+typedef void(^failureData)(id error);
+typedef void(^failureGetData)(id error);
+
+@property(nonatomic,strong) successGetData successBlock;
+@property(nonatomic,strong) failureData failureDataBlock;
+@property(nonatomic,strong) failureGetData failureBlock;
+
+@property(nonatomic,copy)void(^FiledownloadedTo)(NSURL*);
+@property(nonatomic,copy)void(^FileuploadedTo)(id);
 
 
-//设备信息
+//Get请求
+-(void)RequestDataWithUrl:(NSString*)urlString;
+//post请求
+-(void)RequestDataWithUrl:(NSString*)urlString pragma:(NSDictionary*)pragmaDict;
+//带图片Post请求
+-(void)RequestDataWithUrl:(NSString*)urlString pragma:(NSDictionary*)pragmaDict ImageDatas:(id)data imageName:(id)imageName;
+//下载
+-(void)StartDownloadTaskWithUrl:(NSString*)urlString;
+//上传
+-(void)StartUploadTaskTaskWithUrl:(NSString*)urlString;
+
+//结果回调
+-(void)getResultWithSuccess:(successGetData)success DataFaiure:(failureData)datafailure Failure:(failureGetData)failure;
+
+
 //设备名称
 @property (nonatomic,copy)NSString * deviceName;
 //设备模型
@@ -43,6 +64,7 @@
 @property (nonatomic,copy)NSString * networkType;
 //MD5加密串
 @property (nonatomic,copy)NSString * sign ;
+
 
 
 @end

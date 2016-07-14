@@ -2,61 +2,168 @@
 //  Macros.h
 //  syb
 //
-//  Created by GX on 15/9/17.
-//  Copyright (c) 2015年 GX. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
-#ifndef syb_Macros_h
-#define syb_Macros_h
-#pragma mark - 系统库
-#import <Availability.h>
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import <CoreData/CoreData.h>
-#pragma mark -
-#pragma mark 工具类
-#import "GXHttpRequest.h"
-#import "UserDefaultsUtils.h"
-#import "HDHud.h"
-#import "NSString+Validation.h"
-#import "NSString+MD5.h"
-#import "GTMBase64.h"
-#import "GTMDefines.h"
-#import "RemindFrameHandler.h"
-#import "OpenUDID.h"
-#import "UIColor+Foundation.h"
-#import "NSDate+Tools.h"
-#import "NSArray+Other.h"
-#import "UIWebView+SybWebView.h"
-#import "TimeTool.h"
-#pragma mark -
-#pragma mark Model类
-#import "SingleManage.h"
-#import "Config.h"
+#ifndef Macros_h
+#define Macros_h
+
 #pragma mark -
 #pragma mark Lib类
-#import <ZBarSDK.h>
-#import <iflyMSC/iflyMSC.h>
+#import <UMMobClick/MobClick.h>
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
 #import <MJRefresh.h>
 #import <MJExtension.h>
-#import <MobClick.h>
+#import "HDHud.h"
+#import "BKHelper.h"
+#import "TimeTool.h"
+
+#pragma mark -
+#pragma mark 基类
+
+#import "BaseViewController.h"
+#import "BaseTabBarController.h"
+#import "BaseCell.h"
+
+#pragma mark -
+#pragma mark 类别
+#import "NSString+Additions.h"
+#import "UILabel+Additional.h"
+#import "UIButton+Addtional.h"
+#import "UIView+Additional.h"
+#import "NSString+Validation.h"
+#pragma mark -
+#pragma mark 网络请求
+#import "GXHttpRequest.h"
+
+
+
+#pragma mark -
+#pragma mark 持久化
+#import "UserDefaultsUtils.h"
+
+#pragma mark -
+#pragma mark 单例
+#import "SingleManage.h"
+#import "SybSession.h"
 
 #pragma mark -
 #pragma mark 打印日志
 //DEBUG  模式下打印日志,当前行
-//#define GTDEBUG 0
 #define GTDEBUG 1
 #if GTDEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
 #else
 #define NSLog(...)
 #endif
-#pragma mark -
-#pragma mark 各种判断宏
-//各种各样的判断
+
+
+
+//Layout 布局类宏命令
+#define kMainScreenHeight   ([UIScreen mainScreen].bounds).size.height //屏幕的高度
+#define kMainScreenWidth    ([UIScreen mainScreen].bounds).size.width //屏幕的宽度
+#define WIDTH_VIEW(view) CGRectGetWidth(view.frame)
+#define HEIGHT_VIEW(view) CGRectGetHeight(view.frame)
+#define VIEW_MAXX(view) CGRectGetMaxX(view.frame)
+#define VIEW_MAXY(view) CGRectGetMaxY(view.frame)
+
+//控件的尺寸
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define WIDTH_VIEW(view) CGRectGetWidth(view.frame)
+#define HEIGHT_VIEW(view) CGRectGetHeight(view.frame)
+#define VIEW_MAXX(view) CGRectGetMaxX(view.frame)
+#define VIEW_MAXY(view) CGRectGetMaxY(view.frame)
+
+//适配 利器宏命令
+#define Proportion ([UIScreen mainScreen].bounds.size.width/320)
+
+#define kTabBarHeight                        49.0f
+#define kNaviBarHeight                       44.0f
+#define kHeightFor4InchScreen                568.0f
+#define kHeightFor3p5InchScreen              480.0f
+#define kStatusBarHeight                     [UIApplication sharedApplication].statusBarFrame.size.height
+#define kRect(x, y, w, h)    CGRectMake(x, y, w, h)
+#define kSize(w, h)                          CGSizeMake(w, h)
+#define kPoint(x, y)                         CGPointMake(x, y)
+
+#define kSeparatorCellHeight 10.0f // 分割cell的高度
+
+
+
+//字体
+#define KTitleFont   @"STHeitiSC-Medium"
+#define KContentFont @"Helvetica"
+#define KHeitiFont   @"Heiti SC"
+
+
+//颜色
+/// 通过RGBA设置颜色，使用0x格式，如：RGBAAllColor(0xAABBCC, 0.5);
+#define RGBAAllColor(rgb, a) [UIColor colorWithRed:((float)((rgb & 0xFF0000) >> 16))/255.0  \
+green:((float)((rgb & 0xFF00) >> 8))/255.0     \
+blue:((float)(rgb & 0xFF))/255.0              \
+alpha:(a)/1.0]
+
+/// 通过RGB设置颜色，使用0x格式，如：RGBAAllColor(0xAABBCC);
+#define RGBAllColor(rgb) RGBAAllColor(rgb, 1.0)
+#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f \
+alpha:(a)]
+
+#define HexRGBAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:(a)]
+#define GXRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
+
+
+
+/** 项目默认背景颜色 */
+#define kDefaultBackgroundColor     RGBACOLOR(241.f, 241.f, 241.f, 1.f)
+
+//项目主题色
+#define ThemeColor [UIColor colorWithRed:240.0/255.0f green:47.0/255.0f blue:111.0/255.0f alpha:1]
+/** 标签栏颜色 */
+#define kTabBarBackColor     RGBACOLOR(250.f, 250.f, 250.f,1.f)
+/** 标签栏文字选中颜色 */
+#define kTabBarItemSelectColor     RGBACOLOR(240.f, 47.f,111.f, 1.f)
+/**  标签栏文字未选中颜色 */
+#define kTabBarItemNomalColor     RGBACOLOR(81.f, 88.f, 101.f, 1.f)
+/**  聊天名字颜色 */
+#define kNameColor     RGBACOLOR(255, 183.f, 10.f, 1.f)
+
+/** 导航栏背景颜色 */
+#define kNavBackGround  RGBACOLOR(248.f, 248.f, 248.f,1.f)
+/** 导航栏按钮颜色 */
+#define kNavTintColor RGBCOLOR(221.f, 221.f, 221.f)
+/** 导航栏Title */
+#define kNavTitleColor RGBCOLOR(1.f, 1.f,1.f)
+
+/** 黑色输入框背景*/
+#define kTextFieldColor RGBCOLOR(32.f, 33.f, 34.f)
+
+/** 黑色输入框默认文字色*/
+#define kTextFieldPlaceHolderColor RGBCOLOR(71.f, 72.f, 73.f)
+
+/** 白色输入框边框 */
+#define kTextFieldGrayLayerColor RGBCOLOR(46.f, 46.f, 46.f)
+
+/** 滑动条红色 */
+#define kSliderRedColor RGBCOLOR(216.f, 55.f, 73.f)
+
+/** 主要文字颜色 */
+#define kMainFontColor RGBCOLOR(238.f, 238.f, 238.f)
+
+/** 辅助文字颜色 */
+#define kAiderFontColor RGBCOLOR(161.f, 161.f, 161.f)
+
+
+/** 高亮文字颜色 */
+#define kTipsFontColor RGBCOLOR(187.f, 187.f, 187.f)
+
+
+/** 分割线 */
+#define kSeparatorLineColor RGBCOLOR(230.0f, 230.0f, 230.0f)
+
 //字符串是否为空
 #define IsStrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref)isEqualToString:@""]))
 #define ISNIL(variable) (variable==nil)
@@ -65,41 +172,76 @@
 //字典数据是否有效
 #define IS_DICTIONARY_CLASS(variable) ((!ISNIL(variable))&&([variable  isKindOfClass:[NSDictionary class]])&&([((NSDictionary *)variable) count]>0))
 //数组数据是否有效
-#define IS_ARRAY_CLASS(variable) ((!ISNIL(variable))&&([variable  isKindOfClass:[NSArray class]])&&([((NSArray *)variable) count]>0))
+#define IS_ARRAY_CLASS(variable) ((!ISNIL(variable))&&([variable  isKindOfClass:[NSArray class]]))
 //数字类型是否有效
 #define IS_NUMBER_CLASS(variable) ((!ISNIL(variable))&&([variable  isKindOfClass:[NSNumber class]]))
 //字符串是否有效
 #define IS_EXIST_STR(str) ((nil != (str)) &&([(str) isKindOfClass:[NSString class]]) && (((NSString *)(str)).length > 0))
+
 #pragma mark -
 #pragma mark 设备系统版本、尺寸、字体、颜色 相关配置
-
-//判断机型
-#define iPhone4S (CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size))
-#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 //判断程序的版本
 #define IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] <= 7.0)
-#define IOS_9 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0f)
-//控件的尺寸
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
-#define WIDTH_VIEW(view) CGRectGetWidth(view.frame)
-#define HEIGHT_VIEW(view) CGRectGetHeight(view.frame)
-#define VIEW_MAXX(view) CGRectGetMaxX(view.frame)
-#define VIEW_MAXY(view) CGRectGetMaxY(view.frame)
-//适配ip6 ip6+ 利器宏命令
-#define Proportion ([UIScreen mainScreen].bounds.size.width/320)
+#define IOS_8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f)
 
-#define GXRandomFont [UIFont systemFontOfSize:((arc4random() % 4) + 12)*([UIScreen mainScreen].bounds.size.width/320)]
-//APP STORE 下载地址
-#define AppStoreUrl @"https://itunes.apple.com/cn/app/shi-yong-bao/id988776061?mt=8"
+//格式转化
+#define Int2String(para)  [NSString stringWithFormat:@"%i", (int)para]
+#define Float12String(float)  [NSString stringWithFormat:@"%.1f", float]
+#define Float22String(float)  [NSString stringWithFormat:@"%.2f", float]
+#define Long2String(long)  [[NSNumber numberWithLongLong:long] stringValue]
+#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
 
-//接口
-#define MAINURL @"http://app.spygmall.com/index.php?"
+
+
+#define TEXT_SPACING_FOR_LINE           4.5f    //文本行间距
+//字体
+#define FONT_NAME                       [UIFont systemFontOfSize:17.0f].familyName
+#define FONT_NAME_FOR_NUMBER            @"HelveticaNeue-Thin"
+#define FONT_NAME_FOR_SCORE             @"HelveticaNeue-Thin"
+/**********  系统通用宏  **********/
+
+#define LOGIN_NAVIGATIONCONTROLLER ((AppDelegate *)[UIApplication sharedApplication].delegate).loginNavigationController
+#define MAIN_NAVIGATIONCONTROLLER ((AppDelegate *)[UIApplication sharedApplication].delegate).mainNavigationController
+
+//设备
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+enum {
+    FrameTypeX = 0,                         //x
+    FrameTypeY = 1,                         //y
+    FrameTypeWidth = 2,                     //width
+    FrameTypeHeight = 3                     //height
+};
+typedef NSUInteger FrameType;
+
+#define Proportion375 (kMainScreenWidth/375)
+
+#define SCREEN_MAX_LENGTH (MAX(kMainScreenWidth, kMainScreenHeight))
+#define SCREEN_MIN_LENGTH (MIN(kMainScreenWidth, kMainScreenHeight))
+//析构
+#define RELEASE_MEMORY(__POINTER)   { if((__POINTER) != nil) { __POINTER = nil;  __POINTER = 0;} }//初始化
+#define DEFAULTS [NSUserDefaults standardUserDefaults]
+#define HOTSPOT_STATUSBAR_HEIGHT            20
+#define APP_STATUSBAR_HEIGHT                (CGRectGetHeight([UIApplication sharedApplication].statusBarFrame))
+#define IS_HOTSPOT_CONNECTED                (APP_STATUSBAR_HEIGHT==(SYS_STATUSBAR_HEIGHT+HOTSPOT_STATUSBAR_HEIGHT)?YES:NO)
+
+
+//HTTP服务器域名
 #define OnLineURL @"http://api.app.spygmall.com/index.php/home/client/"
 //#define OnLineURL @"http://api.app.spygmall.com/index.php/home/client/testRest"
 
+//#define OnLineURL @"http://192.168.201.5/yg-rest/rest/api"
+
+//*登陆
+
 //3.0.0 新的API
-//用户注册接口 
+//用户注册接口
 #define URL_Register  [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"Registered"]]
 //用户登录接口
 #define URL_Login  [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"SignIn"]]
@@ -251,5 +393,14 @@
 
 #define URL_GetStoreGoodsByCatId [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsByCatId"]]
 
+//商品搜索
+#define URL_SearchStoreGoodsList [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"SearchStoreGoodsList"]]
 
-#endif
+//店铺搜索
+#define URL_SearchStoreList [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"SearchStoreList"]]
+
+//订单列表
+#define URL_GoodsOrderRecord [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GoodsOrderRecord"]]
+
+
+#endif /* Macros_h */

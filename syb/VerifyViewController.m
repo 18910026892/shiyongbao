@@ -15,48 +15,34 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationItem.hidesBackButton = YES;
-    [self initBackButton];
+
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
+  
 }
--(void)initBackButton
-{
-    if (!backButton) {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    [self.navigationController.navigationBar addSubview:backButton];
-}
--(void)backButtonClick:(UIButton*)sender
-{
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
-}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = BGColor;
     self.title = @"重置密码2/2";
     [self initAgainBtn];
     [self setLayout];
+    [self setNavTitle:@"重置密码2/2"];
+    [self showBackButton:YES];
+ 
+    [self initAgainBtn];
 }
 -(void)initAgainBtn
 {
     //重新获取验证码的按钮
-    againBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    againBtn.frame = CGRectMake(0, 0, 90, 30);
-    againBtn.backgroundColor = [UIColor clearColor];
-    [againBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
-    againBI = [[UIBarButtonItem alloc]initWithCustomView:againBtn];
-    [againBtn addTarget:self action:@selector(againBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = againBI;
+
+    [self.RightBtn addTarget:self action:@selector(againBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     [self startTime];
 }
 #pragma 开启时间线程
@@ -70,10 +56,10 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                [againBtn setTitle:@"重获验证码" forState:UIControlStateNormal];
-                againBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
-                [againBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
-                againBtn.userInteractionEnabled = YES;
+                [self.RightBtn setTitle:@"重获验证码" forState:UIControlStateNormal];
+                self.RightBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+                [self.RightBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
+                self.RightBtn.userInteractionEnabled = YES;
                 
             });
         }else{
@@ -82,10 +68,10 @@
             NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                [againBtn setTitle:[NSString stringWithFormat:@"(%@)重新获取",strTime] forState:UIControlStateNormal];
-                againBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
-                [againBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
-                againBtn.userInteractionEnabled = NO;
+                [self.RightBtn setTitle:[NSString stringWithFormat:@"(%@)重新获取",strTime] forState:UIControlStateNormal];
+                self.RightBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+                [self.RightBtn setTitleColor:ThemeColor forState:UIControlStateNormal];
+                self.RightBtn.userInteractionEnabled = NO;
             });
             timeout--;
             
@@ -157,8 +143,6 @@
     [TFView addSubview:line];
     [TFView addSubview:password];
     [TFView addSubview:Tf];
-
-    [tf addSubview:againBtn];
     [self.view addSubview:TFView];
     
     //下一步按钮
@@ -187,31 +171,28 @@
 
     NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:@"for",@"bus_type",_phoneNumber,@"phone",PostMD5,@"sms_sign", nil];
     GXHttpRequest * request = [[GXHttpRequest alloc]init];
-    [request StartWorkPostWithurlstr:URL_sendCode pragma:postDict ImageData:nil];
-    request.successGetData = ^(id obj){
-        
-        NSLog(@"%@****%@",postDict,URL_sendCode);
-        
-        _sendDict = [NSMutableDictionary dictionaryWithDictionary:obj];
-        
-        NSLog(@"^^%@",_sendDict);
-        NSString * code = [_sendDict valueForKey:@"code"];
-        NSString * reason = [_sendDict valueForKey:@"message"];
-        if([code isEqualToString:@"1"])
+
+    
+    [request RequestDataWithUrl:URL_sendCode pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
         {
             
-            NSLog(@"发送成功");
-            
-        }else if([code isEqualToString:@"0"])
-        {
-            [HDHud showMessageInView:self.view title:reason];
+            //加载框消失
+           [HDHud showMessageInView:self.view title:@"验证码已经发送，请注意查收"];
+
         }
-    };
-    request.failureGetData = ^(void){
         
-        
+    } DataFaiure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showMessageInView:self.view title:error];
+    } Failure:^(id error) {
+        [HDHud hideHUDInView:self.view];
         [HDHud showNetWorkErrorInView:self.view];
-    };
+    }];
+    
 }
 -(void)ResetBtnClick:(UIButton*)sender
 {
@@ -230,40 +211,32 @@
     }else
     {
         [HDHud showHUDInView:self.view title:@"修改中..."];
+
         
         GXHttpRequest * request = [[GXHttpRequest alloc]init];
-        [request StartWorkPostWithurlstr:URL_ForgetPassWord pragma:postDict ImageData:nil];
-        request.successGetData = ^(id obj){
-            //加载框消失
-            [HDHud hideHUDInView:self.view];
-            
-            _dict = [NSMutableDictionary dictionaryWithDictionary:obj];
-            
-            NSLog(@"^^^^^^^%@",_dict);
-            
-            
-            NSNumber * code = [_dict valueForKey:@"code"];
-            NSString * result = [NSString stringWithFormat:@"%@",code];
-            NSString * reason = [_dict valueForKey:@"message"];
-            if ([result isEqualToString:@"0"]) {
-                NSLog(@"修改失败");
-                [HDHud showMessageInView:self.view title:reason];
-            }else if([result isEqualToString:@"1"])
+        
+        
+        [request RequestDataWithUrl:URL_ForgetPassWord pragma:postDict];
+        
+        [request getResultWithSuccess:^(id response) {
+            /// 加保护
+            if ([response isKindOfClass:[NSDictionary class]])
             {
-                NSLog(@"修改成功");
+                 [HDHud hideHUDInView:self.view];
+                
                 [HDHud showMessageInView:self.view title:@"修改成功"];
                 
                 [self performSelector:@selector(backLogin) withObject:nil afterDelay:1.5];
-                
-                
             }
             
-        };
-        request.failureGetData = ^(void){
-            
+        } DataFaiure:^(id error) {
+            [HDHud hideHUDInView:self.view];
+            [HDHud showMessageInView:self.view title:error];
+        } Failure:^(id error) {
             [HDHud hideHUDInView:self.view];
             [HDHud showNetWorkErrorInView:self.view];
-        };
+        }];
+
         
         
         

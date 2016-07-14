@@ -19,53 +19,19 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self initNavigationBar];
+ 
     [MobClick beginLogPageView:@"密码修改"];
+    
+    [self setTabBarHide:YES];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
-    [CompleteButton removeFromSuperview];
+
      [MobClick endLogPageView:@"密码修改"];
 }
-//页面设置的相关方法
--(void)PageSetup
-{
-    self.navigationController.navigationBarHidden = NO;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.tabBarController.tabBar.hidden = YES;
-    self.navigationItem.hidesBackButton = YES;
-    
-}
 
--(void)initNavigationBar
-{
-    if(!backButton)
-    {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:backButton];
-    
-    if (!CompleteButton) {
-        CompleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        CompleteButton.frame = CGRectMake(SCREEN_WIDTH-54, 0, 44, 44);
-        [CompleteButton setTitle:@"完成" forState:UIControlStateNormal];
-        [CompleteButton setTitleColor:ThemeColor forState:UIControlStateNormal];
-        [CompleteButton addTarget:self action:@selector(CompleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:CompleteButton];
-}
--(void)backButtonClick:(UIButton*)sender
-{
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
-}
+
 -(void)CompleteButtonClick:(UIButton*)sender
 {
     
@@ -79,8 +45,9 @@
     [ctf3 resignFirstResponder];
     
 
-    SM = [SingleManage shareManage];
- 
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     _OldPassWord = [NSString stringWithFormat:@"%@",ctf1.text];
     _NewPassWord = [NSString stringWithFormat:@"%@",ctf2.text];
     _AgainPassWord = [NSString stringWithFormat:@"%@",ctf3.text];
@@ -95,7 +62,7 @@
     }else if(![_OldPassWord isValidPassword]||![_NewPassWord isValidPassword]||![_AgainPassWord isValidPassword])
     {
         [HDHud showMessageInView:self.view title:@"密码格式错误"];
-    }else if(![_OldPassWord isEqualToString:SM.passWord])
+    }else if(![_OldPassWord isEqualToString:userSession.passWord])
     {
         [HDHud showMessageInView:self.view title:@"老密码不正确"];
         
@@ -106,38 +73,35 @@
         NSLog(@"changePassword");
         [HDHud showHUDInView:self.view title:@"修改中"];
         
-        GXHttpRequest * request = [[GXHttpRequest alloc]init];
-        [request StartWorkPostWithurlstr:URL_ChangePassWord pragma:postDict ImageData:nil];
-        request.successGetData = ^(id obj){
-            //加载框消失
-            [HDHud hideHUDInView:self.view];
-            
-            _dict = [NSMutableDictionary dictionaryWithDictionary:obj];
-
-            NSString * reason = [NSString stringWithFormat:@"%@",[_dict valueForKey:@"message"]];
-            NSString * ok = [NSString stringWithFormat:@"%@",[_dict valueForKey:@"code"]];
-            if ([ok isEqualToString:@"0"]) {
-                NSLog(@"修改失败");
-                [HDHud showMessageInView:self.view title:reason];
-            }else if([ok isEqualToString:@"1"])
+      
+        GXHttpRequest *request = [[GXHttpRequest alloc]init];
+        
+        [request RequestDataWithUrl:URL_ChangePassWord pragma:postDict];
+        
+        [request getResultWithSuccess:^(id response) {
+            /// 加保护
+            if ([response isKindOfClass:[NSDictionary class]])
             {
-                NSLog(@"修改成功");
-                [HDHud showMessageInView:self.view title:@"修改成功"];
                 
-                [self performSelector:@selector(goLogin) withObject:nil afterDelay:1.5];                
+                //加载框消失
+                [HDHud hideHUDInView:self.view];
+   
+                [HDHud showMessageInView:self.view title:@"修改成功"];
+                    
+                [self performSelector:@selector(goLogin) withObject:nil afterDelay:1.5];
+                    
+           
                 
             }
             
-          
-            
-        };
-        request.failureGetData = ^(void){
-            
+        } DataFaiure:^(id error) {
+            [HDHud hideHUDInView:self.view];
+            [HDHud showMessageInView:self.view title:error];
+        } Failure:^(id error) {
             [HDHud hideHUDInView:self.view];
             [HDHud showNetWorkErrorInView:self.view];
-        };
-        
-    
+        }];
+
         
     }
     
@@ -146,40 +110,16 @@
 
 -(void)goLogin
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_name"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_photo"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"nickname"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"birthday"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sex"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"code"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_money"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_desc"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"baby_name"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"baby_sex"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"baby_birthday"];
     
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     
-    SM = [SingleManage shareManage];
-    SM.isLogin = NO;
-    SM.userID = nil;
-    SM.userName = nil;
-    SM.nickName = nil;
-    SM.birthday = nil;
-    SM.imageURL = nil;
-    SM.userSex = nil;
-    SM.userToken = nil;
-    SM.passWord = nil;
-    SM.userMoney = nil;
-    SM.userdesc = nil;
-    SM.babySex = nil;
-    SM.babyBirthday = nil;
-    SM.babyName = nil;
+    [userSession removeUserInfo];
     
     
     [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogout" object:@"logout"];
+    
     
     NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-2] animated:YES];
@@ -191,6 +131,9 @@
 
     [self initTableView];
     
+    [self showBackButton:YES];
+    [self setNavTitle:@"密码修改"];
+    
 }
 -(void)initTableView
 {
@@ -199,7 +142,7 @@
         TableView = [[UITableView alloc]initWithFrame:CGRectMake(0,64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
         TableView.delegate = self;
         TableView.dataSource = self;
-        TableView.backgroundColor =  BGColor;
+        TableView.backgroundColor =  kDefaultBackgroundColor;
         TableView.scrollEnabled = NO;
         [self.view addSubview:TableView];
     }

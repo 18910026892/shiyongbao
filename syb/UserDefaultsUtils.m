@@ -33,7 +33,12 @@
     [userDefaults setBool:value forKey:key];
     [userDefaults synchronize];
 }
-
++(void)removeValueforKey:(NSString*)key
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:key];
+    [userDefaults synchronize];
+}
 +(void)print{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dic = [userDefaults dictionaryRepresentation];

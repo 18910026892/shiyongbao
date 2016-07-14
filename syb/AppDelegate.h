@@ -2,22 +2,22 @@
 //  AppDelegate.h
 //  syb
 //
-//  Created by GX on 15/9/17.
-//  Copyright (c) 2015年 GX. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-static NSString *appKey = @"2de77c9b51dc2973206f1751";
-static NSString *channel = @"App Store";
-static BOOL isProduction = TRUE;
+#import "BaseTabBarController.h"
+#import "SybSession.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
 {
-    SingleManage * SM;
+    SybSession * userSession;
 }
 @property (strong, nonatomic) UIWindow *window;
 
-@property (nonatomic,strong)NSMutableArray * shopCatList;
-@property (nonatomic,strong)NSMutableArray * goodCatList;
+@property (nonatomic,strong)BaseTabBarController * tabBarViewController;
+
+
+
 @end
 

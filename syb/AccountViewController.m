@@ -13,59 +13,35 @@
 {
     self = [super init];
     if (self) {
-        self.title = @"账户与安全";
+       
     }
     return self;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self initBackButton];
+
     [MobClick beginLogPageView:@"账户与安全"];
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTabbarButton" object:@YES];
+        [self setTabBarHide:YES];
+
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
     [MobClick endLogPageView:@"账户与安全"];
 
 }
-//页面设置的相关方法
--(void)PageSetup
-{
-    self.navigationController.navigationBarHidden = NO;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.tabBarController.tabBar.hidden = YES;
-    self.navigationItem.hidesBackButton = YES;
-}
 
--(void)initBackButton
-{
-    if (!backButton) {
-        
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    [self.navigationController.navigationBar addSubview:backButton];
-}
--(void)backButtonClick:(UIButton*)sender
-{
-   
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
-}
+
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     [self InitTabelView];
     [self InitLogoutButton];
+    
+    [self setNavTitle:@"账户与安全"];
+    [self showBackButton:YES];
 }
 
 -(void)InitLogoutButton
@@ -138,7 +114,9 @@
       
         [cell.contentView addSubview:cellTitleLabel];
     }
-     SM = [SingleManage shareManage];
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     switch (indexPath.section) {
         case 0:
         {
@@ -147,7 +125,7 @@
             cellImageView.hidden = YES;
         
             cellTitleLabel.frame = CGRectMake(24, 12, 200, 20);
-            cellTitleLabel.text = [NSString stringWithFormat:@"账号:%@",SM.userName];
+            cellTitleLabel.text = [NSString stringWithFormat:@"账号:%@",userSession.userName];
         }
             break;
             case 1:
@@ -157,7 +135,7 @@
             cellImageView.hidden = YES;
             
             cellTitleLabel.frame = CGRectMake(24, 12, 200, 20);
-            cellTitleLabel.text = [NSString stringWithFormat:@"邀请码:%@",SM.code];
+            cellTitleLabel.text = [NSString stringWithFormat:@"邀请码:%@",userSession.code];
         }
             break;
             case 2:
@@ -185,42 +163,15 @@
 }
 -(void)LogoutClick:(UIButton*)sender
 {
-   
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_id"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_name"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_photo"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"nickname"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"birthday"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"sex"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"code"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_money"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user_desc"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"baby_name"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"baby_sex"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"baby_birthday"];
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     
-
-    SM = [SingleManage shareManage];
-    SM.isLogin = NO;
-    SM.userID = nil;
-    SM.userName = nil;
-    SM.nickName = nil;
-    SM.birthday = nil;
-    SM.imageURL = nil;
-    SM.userSex = nil;
-    SM.userToken = nil;
-    SM.passWord = nil;
-    SM.userMoney = nil;
-    SM.userdesc = nil;
-    SM.babySex = nil;
-    SM.babyBirthday = nil;
-    SM.babyName = nil;
-        
+    [userSession removeUserInfo];
+  
         
     [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogout" object:@"logout"];
-    NSLog(@"确认一下发送没");
+  
     
     NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];

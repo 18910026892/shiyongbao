@@ -2,70 +2,34 @@
 //  GoodsViewController.h
 //  syb
 //
-//  Created by GX on 15/10/28.
-//  Copyright © 2015年 GX. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "GoodsCell.h"
-#import "GoodsModel.h"
-#import "DOPDropDownMenu.h"
+#import "BaseViewController.h"
+#import "brandModel.h"
+#import "good320Model.h"
+#import "BrandCell.h"
+#import "GoodsTableViewCell.h"
 
-@interface GoodsViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,DOPDropDownMenuDataSource, DOPDropDownMenuDelegate>
-{
-    UIButton * backButton;
-    
-    UITableView * TableView;
+@interface GoodsViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
-    
-    DOPDropDownMenu * menuView;
-    
-    SingleManage * SM;
-    
-}
+@property (nonatomic,strong)UITableView * TableView;
 
-@property BOOL Finish;
-//返回值的数组
-@property (nonatomic,strong)NSMutableDictionary * backDict;
+@property (nonatomic,strong)NSMutableArray * brandArray;
 
-//筛选数组
-@property (nonatomic,strong)NSMutableArray *ScreeningArray;
+@property (nonatomic,strong)NSMutableArray * brandModelArray;
 
-//排序对象字典
-@property (nonatomic,strong)NSMutableDictionary * SortDict;
+@property (nonatomic,strong)NSMutableArray * brandListArray;
 
-//元素1数组
-@property (nonatomic,strong)NSMutableArray * Item1Array;
-//元素2数组
-@property (nonatomic,strong)NSMutableArray * Item2Array;
+@property (nonatomic,strong)NSMutableArray * goodArray;
 
-@property (nonatomic,strong)NSMutableArray * FinalArray;
+@property (nonatomic,strong)NSMutableArray * goodModelArray;
 
-//是否刷新的标志
-@property(nonatomic,assign)BOOL update;
+@property (nonatomic,strong)NSMutableArray * goodListArray;
 
-//请求数据传递的参数
-@property (nonatomic,copy)NSString * cat_id;
+@property(nonatomic,copy)NSString * page;
+@property(nonatomic,copy)NSString * cat_id;
 
-//页面参数
-@property (nonatomic,copy)NSString * page;
 
-//传参字典
-@property (nonatomic,strong)NSMutableDictionary * paraDict;
-
-@property (nonatomic,strong)NSMutableDictionary * postDict;
-
-@property (nonatomic,strong)NSMutableDictionary * FirstDict;
-
-//未知筛选条件参数
-@property (nonatomic,copy)NSString * screeningKey;
-
-//解析到的对象字典
-@property (nonatomic,strong)NSMutableDictionary * objDict;
-
-//数据模型数组
-@property (nonatomic,strong)NSArray * ModelArray;
-
-//商品列表页面的商品列表数组
-@property (nonatomic,strong)NSMutableArray * GoodsList;
 @end

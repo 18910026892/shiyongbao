@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContactUsViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface ContactUsViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 {
-    UIButton * backButton;
+
     
     UITableView * TableView;
     

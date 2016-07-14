@@ -8,15 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IntroductionViewController : UIViewController<UITextViewDelegate>
+@interface IntroductionViewController : BaseViewController<UITextViewDelegate>
 {
-    UIButton * backButton;
-    UIButton * CompleteButton;
 
     UILabel * label1,*label2;
     UITextView * Tv;
     UIView * TvBGView;
-    SingleManage * SM;
+    SybSession * userSession;
 }
 @property NSInteger count;
 

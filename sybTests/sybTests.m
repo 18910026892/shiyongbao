@@ -2,11 +2,10 @@
 //  sybTests.m
 //  sybTests
 //
-//  Created by GX on 15/9/17.
-//  Copyright (c) 2015年 GX. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
 @interface sybTests : XCTestCase
@@ -27,7 +26,7 @@
 
 - (void)testExample {
     // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+    // Use XCTAssert and related functions to verify your tests produce the correct results.
 }
 
 - (void)testPerformanceExample {

@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
-@interface GeneralTextFiledViewController : UIViewController<UITextFieldDelegate>
+@interface GeneralTextFiledViewController : BaseViewController<UITextFieldDelegate>
 {
-    UIButton * backButton;
-    UIButton * CompleteButton;
-    
+  
     CustomTextField * Ctf;
     UIView * CtfBgView;
-    SingleManage * SM;
+    SybSession * userSession;
 }
 @property (nonatomic,copy)NSString * TFtype;
 @end

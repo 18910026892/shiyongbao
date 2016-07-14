@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AccountViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+@interface AccountViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 {
-    UIButton * backButton;
+    
     UILabel * AccountLabel;
     UITableView * TableView;
     UIButton * LogoutButton;
-    SingleManage * SM;
+     SybSession * userSession;
     
     UIImageView * cellImageView;
     UILabel * cellTitleLabel;

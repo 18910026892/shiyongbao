@@ -12,49 +12,16 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self initNavigationBar];
+ 
 }
--(void)PageSetup
-{
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.navigationController.navigationBarHidden = NO;
-}
-//初始化顶部导航栏上面的控件
--(void)initNavigationBar
-{
-    if(!backButton)
-    {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:backButton];
-    
-    if (!CompleteButton) {
-        CompleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        CompleteButton.frame = CGRectMake(SCREEN_WIDTH-54, 0, 44, 44);
-        [CompleteButton setTitle:@"完成" forState:UIControlStateNormal];
-        [CompleteButton setTitleColor:ThemeColor forState:UIControlStateNormal];
-        [CompleteButton addTarget:self action:@selector(CompleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:CompleteButton];
-    
-}
+
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
-    [CompleteButton removeFromSuperview];
     
 }
--(void)backButtonClick:(UIButton*)sender
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
+
 -(void)CompleteButtonClick:(UIButton*)sender
 {
     if (_count>100) {
@@ -78,12 +45,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setlayout];
+    
+    [self setNavTitle:@"自我介绍"];
+    [self showBackButton:YES];
+    
+    [self.RightBtn setTitle:@"保存" forState:UIControlStateNormal
+     ];
+    self.RightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [self.RightBtn addTarget:self action:@selector(CompleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 -(void)setlayout
 {
-    SM = [SingleManage shareManage];
-    
-    
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     TvBGView  = [[UIView alloc]init];
     TvBGView.frame = CGRectMake(0,84, SCREEN_WIDTH,140);
     TvBGView.backgroundColor = [UIColor whiteColor];
@@ -92,7 +69,7 @@
     Tv.textColor = [UIColor blackColor];
     Tv.font = [UIFont systemFontOfSize:14];
     Tv.delegate = self;
-    Tv.text = SM.userdesc;
+    Tv.text = userSession.userdesc;
     Tv.backgroundColor = [UIColor clearColor];
     Tv.returnKeyType = UIReturnKeyDefault;
     Tv.keyboardType = UIKeyboardTypeDefault;
@@ -101,7 +78,7 @@
     
     label1 = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-160, VIEW_MAXY(TvBGView)-20, 140, 20)];
     
-    NSInteger x = [SM.userdesc length];
+    NSInteger x = [userSession.userdesc length];
 
     label1.text = [NSString stringWithFormat:@"%ld/100字",x];
     label1.textColor = ThemeColor;

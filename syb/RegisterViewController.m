@@ -15,82 +15,79 @@
 @implementation RegisterViewController
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.navigationItem.hidesBackButton = YES;
-    [self initBackButton];
-     [MobClick beginLogPageView:@"注册"];
+    [super viewWillAppear:animated];
+    
+    [self setTabBarHide:YES];
+    
+    [MobClick beginLogPageView:@"注册"];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
+
      [MobClick endLogPageView:@"注册"];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = BGColor;
-    self.title = @"注册1/2";
     _isShow = NO;
     _isTest = NO;
     [self getConfig];
-
+    [self setNavTitle:@"注册1/2"];
+    [self showBackButton:YES];
 }
 
 -(void)getConfig
 {
     
     
-    GXHttpRequest * request = [[GXHttpRequest alloc]init];
-    [request StartWorkWithUrlstr:URL_Config];
-    NSLog(@"^^^^^^^%@",URL_Config);
-    request.successGetData = ^(id obj){
-        
-        NSDictionary * dict = [obj valueForKey:@"result"];
-        _needShow  = [dict valueForKey:@"is_show_captcha"];
-           
-     
-        
-        NSLog(@"%@^^^%@",dict, _needShow);
-        
-        if ([_needShow isEqualToString:@"1"
-            ]) {
-            _isShow = YES;
-            _isTest = NO;
-        }else if([_needShow isEqualToString:@"0"
-                 ])
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_Config pragma:nil];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
         {
-            _isShow = NO;
-           _isTest = YES;
-       }
+            
+            //加载框消失
+            [HDHud hideHUDInView:self.view];
+            
+            
+            NSDictionary * dict = [response valueForKey:@"result"];
+            _needShow  = [dict valueForKey:@"is_show_captcha"];
+      
+            
+            if ([_needShow isEqualToString:@"1"
+                 ]) {
+                _isShow = YES;
+                _isTest = NO;
+            }else if([_needShow isEqualToString:@"0"
+                      ])
+            {
+                _isShow = NO;
+                _isTest = YES;
+            }
+            
+            [self setLayout];
+            
+            
+        }
         
-        [self setLayout];
-    };
-    request.failureGetData = ^(void){
-        
-    };
+    } DataFaiure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showMessageInView:self.view title:error];
+    } Failure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showNetWorkErrorInView:self.view];
+    }];
+    
+
     
     
     
 }
 
-
-
--(void)initBackButton
-{
-    if (!backButton) {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    [self.navigationController.navigationBar addSubview:backButton];
-}
--(void)backButtonClick:(UIButton*)sender
-{
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
-}
 
 //初始化控件群
 -(void)setLayout
@@ -221,39 +218,46 @@
     
     
     NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:@"reg",@"bus_type",_userName,@"phone",PostMD5,@"sms_sign", nil];
-    GXHttpRequest * request = [[GXHttpRequest alloc]init];
-    [request StartWorkPostWithurlstr:URL_sendCode pragma:postDict ImageData:nil];
-     request.successGetData = ^(id obj){
-   
-    
-         NSLog(@"%@",obj);
-         
-    _sendDict = [NSMutableDictionary dictionaryWithDictionary:obj];
   
-    _testcode = [[obj valueForKey:@"result"]valueForKey:@"message_code"];
-         
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
-    NSString * code = [_sendDict valueForKey:@"code"];
-    NSString * reason = [_sendDict valueForKey:@"message"];
-         if([code isEqualToString:@"1"])
-    {
-      
-        VerificationViewController * verificationVC = [[VerificationViewController alloc]init];
-        verificationVC.phoneNumber = _userName;
-        verificationVC.testcode = _testcode;
-        [self.navigationController pushViewController:verificationVC animated:YES];
+    [request RequestDataWithUrl:URL_sendCode pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            
+            //加载框消失
+            [HDHud hideHUDInView:self.view];
+            
+            _sendDict = [NSMutableDictionary dictionaryWithDictionary:response];
+            
+            _testcode = [[response valueForKey:@"result"]valueForKey:@"message_code"];
+            
+     
+            VerificationViewController * verificationVC = [[VerificationViewController alloc]init];
+            verificationVC.phoneNumber = _userName;
+            verificationVC.testcode = _testcode;
+            [self.navigationController pushViewController:verificationVC animated:YES];
+                
+       
+
+            
+            
+        }
         
-    }else if([code isEqualToString:@"0"])
-    {
-        [HDHud showMessageInView:self.view title:reason];
-    }
-    };
-    request.failureGetData = ^(void){
-    
+    } DataFaiure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showMessageInView:self.view title:error];
+    } Failure:^(id error) {
         [HDHud hideHUDInView:self.view];
         [HDHud showNetWorkErrorInView:self.view];
-    };
-        
+    }];
+    
+
+    
+    
 
 }
 - (void)didReceiveMemoryWarning {

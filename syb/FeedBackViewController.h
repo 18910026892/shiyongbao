@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
-@interface FeedBackViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>
+@interface FeedBackViewController : BaseViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>
 {
-    UIButton * backButton;
-    UIButton * SubmitButton;
-    
+   
+
     UITableView * TableView;
     UILabel * label1,*label2;
     UITextView * Tv;
     CustomTextField * Tf;
-    SingleManage * SM;
+    SybSession * userSession;
 }
 
 @property NSInteger count;

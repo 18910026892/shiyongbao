@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
-@interface ChangePassWordViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface ChangePassWordViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
-    UIButton * backButton;
-    UIButton * CompleteButton;
+
     
     UITableView * TableView;
     UILabel * cellTitleLabel;
     
     CustomTextField * cellTextField;
-    SingleManage * SM;
+    SybSession * userSession;
 }
 
 @property (nonatomic,copy)NSString * OldPassWord;

@@ -16,7 +16,7 @@
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        [self.contentView addSubview:self.imageView];
+        [self.contentView addSubview:self.cellImage];
         
         
     }
@@ -30,7 +30,7 @@
 {
     if (!_cellImage) {
         _cellImage = [[UIImageView alloc]init];
-        _cellImage.frame = CGRectMake(0,0,SCREEN_WIDTH,102*Proportion);
+        _cellImage.frame = CGRectMake(0,0,kMainScreenWidth,102*Proportion);
     }
     return _cellImage;
 }
@@ -39,6 +39,11 @@
 -(void)setModel:(brandModel *)model
 {
     _model = model;
+    
+    NSString * imageUrl = model.group_img;
+    
+    [self.cellImage sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    
 }
 
 @end

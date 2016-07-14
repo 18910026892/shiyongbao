@@ -10,26 +10,17 @@
 #import "MyMessageViewController.h"
 #import "MessageModel.h"
 #import "MessageTableViewCell.h"
-@interface MyMessageViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
-{
-    UIButton * backButton;
-    UITableView * TableView;
+@interface MyMessageViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
 
-}
+@property (nonatomic,strong)UITableView * TableView;
 
-//是否刷新的标志
-@property(nonatomic,assign)BOOL update;
+@property (nonatomic,strong)NSMutableArray * tableArray;
+
+@property (nonatomic,strong)NSMutableArray * tableModelArray;
+
+@property (nonatomic,strong)NSMutableArray * tableListArray;
 
 
-//页面参数
-@property (nonatomic,copy)NSString * page;
+@property(nonatomic,copy)NSString * page;
 
-//解析到的对象字典
-@property (nonatomic,strong)NSMutableDictionary * objDict;
-
-//数据模型数组
-@property (nonatomic,strong)NSArray * ModelArray;
-
-//消息数组
-@property (nonatomic,strong)NSMutableArray * messageList;
 @end

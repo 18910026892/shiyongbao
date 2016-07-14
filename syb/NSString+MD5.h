@@ -12,11 +12,5 @@
 
 +(NSString *)MD5WithString:(NSString *)string;
 
-+ (NSString*)encodeBase64String:(NSString*)input;
 
-+ (NSString*)decodeBase64String:(NSString*)input;
-
-+ (NSString*)encodeBase64Data:(NSData*)data;
-
-+ (NSString*)decodeBase64Data:(NSData*)data;
 @end

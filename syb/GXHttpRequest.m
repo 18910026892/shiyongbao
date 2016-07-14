@@ -1,74 +1,123 @@
 //
 //  GXHttpRequest.m
-//  ShiHuoBang
+//  syb
 //
-//  Created by 光明天下 on 15/3/27.
-//  Copyright (c) 2015年 Gongxin. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
 #import "GXHttpRequest.h"
 
 @implementation GXHttpRequest
-//将urlstr UTF8编码
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        
+        
+    }
+    return self;
+}
+
+
+//将 UTF8编码
 -(NSString *)getEncodeurlStr:(NSString *)urlstr;
 {
     NSString *encodeurlstr =  [urlstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return encodeurlstr;
 }
-//GET 请求
--(void)StartWorkWithUrlstr:(NSString *)str
+
+-(void)getResultWithSuccess:(successGetData)success DataFaiure:(failureData)datafailure Failure:(failureGetData)failure;
 {
-   
+    _successBlock = success;
+    _failureDataBlock = datafailure;
+    _failureBlock = failure;
+}
+
+//Get 请求
+-(void)RequestDataWithUrl:(NSString*)urlString;
+{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
-  
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     
-    [manager GET:[self getEncodeurlStr:str] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if(_successGetData){
-            self.successGetData(responseObject);
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSString * requestUrl = [self getEncodeurlStr:urlString];
+    
+    [manager GET:requestUrl parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        NSLog(@"%@",downloadProgress);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        if([jsonDict[@"state"] integerValue]==1){
+            if(_successBlock){
+                id response = jsonDict[@"data"];
+                self.successBlock(response);
+            }
+        }else{
+            if(_failureDataBlock){
+                self.failureDataBlock(jsonDict[@"msg"]);
+            }
         }
+        
+        
+        
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if(_failureGetData){
-            self.failureGetData();
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if(_failureBlock){
+            self.failureBlock(error);
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
+}
+
+//不带图片post请求
+-(void)RequestDataWithUrl:(NSString*)urlString pragma:(NSDictionary*)pragmaDict;
+{
+    [self RequestDataWithUrl:urlString pragma:pragmaDict ImageDatas:nil imageName:nil];
+}
+
+
+//带图片Post 请求
+-(void)RequestDataWithUrl:(NSString*)urlString pragma:(NSDictionary*)pragmaDict ImageDatas:(id)data imageName:(id)imageName;
+{
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
     
-}
-//Post 请求
-
--(void)StartWorkPostWithurlstr:(NSString *)str pragma:(NSDictionary *)dict ImageData:(NSData *)data;
-{
-    //状态栏旁边的菊花指示器转动
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-   
     //获取设备信息
     [self getDevuceInfo];
     
     [self isNetWork];
     
-    NSMutableDictionary * postDict = [NSMutableDictionary dictionaryWithDictionary:dict];
-    
-    NSString * token;
-    
-    SingleManage * SM = [SingleManage shareManage];
-    
-  
-    
-    if ([SM.userToken isEmpty]) {
-        token = @"";
+    NSMutableDictionary * postDict = [NSMutableDictionary dictionaryWithDictionary:pragmaDict];
+
+    SybSession * userSession = [SybSession sharedSession];
+
+    if (userSession.isLogin) {
+        
+         [postDict setValue:userSession.userToken forKey:@"token"];
     }else
     {
-        token = SM.userToken;
+         [postDict setValue:@"" forKey:@"token"];
     }
     
-    [postDict setValue:token forKey:@"token"];
+   
     
     //渠道
     [postDict setValue:@"AppStore" forKey:@"re"];
@@ -105,29 +154,95 @@
     //时间戳
     [postDict setValue:_nowDate forKey:@"st"];
     
-
-
+    NSString * requestUrl = [self getEncodeurlStr:urlString];
     
-    
-    [manager POST:[self getEncodeurlStr:str]  parameters:postDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        if(data==nil) ;else{
-            [formData appendPartWithFileData:data name:@"user_photo" fileName:@"defult_placeImage.png" mimeType:@"png"];
+    [manager POST:requestUrl parameters:postDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        if(data==nil) ;
+        else if([data isKindOfClass:[NSData class]]){
+            [formData appendPartWithFileData:data name:imageName fileName:@"defult_placeImage.png" mimeType:@"png"];
+        }else if([data isKindOfClass:[NSMutableArray class]]){
+            //多张图片上传
+            [data enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSData *imgData = (NSData *)obj;
+                NSString *imgKey = [imageName isKindOfClass:[NSString class]]?imageName:imageName[idx];
+                [formData appendPartWithFileData:imgData name:imgKey fileName:@"defult_placeImage.png" mimeType:@"png"];
+            }];
         }
-    }success:^(AFHTTPRequestOperation *operation, id responseObject){
-        if(_successGetData){
-            self.successGetData(responseObject);
+        
+    } progress:^(NSProgress * _Nonnull downloadProgress) {
+        NSLog(@"%f",downloadProgress.fractionCompleted);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        if([jsonDict[@"code"] integerValue]==1){
+            if(_successBlock){
+                id response = jsonDict;
+                self.successBlock(response);
+            }
+        }else{
+            if(_failureDataBlock){
+                self.failureDataBlock(jsonDict[@"message"]);
+            }
+        }
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        if(_failureBlock){
+            self.failureBlock(error);
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if(_failureGetData){
-            self.failureGetData();
-            
-                NSLog(@"Error: %@", error.userInfo);
-            
-       
-        }
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        
+        NSLog(@"  %@ ",error);
     }];
+}
+
+//下载
+-(void)StartDownloadTaskWithUrl:(NSString*)urlString;
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+        if(_FiledownloadedTo){
+            self.FiledownloadedTo(filePath);
+        }
+        
+    }];
+    [downloadTask resume];
+}
+//上传
+-(void)StartUploadTaskTaskWithUrl:(NSString*)urlString;
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:@"http://example.com/upload"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Success: %@ %@", response, responseObject);
+            if(_FileuploadedTo)
+            {
+                self.FileuploadedTo(responseObject);
+            }
+        }
+    }];
+    [uploadTask resume];
 }
 
 //获取设备信息
@@ -140,7 +255,7 @@
     _deviceSystemVersion= device.systemVersion;
     _deviceID = [OpenUDID value];
     
-   
+    
     CGRect rect = [[UIScreen mainScreen] bounds];
     CGFloat scale = [[UIScreen mainScreen] scale];
     CGFloat width = rect.size.width * scale;
@@ -154,8 +269,8 @@
     NSString * sign = [NSString stringWithFormat:@"spyg:%@",_nowDate];
     _sign = [NSString MD5WithString:sign];
     
-
-
+    
+    
     
 }
 //时间戳
@@ -178,7 +293,7 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     // 检测网络连接的单例,网络变化时的回调方法
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-     
+        
         
         if (status==0) {
             _networkType = @"noNetwork";
@@ -193,8 +308,9 @@
         
     }];
     
-  
+    
     
 }
+
 
 @end

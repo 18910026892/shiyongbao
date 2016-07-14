@@ -18,6 +18,8 @@
 
 +(void)saveBoolValue:(BOOL)value withKey:(NSString *)key;
 
++(void)removeValueforKey:(NSString*)key;
+
 +(void)print;
 
 @end

@@ -2,8 +2,8 @@
 //  ViewController.m
 //  syb
 //
-//  Created by GX on 15/9/17.
-//  Copyright (c) 2015年 GX. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
 #import "ViewController.h"

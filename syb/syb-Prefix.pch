@@ -1,17 +1,19 @@
 //
-//  syb-Prefix.pch
+//  PrefixHeader.pch
 //  syb
 //
-//  Created by GX on 15/9/17.
-//  Copyright (c) 2015年 GX. All rights reserved.
+//  Created by GongXin on 16/7/7.
+//  Copyright © 2016年 spyg. All rights reserved.
 //
 
-#ifndef syb_syb_Prefix_pch
-#define syb_syb_Prefix_pch
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
 #import "Macros.h"
 #import "AppDelegate.h"
 
-#endif
+
+#endif /* PrefixHeader_pch */

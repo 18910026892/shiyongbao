@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
 #import "PooCodeView.h"
-@interface ForgetPasswordViewController : UIViewController<UITextFieldDelegate>
+@interface ForgetPasswordViewController : BaseViewController<UITextFieldDelegate>
 {
-    UIButton * backButton;
+
     UIView * TFView;
     UILabel * phoneNumber;
     CustomTextField * tf;

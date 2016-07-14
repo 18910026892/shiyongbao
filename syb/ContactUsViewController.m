@@ -20,43 +20,18 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self initBackButton];
+   
      [MobClick beginLogPageView:@"联系客服"];
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTabbarButton" object:@YES];
+    
+        [self setTabBarHide:YES];
+    
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
+ 
     [MobClick endLogPageView:@"联系客服"];
   
-}
-//页面设置的相关方法
--(void)PageSetup
-{
-    self.navigationController.navigationBarHidden = NO;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.tabBarController.tabBar.hidden = YES;
-    self.navigationItem.hidesBackButton = YES;
-}
--(void)initBackButton
-{
-    if (!backButton) {
-        
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    [self.navigationController.navigationBar addSubview:backButton];
-}
--(void)backButtonClick:(UIButton*)sender
-{
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
 }
 
 //初始化相关控件
@@ -65,6 +40,9 @@
     // Do any additional setup after loading the view.
     [self initTableView];
     [self initAlertLabel];
+
+    [self showBackButton:YES];
+    [self setNavTitle:@"联系客服"];
 }
 -(void)initAlertLabel
 {

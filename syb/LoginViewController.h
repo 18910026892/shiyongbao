@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
-@interface LoginViewController : UIViewController<UITextFieldDelegate>
+@interface LoginViewController : BaseViewController<UITextFieldDelegate>
 {
-    UIButton * backButton;
+ 
     //输入区域
     UIView * TFView;
     //账号密码图标
@@ -26,7 +26,7 @@
     UIButton * registerBtn;
     UIButton * forgetBtn;
     
-    SingleManage * SM;
+    SybSession * userSession;
     
 }
 

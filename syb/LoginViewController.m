@@ -17,56 +17,32 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self initNavigationBar];
-     [MobClick beginLogPageView:@"登录"];
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTabbarButton" object:@YES];
-}
--(void)PageSetup
-{
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.hidesBackButton = YES;  
+   
+    [self setTabBarHide:YES];
     
+     [MobClick beginLogPageView:@"登录"];
+
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
-     [MobClick endLogPageView:@"登录"];
+
+    [MobClick endLogPageView:@"登录"];
    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"登录";
-    self.tabBarController.tabBar.hidden = YES;
+    [self setNavTitle:@"登录"];
+    [self showBackButton:YES];
 
     [self initTFView];
     [self initBtns];
+    
+
   
 }
 
-
-//初始化顶部导航栏上面的控件
--(void)initNavigationBar
-{
-    if (!backButton) {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:backButton];
-}
-
--(void)backButtonClick:(UIButton*)sender
-{
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
-}
 //输入区域
 -(void)initTFView
 {
@@ -177,92 +153,66 @@
     
         [HDHud showHUDInView:self.view title:@"登录中..."];
         
-        GXHttpRequest * request = [[GXHttpRequest alloc]init];
-        [request StartWorkPostWithurlstr:URL_Login pragma:postDict ImageData:nil];
-        request.successGetData = ^(id obj){
-            //加载框消失
-            [HDHud hideHUDInView:self.view];
-            
-            NSLog(@"%@-----%@",postDict,obj);
-            
-            
-            _dict = [NSMutableDictionary dictionaryWithDictionary:obj];
-            
-            NSString * code = [_dict valueForKey:@"code"];
-            NSString * reason = [_dict valueForKey:@"message"];
+ 
+        
+        
+        GXHttpRequest *request = [[GXHttpRequest alloc]init];
+        
+        [request RequestDataWithUrl:URL_Login pragma:postDict];
+        
+        [request getResultWithSuccess:^(id response) {
+            /// 加保护
+            if ([response isKindOfClass:[NSDictionary class]])
+            {
+                
+                //加载框消失
+                [HDHud hideHUDInView:self.view];
+                
+           
+                if (!userSession) {
+                    userSession = [SybSession sharedSession];
+                }
+                
+                NSDictionary * userDict = [response valueForKey:@"result"];
          
-            if ([code isEqualToString:@"1"]) {
-    
-                _userDict = [_dict valueForKey:@"result"];
-                [self saveUserInfo:_userDict];
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:_userDict];
+                   NSLog(@" %@ ",userDict);
+                
+                userSession.isLogin = YES;
+               [userSession saveWithDictionary:userDict];
+     
+             
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:userDict];
                 NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
                 [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
                 
-            }else if([code isEqualToString:@"0"])
-            {
-                NSLog(@"登录失败");
-                [HDHud showMessageInView:self.view title:reason];
+            
+                
+                
                 
             }
             
-            
-        };
-        request.failureGetData = ^(void){
-            
+        } DataFaiure:^(id error) {
+            [HDHud hideHUDInView:self.view];
+            [HDHud showMessageInView:self.view title:error];
+        } Failure:^(id error) {
             [HDHud hideHUDInView:self.view];
             [HDHud showNetWorkErrorInView:self.view];
-            
-                       
-            
-        };
+        }];
+        
+        
+
+        
+        
         
         
     }else
     {
-        [RemindFrameHandler addLeftRightAnimation:TFView];
+        [HDHud showMessageInView:self.view title:@"请输入有效的账号密码"];
     }
 
     
 }
--(void)saveUserInfo:(NSMutableDictionary*)dict
-{
 
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_id"] forKey:@"user_id"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_name"] forKey:@"user_name"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_photo"] forKey:@"user_photo"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"nickname"] forKey:@"nickname"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"birthday"] forKey:@"birthday"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"sex"] forKey:@"sex"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"code"] forKey:@"code"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"token"] forKey:@"token"];
-    [UserDefaultsUtils saveValue:_passWord forKey:@"password"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"app_money"] forKey:@"user_money"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_desc"] forKey:@"user_desc"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_name"] forKey:@"baby_name"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_sex"] forKey:@"baby_sex"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_birthday"] forKey:@"baby_birthday"];
-    
-    
-    //单例取值
-    SM = [SingleManage shareManage];
-    SM.userID = [UserDefaultsUtils valueWithKey:@"user_id"];
-    SM.userName = [UserDefaultsUtils valueWithKey:@"user_name"];
-    SM.imageURL = [UserDefaultsUtils valueWithKey:@"user_photo"];
-    SM.nickName  = [UserDefaultsUtils valueWithKey:@"nickname"];
-    SM.birthday = [UserDefaultsUtils valueWithKey:@"birthday"];
-    SM.userSex = [UserDefaultsUtils valueWithKey:@"sex"];
-    SM.code  = [UserDefaultsUtils valueWithKey:@"code"];
-    SM.userToken = [UserDefaultsUtils valueWithKey:@"token"];
-    SM.passWord = [UserDefaultsUtils valueWithKey:@"password"];
-    SM.userMoney = [UserDefaultsUtils valueWithKey:@"user_money"];
-    SM.userdesc = [UserDefaultsUtils valueWithKey:@"user_desc"];
-    SM.babyName = [UserDefaultsUtils valueWithKey:@"baby_name"];
-    SM.babySex = [UserDefaultsUtils valueWithKey:@"baby_sex"];
-    SM.babyBirthday = [UserDefaultsUtils valueWithKey:@"baby_birthday"];
-    
-    SM.isLogin = YES;
-}
 
 
 //注册按钮的点击事件

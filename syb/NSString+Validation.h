@@ -10,14 +10,15 @@
 
 @interface NSString (Validation)
 
+
+/*判断输入的是否是昵称*/
+-(BOOL)isValidNickName;
+
 /*判断输入的是否是手机号码*/
 -(BOOL)isValidPhone;
 
 /*判断输入帐号是否为邮箱*/
 -(BOOL)isValidEmail;
-
-/*判断帐号昵称的合法性*/
--(BOOL)isValidNickName;
 
 /*判断密码只能是6-16位数字和字母*/
 -(BOOL)isValidPassword;

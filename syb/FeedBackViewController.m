@@ -20,58 +20,21 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self  InitnavigationBar];
+
     [MobClick beginLogPageView:@"意见反馈"];
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"HideTabbarButton" object:@YES];
+  
+    [self setTabBarHide:YES];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
-    [SubmitButton removeFromSuperview];
+  
     [MobClick endLogPageView:@"意见反馈"];
  
  
 }
-//页面设置的相关方法
--(void)PageSetup
-{
-    self.navigationController.navigationBarHidden = NO;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.tabBarController.tabBar.hidden = YES;
-    self.navigationItem.hidesBackButton = YES;
-  
-}
 
--(void)InitnavigationBar
-{
-    if(!backButton)
-    {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-    }
-    [self.navigationController.navigationBar addSubview:backButton];
-    
-    if (!SubmitButton) {
-        SubmitButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        SubmitButton.frame = CGRectMake(SCREEN_WIDTH-54, 0, 44, 44);
-        [SubmitButton setTitle:@"提交" forState:UIControlStateNormal];
-        [SubmitButton setTitleColor:ThemeColor forState:UIControlStateNormal];
-        [SubmitButton addTarget:self action:@selector(SubmitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:SubmitButton];
-}
--(void)backButtonClick:(UIButton*)sender
-{
-    NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
-}
+
 -(void)SubmitButtonClick:(UIButton*)sender
 {
     NSString * content;
@@ -84,11 +47,11 @@
     }else
     {
            NSString * usernumber;
-            SM = [SingleManage shareManage];
-        
-        
+        if (!userSession) {
+            userSession = [SybSession sharedSession];
+        }
            if ([Tf.text length]==0) {
-               usernumber = SM.userName;
+               usernumber = userSession.userName;
             }else
            {
                
@@ -99,13 +62,22 @@
         
         
             [HDHud showHUDInView:self.view title:@"提交中..."];
-            GXHttpRequest * request = [[GXHttpRequest alloc]init];
-            [request StartWorkPostWithurlstr:URL_FeedBack pragma:postDict ImageData:nil];
-            request.successGetData = ^(id obj){
+        
+        
+        
+        GXHttpRequest *request = [[GXHttpRequest alloc]init];
+        
+        [request RequestDataWithUrl:URL_FeedBack pragma:postDict];
+        
+        [request getResultWithSuccess:^(id response) {
+            /// 加保护
+            if ([response isKindOfClass:[NSDictionary class]])
+            {
+                
                 //加载框消失
                 [HDHud hideHUDInView:self.view];
-            
-                _dict = [NSMutableDictionary dictionaryWithDictionary:obj];
+                
+                _dict = [NSMutableDictionary dictionaryWithDictionary:response];
                 NSLog(@"&&&&%@",_dict);
                 NSString * result = [_dict valueForKey:@"code"];
                 NSString * message = [_dict valueForKey:@"message"];
@@ -113,7 +85,7 @@
                 if ([result isEqualToString:@"1"]) {
                     
                     [HDHud showMessageInView:self.view title:@"提交成功"];
-                      [self performSelector:@selector(backMine) withObject:nil afterDelay:1.5];
+                    [self performSelector:@selector(backMine) withObject:nil afterDelay:1.5];
                     
                     
                 }else if([result isEqualToString:@"0"])
@@ -123,13 +95,20 @@
                     
                 }
                 
-            };
-            request.failureGetData = ^(void){
                 
-                [HDHud hideHUDInView:self.view];
-                [HDHud showNetWorkErrorInView:self.view];
-            };
+            }
             
+        } DataFaiure:^(id error) {
+             [HDHud hideHUDInView:self.view];
+            [HDHud showMessageInView:self.view title:error];
+        } Failure:^(id error) {
+            [HDHud hideHUDInView:self.view];
+            [HDHud showNetWorkErrorInView:self.view];
+        }];
+        
+        
+
+    
             
         }
 
@@ -143,6 +122,9 @@
 
     [self initTableView];
 
+    [self showBackButton:YES];
+    
+    [self setNavTitle:@"意见反馈"];
 }
 -(void)initTableView
 {
@@ -151,7 +133,7 @@
         TableView = [[UITableView alloc]initWithFrame:CGRectMake(0,64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
         TableView.delegate = self;
         TableView.dataSource = self;
-        TableView.backgroundColor =  BGColor;
+        TableView.backgroundColor =  kDefaultBackgroundColor;
         TableView.scrollEnabled = NO;
         [self.view addSubview:TableView];
     }

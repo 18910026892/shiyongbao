@@ -12,50 +12,16 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self PageSetup];
-    [self initNavigationBar];
-}
--(void)PageSetup
-{
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = BGColor;
-    self.navigationController.navigationBarHidden = NO;
-}
-//初始化顶部导航栏上面的控件
--(void)initNavigationBar
-{
-    if(!backButton)
-    {
-        backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(0, 0, 44, 44);
-        [backButton setImage:[UIImage imageNamed:@"backbutton"] forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:backButton];
-    
-    if (!CompleteButton) {
-        CompleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        CompleteButton.frame = CGRectMake(SCREEN_WIDTH-54, 0, 44, 44);
-        [CompleteButton setTitle:@"完成" forState:UIControlStateNormal];
-        [CompleteButton setTitleColor:ThemeColor forState:UIControlStateNormal];
-        [CompleteButton addTarget:self action:@selector(CompleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    [self.navigationController.navigationBar addSubview:CompleteButton];
-    
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [backButton removeFromSuperview];
-    [CompleteButton removeFromSuperview];
+
     
 }
--(void)backButtonClick:(UIButton*)sender
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
+
 -(void)CompleteButtonClick:(UIButton*)sender
 {
     NSLog(@"完成");
@@ -86,11 +52,20 @@
 {
     [super viewDidLoad];
     [self initCustomTextField];
+    [self setNavTitle:_TFtype];
+    [self showBackButton:YES];
+    
+    [self.RightBtn setTitle:@"保存" forState:UIControlStateNormal
+     ];
+    self.RightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [self.RightBtn addTarget:self action:@selector(CompleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)initCustomTextField
 {
-    SM = [SingleManage shareManage];
-    
+    if (!userSession) {
+        userSession = [SybSession sharedSession];
+    }
     CtfBgView  = [[UIView alloc]init];
     CtfBgView.frame = CGRectMake(0,84, SCREEN_WIDTH,44);
     CtfBgView.backgroundColor = [UIColor whiteColor];
@@ -100,11 +75,11 @@
     Ctf.placeholder = [NSString stringWithFormat:@"%@(1-10位字符)",_TFtype];
     if([_TFtype isEqualToString:@"昵称"])
     {
-        Ctf.text = SM.nickName;
+        Ctf.text = userSession.nickName;
         
     }else if([_TFtype isEqualToString:@"宝贝昵称"])
     {
-        Ctf.text = SM.babyName;
+        Ctf.text = userSession.babyName;
     }
   
     Ctf.clearButtonMode = UITextFieldViewModeWhileEditing;

@@ -9,6 +9,16 @@
 #import "NSString+Validation.h"
 
 @implementation NSString (Validation)
+/*判断输入的是否是昵称*/
+-(BOOL)isValidNickName;
+{
+    NSString *nicknameRegex = @"^[\u4e00-\u9fa5]{4,8}$";
+    
+    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",nicknameRegex];
+    
+    return [passWordPredicate evaluateWithObject:self];
+
+}
 
 /*判断输入的是否是手机号码*/
 -(BOOL)isValidPhone
@@ -27,14 +37,6 @@
     NSString *emailRegex = stricterFilterString ? stricterFilterString : laxString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:self];
-}
-
-/*判断昵称只能是中英文、数字、下划线*/
--(BOOL)isValidNickName
-{
-    NSString *stricterFilterString =@"^[\u4e00-\u9fa5a-zA-Z0-9_]{1,19}$";
-    NSPredicate *mtNickNameTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stricterFilterString];
-    return [mtNickNameTest evaluateWithObject:self];
 }
 
 /*帐号密码格式*/
@@ -105,6 +107,7 @@
     //返回处理好的身份证号
     return idcardNumber;
 }
+
 
 
 @end

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
 #import "PooCodeView.h"
-@interface RegisterViewController : UIViewController
+@interface RegisterViewController : BaseViewController
 {
-    UIButton * backButton;
+   
     UIView * TFView;
     UILabel * phoneNumber;
     CustomTextField * tf;
