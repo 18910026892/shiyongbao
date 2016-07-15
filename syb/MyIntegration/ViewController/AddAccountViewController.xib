@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddAccountViewController">
             <connections>
+                <outlet property="accountTF" destination="ubL-eZ-lFB" id="SY3-Zw-3pQ"/>
                 <outlet property="bandingBtn" destination="SE7-Ou-67U" id="MkI-UQ-G7I"/>
+                <outlet property="nameTF" destination="dkR-aH-vd9" id="41W-yc-2UE"/>
                 <outlet property="typeName" destination="4wJ-mA-x52" id="osJ-eh-jFr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

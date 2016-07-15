@@ -407,5 +407,6 @@ typedef NSUInteger FrameType;
 
 /*********获取我的积分**********/
 #define URL_GetUserIntegral [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetUserIntegral"]]
-
+/*********获取积分收入支出明细**********/
+#define URL_GetUserPointRecord [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetUserPointRecord"]]
 #endif /* Macros_h */

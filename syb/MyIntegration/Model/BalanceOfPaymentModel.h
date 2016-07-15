@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface BalanceOfPaymentModel : NSObject
-
+@property (nonatomic,copy)NSString *point_num;
+@property (nonatomic,copy)NSString *rel_order_id;
+@property (strong,nonatomic) NSNumber *adjust_date;
+-(instancetype)initWithDict:(NSDictionary*)dict;
++(NSArray *)arrayWithArrays:(NSArray *)dicts;
 @end

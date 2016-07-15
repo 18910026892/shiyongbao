@@ -11,6 +11,8 @@
 @interface AddAccountViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *typeName;
 @property (weak, nonatomic) IBOutlet UIButton *bandingBtn;
+@property (weak, nonatomic) IBOutlet UITextField *accountTF;
+@property (weak, nonatomic) IBOutlet UITextField *nameTF;
 
 @end
 
@@ -40,7 +42,45 @@
 }
 - (IBAction)bandingAction:(UIButton *)sender
 {
+    if (self.accountTF.text.length==0||self.nameTF.text.length==0) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"信息不全" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [av show];
+        return;
+    }
+    [self bangdingAccount];
+}
+- (void)bangdingAccount
+{
+    [HDHud showHUDInView:self.view title:@"绑定中..."];
+    NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:@"user_id",user.userID,nil];
     
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_GetUserIntegral pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            if ([[response objectForKey:@"code"] intValue]==1) {
+                [HDHud showMessageInView:self.view title:@"绑定成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+        
+    } DataFaiure:^(id error) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        [HDHud showMessageInView:self.view title:error];
+
+    } Failure:^(id error) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        [HDHud showMessageInView:self.view title:error];
+
+    }];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
