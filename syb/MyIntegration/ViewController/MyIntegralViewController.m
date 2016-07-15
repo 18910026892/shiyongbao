@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *lineHeights;
-
+@property (nonatomic,copy)NSString *myIntegral;
 @end
 @implementation MyIntegralViewController
 {
@@ -47,12 +47,39 @@
     [super viewDidLoad];
     [self setNavTitle:@"我的积分"];
     [self showBackButton:YES];
+    self.myIntegral = @"0";
+    
     user = [SybSession sharedSession];
-    
     [self.RightBtn addTarget:self action:@selector(toBalanceVC:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self requestMyIntegral];
 }
-
+- (void)requestMyIntegral
+{
+    NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:@"user_id",user.userID,nil];
+    
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_GetUserIntegral pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            
+            NSLog(@" %@",response);
+            
+            NSDictionary *userInfo = [response objectForKey:@"result"];
+            self.scoreLabel.text = [NSString stringWithFormat:@"%@积分",[userInfo valueForKey:@"point_num"]];
+            self.myIntegral = [NSString stringWithFormat:@"%@",[userInfo valueForKey:@"point_num"]];
+            
+        }
+        
+    } DataFaiure:^(id error) {
+        self.scoreLabel.text = [NSString stringWithFormat:@"0积分"];
+    } Failure:^(id error) {
+        self.scoreLabel.text = [NSString stringWithFormat:@"0积分"];
+    }];
+}
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];

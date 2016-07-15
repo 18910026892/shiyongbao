@@ -101,7 +101,6 @@
 		D21EE7D91D322278008AE0B7 /* SybWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EE7D81D322278008AE0B7 /* SybWebViewController.m */; };
 		D21EE7DD1D3225E7008AE0B7 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EE7DC1D3225E7008AE0B7 /* MyOrderViewController.m */; };
 		D21EE7E01D3245CF008AE0B7 /* MyAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EE7DF1D3245CF008AE0B7 /* MyAttentionViewController.m */; };
-		F259B66E1D37A088000410B3 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B66D1D37A088000410B3 /* UIView+Extension.m */; };
 		F259B67B1D37DD6C000410B3 /* MyIntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B6791D37DD6C000410B3 /* MyIntegralViewController.m */; };
 		F259B67C1D37DD6C000410B3 /* MyIntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B67A1D37DD6C000410B3 /* MyIntegralViewController.xib */; };
 		F259B6801D37E1BE000410B3 /* BalanceOfPaymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B67E1D37E1BE000410B3 /* BalanceOfPaymentsViewController.m */; };
@@ -113,6 +112,7 @@
 		F259B68E1D37ED39000410B3 /* CashingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B68C1D37ED39000410B3 /* CashingViewController.xib */; };
 		F259B6951D380BC2000410B3 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B6931D380BC2000410B3 /* AddAccountViewController.m */; };
 		F259B6961D380BC2000410B3 /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B6941D380BC2000410B3 /* AddAccountViewController.xib */; };
+		F2A987D11D388EDC00A48B25 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987D01D388EDC00A48B25 /* UIView+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -323,8 +323,6 @@
 		D21EE7DE1D3245CF008AE0B7 /* MyAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAttentionViewController.h; sourceTree = "<group>"; };
 		D21EE7DF1D3245CF008AE0B7 /* MyAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAttentionViewController.m; sourceTree = "<group>"; };
 		D7C3699B88F3AE309E260902 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		F259B66C1D37A088000410B3 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		F259B66D1D37A088000410B3 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		F259B6781D37DD6C000410B3 /* MyIntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyIntegralViewController.h; sourceTree = "<group>"; };
 		F259B6791D37DD6C000410B3 /* MyIntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyIntegralViewController.m; sourceTree = "<group>"; };
 		F259B67A1D37DD6C000410B3 /* MyIntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyIntegralViewController.xib; sourceTree = "<group>"; };
@@ -342,6 +340,8 @@
 		F259B6921D380BC2000410B3 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
 		F259B6931D380BC2000410B3 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
 		F259B6941D380BC2000410B3 /* AddAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
+		F2A987CF1D388EDC00A48B25 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		F2A987D01D388EDC00A48B25 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -491,7 +491,6 @@
 			isa = PBXGroup;
 			children = (
 				F259B66F1D37DCB2000410B3 /* MyIntegration */,
-				F259B66B1D37A088000410B3 /* Tools */,
 				18B484411D2E259D001703C0 /* Src */,
 				18B484291D2E23CF001703C0 /* Base */,
 				18B484171D2E1D8D001703C0 /* Common */,
@@ -904,18 +903,10 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F259B66B1D37A088000410B3 /* Tools */ = {
-			isa = PBXGroup;
-			children = (
-				F259B66C1D37A088000410B3 /* UIView+Extension.h */,
-				F259B66D1D37A088000410B3 /* UIView+Extension.m */,
-			);
-			path = Tools;
-			sourceTree = "<group>";
-		};
 		F259B66F1D37DCB2000410B3 /* MyIntegration */ = {
 			isa = PBXGroup;
 			children = (
+				F2A987CE1D388EDC00A48B25 /* Tools */,
 				F259B6751D37DD6C000410B3 /* Model */,
 				F259B6761D37DD6C000410B3 /* View */,
 				F259B6771D37DD6C000410B3 /* ViewController */,
@@ -959,6 +950,15 @@
 				F259B6941D380BC2000410B3 /* AddAccountViewController.xib */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F2A987CE1D388EDC00A48B25 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				F2A987CF1D388EDC00A48B25 /* UIView+Extension.h */,
+				F2A987D01D388EDC00A48B25 /* UIView+Extension.m */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1197,7 +1197,6 @@
 				18730A871D2F685700A0BF35 /* RegisterViewController.m in Sources */,
 				18B4849F1D2E2A5B001703C0 /* NSDate+Category.m in Sources */,
 				18B4849C1D2E2A5B001703C0 /* NSString+Validation.m in Sources */,
-				F259B66E1D37A088000410B3 /* UIView+Extension.m in Sources */,
 				18B484C61D2E4122001703C0 /* BrandCell.m in Sources */,
 				18730AB61D2F691A00A0BF35 /* Config.m in Sources */,
 				18922B261D372FEE00B82890 /* ShopsAllViewController.m in Sources */,
@@ -1213,6 +1212,7 @@
 				18730AA91D2F68B800A0BF35 /* GeneralTextFiledViewController.m in Sources */,
 				18B484B61D2E2B3B001703C0 /* BKHelper.m in Sources */,
 				18B4842D1D2E2404001703C0 /* BaseCell.m in Sources */,
+				F2A987D11D388EDC00A48B25 /* UIView+Extension.m in Sources */,
 				D21EE7D21D320E56008AE0B7 /* MeHeaderLoginView.m in Sources */,
 				18B4849B1D2E2A5B001703C0 /* NSString+MD5.m in Sources */,
 				18B4844D1D2E2603001703C0 /* GoodsViewController.m in Sources */,

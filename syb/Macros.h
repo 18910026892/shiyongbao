@@ -405,5 +405,7 @@ typedef NSUInteger FrameType;
 //店铺列表
 #define URL_StoreListByCat [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"StoreListByCat"]]
 
+/*********获取我的积分**********/
+#define URL_GetUserIntegral [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetUserIntegral"]]
 
 #endif /* Macros_h */

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalanceOfPaymentsViewController">
@@ -26,9 +25,6 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovc-NW-hHr">
                             <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="ovc-NW-hHr" secondAttribute="height" multiplier="4:1" id="LRB-Rj-5AE"/>
-                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="收入记录">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,9 +38,6 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kdk-9V-6Y5">
                             <rect key="frame" x="160" y="0.0" width="160" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="Kdk-9V-6Y5" secondAttribute="height" multiplier="4:1" id="yBJ-1k-rSj"/>
-                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="支出记录">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,7 +68,10 @@
                         <constraint firstItem="ovc-NW-hHr" firstAttribute="leading" secondItem="uR2-x3-ypF" secondAttribute="leading" id="Mip-yN-faG"/>
                         <constraint firstAttribute="height" constant="40" id="Yap-WZ-f2C"/>
                         <constraint firstAttribute="bottom" secondItem="ovc-NW-hHr" secondAttribute="bottom" id="eeV-8K-D8R"/>
+                        <constraint firstItem="Kdk-9V-6Y5" firstAttribute="leading" secondItem="ovc-NW-hHr" secondAttribute="trailing" id="iBt-2R-2fM"/>
+                        <constraint firstItem="Kdk-9V-6Y5" firstAttribute="height" secondItem="ovc-NW-hHr" secondAttribute="height" id="my4-3L-J1e"/>
                         <constraint firstItem="ovc-NW-hHr" firstAttribute="top" secondItem="uR2-x3-ypF" secondAttribute="top" id="w78-Qa-w0T"/>
+                        <constraint firstItem="Kdk-9V-6Y5" firstAttribute="width" secondItem="ovc-NW-hHr" secondAttribute="width" id="yOp-cB-IAw"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lQ2-Nc-5fI">
