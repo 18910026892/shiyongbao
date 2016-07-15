@@ -28,7 +28,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self setTabBarHide:YES];
+  
 }
 
 -(void)setupViews
@@ -46,19 +46,20 @@
     
     NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:_cat_id1,@"cat_id",_page,@"page", nil];
 
-    
+ 
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
-    [request RequestDataWithUrl:URL_ShopList pragma:postDict];
+    [request RequestDataWithUrl:URL_StoreListByCat pragma:postDict];
     
     [request getResultWithSuccess:^(id response) {
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
+  
+            _ShopsListArray = [[response valueForKey:@"result"] valueForKey:@"data"];
             
-               _ShopsListArray = [response valueForKey:@"result"];
+            NSLog(@" %@ ",_ShopsListArray);
             
-
                 _ModelArray = [ShopsModel mj_objectArrayWithKeyValuesArray:_ShopsListArray];
                 
                 
@@ -154,7 +155,7 @@
     if (!_TableView)
     {
         
-        _TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kMainScreenWidth,kMainScreenHeight-64) style:UITableViewStyleGrouped];
+        _TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth,kMainScreenHeight) style:UITableViewStyleGrouped];
         _TableView.dataSource = self;
         _TableView.delegate = self;
         _TableView.scrollEnabled = YES;
@@ -237,7 +238,10 @@
     
 }
 
-
+-(void)goodsButtonClickWithDict:(NSDictionary*)dict;
+{
+    NSLog(@" %@ ",dict);
+}
 #pragma TableViewDelegate
 
 

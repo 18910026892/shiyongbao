@@ -402,5 +402,8 @@ typedef NSUInteger FrameType;
 //订单列表
 #define URL_GoodsOrderRecord [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GoodsOrderRecord"]]
 
+//店铺列表
+#define URL_StoreListByCat [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"StoreListByCat"]]
+
 
 #endif /* Macros_h */

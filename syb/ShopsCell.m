@@ -23,25 +23,20 @@
     _shopsModel = shopsModel;
     
     //平台来源
-    _platform = [[UIImageView alloc]initWithFrame:CGRectMake(10,12.5, 40,40)];
+    _platform = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 40,40)];
     NSString * platform = shopsModel.shop_logo;
     [_platform sd_setImageWithURL:[NSURL URLWithString:platform]];
     
     //店铺名称
-    _shopName = [[UILabel alloc]initWithFrame:CGRectMake(60,12.5, SCREEN_WIDTH-90, 20)];
+    _shopName = [[UILabel alloc]initWithFrame:CGRectMake(60,10, SCREEN_WIDTH-90, 20)];
     _shopName.text = shopsModel.shop_name;
     _shopName.textColor = [UIColor blackColor];
     _shopName.font = [UIFont systemFontOfSize:14.0];
     _shopName.textAlignment = NSTextAlignmentLeft;
     
-    //质检通过
-    _passImage = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-20,2.5,79,60)];
-    UIImage * passImage = [UIImage imageNamed:@"pass"];
-    _passImage.image = passImage;
-    
     
     _AttentionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _AttentionButton.frame = CGRectMake(SCREEN_WIDTH-70,5, 60, 30);
+    _AttentionButton.frame = CGRectMake(SCREEN_WIDTH-140,15, 60, 30);
     _AttentionButton.layer.borderWidth = .5;
     _AttentionButton.layer.borderColor = RGBACOLOR(200, 200, 200, 1).CGColor;
     _AttentionButton.layer.cornerRadius = 10;
@@ -63,7 +58,7 @@
     [_AttentionButton addTarget:self action:@selector(attentionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     _AttentionCount = [[UILabel alloc]init];
-    _AttentionCount.frame = CGRectMake(SCREEN_WIDTH-130,40, 120, 20);
+    _AttentionCount.frame = CGRectMake(60,30, 120, 20);
     NSString  * userCount = shopsModel.atte_count;
     if ([userCount integerValue] > 10000) {
         userCount = [NSString stringWithFormat:@"共%.1ld万人认为靠谱",[userCount integerValue]/10000];
@@ -72,42 +67,61 @@
     }
     _AttentionCount.text = userCount;
     _AttentionCount.textColor = [UIColor blackColor];
-    _AttentionCount.textAlignment = NSTextAlignmentRight;
+    _AttentionCount.textAlignment = NSTextAlignmentLeft;
     _AttentionCount.font = [UIFont systemFontOfSize:12];
     _AttentionCount.tag = 9999;
     
     //中间那根线
-    _cellLine = [[UILabel alloc]initWithFrame:CGRectMake(10, 65, SCREEN_WIDTH-20,.5)];
+    _cellLine = [[UILabel alloc]initWithFrame:CGRectMake(10, 60, SCREEN_WIDTH-20,.5)];
     _cellLine.backgroundColor = RGBACOLOR(210,210,210,.5);
     
     
-    //Cell的背景视图
-    _cellBackView =  [[UIView alloc]init];
-    _cellBackView.frame = CGRectMake(0,5, SCREEN_WIDTH, 170);
-    _cellBackView.backgroundColor = [UIColor whiteColor];
+    //Cell提示点击
+    _clickImage = [[UIImageView alloc]init];
+    _clickImage.frame = CGRectMake(kMainScreenWidth-70, 7, 60, 30);
+
+    
+    for (int i=0; i<3; i++) {
+        _goodsImage = [UIButton buttonWithType:UIButtonTypeCustom];
+        _goodsImage.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
+        _goodsImage.backgroundColor = [UIColor whiteColor];
+    
+        NSString * imageUrl = [_shopsModel.recommend_goods[i] valueForKey:@"goods_img_url"];
+        [_goodsImage sd_setBackgroundImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal];
+        [_goodsImage addTarget:self action:@selector(goodsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        _goodsImage.tag = i;
+        [self.contentView addSubview:_goodsImage];
+    }
+    
+    for (int i=1; i<3; i++) {
+        _cellLine1 = [[UILabel alloc]initWithFrame:CGRectMake(kMainScreenWidth/3*i, 60, 0.5,kMainScreenWidth/3)];
+        _cellLine1.backgroundColor = RGBACOLOR(210,210,210,.5);
+        [self.contentView addSubview:_cellLine1];
+    }
     
     
     //三张图片
-    _goodsImage = [[UIImageView alloc]init];
-    _goodsImage.frame = CGRectMake(0, 72.5, SCREEN_WIDTH, 90*Proportion);
-    UIImage * noimage = [UIImage imageNamed:@"shopnoimage"];
-    NSString * shopimage = shopsModel.shop_image;
-    [_goodsImage sd_setImageWithURL:[NSURL URLWithString:shopimage] placeholderImage:noimage];
+    [self.contentView addSubview:_platform];
+    [self.contentView addSubview:_shopName];
+    [self.contentView addSubview:_AttentionButton];
+    [self.contentView addSubview:_AttentionCount];
+    [self.contentView addSubview:_cellLine];
+    [self.contentView addSubview:_clickImage];
 
-    
-    [_cellBackView addSubview:_platform];
-    [_cellBackView addSubview:_shopName];
-    [_cellBackView addSubview:_passImage];
-    [_cellBackView addSubview:_AttentionButton];
-    [_cellBackView addSubview:_AttentionCount];
-    [_cellBackView addSubview:_cellLine];
-    [_cellBackView addSubview:_goodsImage];
 
-    [self.contentView addSubview:_cellBackView];
     
 
 }
+-(void)goodsButtonClick:(UIButton*)sender;
+{
+    UIButton * btn = (UIButton*)sender;
+    
+    
+    if (_delegate) {
 
+        [self.delegate goodsButtonClickWithDict:_shopsModel.recommend_goods[btn.tag]];
+    }
+}
 
 -(void)attentionButtonClick:(UIButton*)sender;
 {
@@ -117,7 +131,7 @@
     if ([self.delegate respondsToSelector:@selector(attentionButtonClick:)]) {
         
         
-        [self.delegate attentionButtonClick:btn ];
+        [self.delegate attentionButtonClick:btn];
     }
 }
 

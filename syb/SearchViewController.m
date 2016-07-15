@@ -405,6 +405,8 @@
     {
          [self addRecord:_SearchBar.text];
        
+        NSLog(@" %@ " ,_searchType);
+        
         if ([_searchType isEqualToString:@"0"]) {
             
             GoodsSearchResultViewController * GsrVC = [[GoodsSearchResultViewController alloc]init];

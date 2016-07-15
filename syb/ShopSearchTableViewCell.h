@@ -14,7 +14,7 @@
 
 @optional
 
-
+-(void)goodsButtonClickWithDict:(NSDictionary*)dict;
 -(void)attentionButtonClick:(UIButton*)sender ;
 
 @end
@@ -24,24 +24,26 @@
 @property (nonatomic,strong)ShopsSearchModel * ShopsSearchModel;
 
 @property (weak, nonatomic) id <ShopSearchTableViewCellDelegate> delegate;
-
-//Cell 的背景视图
-@property (nonatomic,strong)UIView * cellBackView;
 //平台来源
 @property (nonatomic,strong)UIImageView * platform;
 //店铺名称
 @property (nonatomic,strong)UILabel * shopName;
-//质检通过标识
-@property (nonatomic,strong)UIImageView * passImage;
+
 //关注按钮
 @property (nonatomic,strong)UIButton * AttentionButton;
 //关注的人数量
 @property (nonatomic,strong)UILabel * AttentionCount;
 //店铺的商品图片
-@property (nonatomic,strong)UIImageView * goodsImage;
+@property (nonatomic,strong)UIButton * goodsImage;
+
+//点击按钮
+@property (nonatomic,strong)UIImageView * clickImage;
 
 //线条
 @property (nonatomic,strong)UILabel * cellLine;
+
+//线条1
+@property (nonatomic,strong)UILabel * cellLine1;
 
 
 @end

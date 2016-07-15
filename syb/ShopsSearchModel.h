@@ -9,23 +9,30 @@
 #import <Foundation/Foundation.h>
 
 @interface ShopsSearchModel : NSObject
-//店铺名称
-@property (nonatomic,copy)NSString * shop_name;
-//平台Logo
-@property (nonatomic,copy)NSString * shop_logo;
-//店铺ID
-@property (nonatomic,copy)NSString * shop_id;
-//店铺地址
-@property (nonatomic,copy)NSString * shop_click_url;
-//店铺图片地址
-@property (nonatomic,copy)NSString * shop_image;
-//店铺的关注数量
+
+@property (nonatomic,copy)NSString * action_id;
 @property (nonatomic,copy)NSString * atte_count;
-//店铺类型
+@property (nonatomic,copy)NSString * c_name;
+@property (nonatomic,copy)NSString * cat_id;
+@property (nonatomic,copy)NSString * is_auto_update;
+@property (nonatomic,copy)NSString * is_show;
+@property (nonatomic,strong)NSMutableArray * recommend_goods;
+@property (nonatomic,copy)NSString * shop_click_url;
+@property (nonatomic,copy)NSString * shop_content;
+@property (nonatomic,copy)NSString * shop_desc;
+@property (nonatomic,copy)NSString * shop_dyna_inspection_url;
+@property (nonatomic,copy)NSString * shop_dyna_services_url;
+@property (nonatomic,copy)NSString * shop_goodslist_url;
+@property (nonatomic,copy)NSString * shop_id;
+@property (nonatomic,copy)NSString * shop_image;
+@property (nonatomic,copy)NSString * shop_logo;
+@property (nonatomic,copy)NSString * shop_name;
+@property (nonatomic,copy)NSString * shop_scal_standard_url;
 @property (nonatomic,copy)NSString * shop_type;
-@property (nonatomic,strong)NSString * tag;
-//用户ID
+@property (nonatomic,copy)NSString * shop_url;
+@property (nonatomic,copy)NSString * sort_order;
 @property (nonatomic,copy)NSString * user_id;
+@property (nonatomic,copy)NSString * tag;
 
 + (instancetype)shopsModelWithDict:(NSDictionary *)dict;
 @end

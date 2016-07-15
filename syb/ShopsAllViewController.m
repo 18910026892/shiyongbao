@@ -13,7 +13,8 @@
 {
     [super viewDidLoad];
     [self setupDatas];
-
+    
+    
 }
 
 -(void)setupDatas
@@ -21,10 +22,7 @@
     _categoryArray = [NSMutableArray array];
     
     [_categoryArray addObjectsFromArray:[UserDefaultsUtils valueWithKey:@"shopCatList"]];
-    
- 
-    
-    
+
     _catIdArray = [NSMutableArray array];
     _TitleArray = [NSMutableArray array];
     

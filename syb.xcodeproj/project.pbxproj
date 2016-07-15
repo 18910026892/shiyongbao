@@ -14,6 +14,7 @@
 		181A663D1D35015100ABDE29 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A663C1D35015100ABDE29 /* OrderDetailViewController.m */; };
 		181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A663F1D3502F300ABDE29 /* OrderDetailCell.m */; };
 		18293A041D339223003ACD40 /* AppDelegate+KeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */; };
+		183B03A71D3889EE0011BFFF /* ClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03A61D3889EE0011BFFF /* ClassifyViewController.m */; };
 		18730A811D2F684900A0BF35 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730A801D2F684900A0BF35 /* LoginViewController.m */; };
 		18730A871D2F685700A0BF35 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730A841D2F685700A0BF35 /* RegisterViewController.m */; };
 		18730A881D2F685700A0BF35 /* VerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730A861D2F685700A0BF35 /* VerificationViewController.m */; };
@@ -146,6 +147,8 @@
 		181A663F1D3502F300ABDE29 /* OrderDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailCell.m; sourceTree = "<group>"; };
 		18293A021D339223003ACD40 /* AppDelegate+KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+KeyboardManager.h"; sourceTree = "<group>"; };
 		18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+KeyboardManager.m"; sourceTree = "<group>"; };
+		183B03A51D3889EE0011BFFF /* ClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyViewController.h; sourceTree = "<group>"; };
+		183B03A61D3889EE0011BFFF /* ClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyViewController.m; sourceTree = "<group>"; };
 		18730A7F1D2F684900A0BF35 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		18730A801D2F684900A0BF35 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		18730A831D2F685700A0BF35 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -386,6 +389,15 @@
 				181A663F1D3502F300ABDE29 /* OrderDetailCell.m */,
 			);
 			name = order;
+			sourceTree = "<group>";
+		};
+		183B03A41D3889790011BFFF /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				183B03A51D3889EE0011BFFF /* ClassifyViewController.h */,
+				183B03A61D3889EE0011BFFF /* ClassifyViewController.m */,
+			);
+			name = Project;
 			sourceTree = "<group>";
 		};
 		18730A7E1D2F683D00A0BF35 /* login */ = {
@@ -650,6 +662,7 @@
 		18B484411D2E259D001703C0 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				183B03A41D3889790011BFFF /* Project */,
 				18D34FA81D3397AA002CE8E0 /* Search */,
 				D21EE7D61D3220BE008AE0B7 /* webview */,
 				18730A891D2F685A00A0BF35 /* forget */,
@@ -1177,6 +1190,7 @@
 				18B4843F1D2E24C2001703C0 /* BKTabBarItem.m in Sources */,
 				D21EE7D91D322278008AE0B7 /* SybWebViewController.m in Sources */,
 				18B484B21D2E2A5B001703C0 /* NSString+Binary.m in Sources */,
+				183B03A71D3889EE0011BFFF /* ClassifyViewController.m in Sources */,
 				18B4849D1D2E2A5B001703C0 /* AnimateTools.m in Sources */,
 				18B484281D2E2307001703C0 /* GXHttpRequest.m in Sources */,
 				18B484971D2E2A5B001703C0 /* UIImage+Additional.m in Sources */,
