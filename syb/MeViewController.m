@@ -20,8 +20,7 @@
 #import "MyOrderViewController.h"
 #import "RegisterViewController.h"
 
-
-#import "SearchViewController.h"
+#import "ClassifyViewController.h"
 @interface MeViewController ()
 
 @end
@@ -176,12 +175,11 @@
 }
 -(void)MeHeaderLoginViewMessageBtn:(UIButton *)messageBtn;
 {
-//    MyMessageViewController * messageVc = [MyMessageViewController viewController];
-//    [self.navigationController pushViewController:messageVc animated:YES];
+
+    ClassifyViewController * messageVc = [ClassifyViewController viewController];
+    [self.navigationController pushViewController:messageVc animated:YES];
     
-    
-    SearchViewController * searchVc = [[SearchViewController alloc]init];
-    [self.navigationController pushViewController:searchVc animated:YES];
+
 }
 -(MeHeaderLogoutView*)logoutHeaderView
 {

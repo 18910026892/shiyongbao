@@ -405,5 +405,13 @@ typedef NSUInteger FrameType;
 //店铺列表
 #define URL_StoreListByCat [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"StoreListByCat"]]
 
+//商品分类
+#define URL_GetStoreGoodsSubCats [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsSubCats"]]
+
+//商品列表
+#define URL_GetStoreGoodsByCatId [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsByCatId"]]
+
+
+
 
 #endif /* Macros_h */
