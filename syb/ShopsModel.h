@@ -33,6 +33,6 @@
 @property (nonatomic,copy)NSString * sort_order;
 @property (nonatomic,copy)NSString * user_id;
 @property (nonatomic,copy)NSString * tag;
-
+@property (nonatomic,copy)NSString * tb_shop_id;
 + (instancetype)shopsModelWithDict:(NSDictionary *)dict;
 @end

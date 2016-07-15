@@ -15,6 +15,14 @@
 		181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A663F1D3502F300ABDE29 /* OrderDetailCell.m */; };
 		18293A041D339223003ACD40 /* AppDelegate+KeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */; };
 		183B03A71D3889EE0011BFFF /* ClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03A61D3889EE0011BFFF /* ClassifyViewController.m */; };
+		183B03AE1D388BF10011BFFF /* ClassifyTableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03AB1D388BF10011BFFF /* ClassifyTableModel.m */; };
+		183B03AF1D388BF10011BFFF /* ClassifyCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03AD1D388BF10011BFFF /* ClassifyCollectionModel.m */; };
+		183B03B61D388BFF0011BFFF /* ClassifyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03B11D388BFF0011BFFF /* ClassifyTableViewCell.m */; };
+		183B03B71D388BFF0011BFFF /* ClassifyCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03B31D388BFF0011BFFF /* ClassifyCollectionCell.m */; };
+		183B03B81D388BFF0011BFFF /* ClassifyCollectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03B51D388BFF0011BFFF /* ClassifyCollectionHeader.m */; };
+		183B03BB1D38D76D0011BFFF /* ProductGoodsViewCotroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03BA1D38D76D0011BFFF /* ProductGoodsViewCotroller.m */; };
+		183B03BE1D38D77D0011BFFF /* ProductGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03BD1D38D77D0011BFFF /* ProductGoodsModel.m */; };
+		183B03C11D38D7980011BFFF /* ProductGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03C01D38D7980011BFFF /* ProductGoodsCell.m */; };
 		18730A811D2F684900A0BF35 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730A801D2F684900A0BF35 /* LoginViewController.m */; };
 		18730A871D2F685700A0BF35 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730A841D2F685700A0BF35 /* RegisterViewController.m */; };
 		18730A881D2F685700A0BF35 /* VerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730A861D2F685700A0BF35 /* VerificationViewController.m */; };
@@ -149,6 +157,22 @@
 		18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+KeyboardManager.m"; sourceTree = "<group>"; };
 		183B03A51D3889EE0011BFFF /* ClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyViewController.h; sourceTree = "<group>"; };
 		183B03A61D3889EE0011BFFF /* ClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyViewController.m; sourceTree = "<group>"; };
+		183B03AA1D388BF10011BFFF /* ClassifyTableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyTableModel.h; sourceTree = "<group>"; };
+		183B03AB1D388BF10011BFFF /* ClassifyTableModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyTableModel.m; sourceTree = "<group>"; };
+		183B03AC1D388BF10011BFFF /* ClassifyCollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyCollectionModel.h; sourceTree = "<group>"; };
+		183B03AD1D388BF10011BFFF /* ClassifyCollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyCollectionModel.m; sourceTree = "<group>"; };
+		183B03B01D388BFF0011BFFF /* ClassifyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyTableViewCell.h; sourceTree = "<group>"; };
+		183B03B11D388BFF0011BFFF /* ClassifyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyTableViewCell.m; sourceTree = "<group>"; };
+		183B03B21D388BFF0011BFFF /* ClassifyCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyCollectionCell.h; sourceTree = "<group>"; };
+		183B03B31D388BFF0011BFFF /* ClassifyCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyCollectionCell.m; sourceTree = "<group>"; };
+		183B03B41D388BFF0011BFFF /* ClassifyCollectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyCollectionHeader.h; sourceTree = "<group>"; };
+		183B03B51D388BFF0011BFFF /* ClassifyCollectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyCollectionHeader.m; sourceTree = "<group>"; };
+		183B03B91D38D76D0011BFFF /* ProductGoodsViewCotroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductGoodsViewCotroller.h; sourceTree = "<group>"; };
+		183B03BA1D38D76D0011BFFF /* ProductGoodsViewCotroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductGoodsViewCotroller.m; sourceTree = "<group>"; };
+		183B03BC1D38D77D0011BFFF /* ProductGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductGoodsModel.h; sourceTree = "<group>"; };
+		183B03BD1D38D77D0011BFFF /* ProductGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductGoodsModel.m; sourceTree = "<group>"; };
+		183B03BF1D38D7980011BFFF /* ProductGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductGoodsCell.h; sourceTree = "<group>"; };
+		183B03C01D38D7980011BFFF /* ProductGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductGoodsCell.m; sourceTree = "<group>"; };
 		18730A7F1D2F684900A0BF35 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		18730A801D2F684900A0BF35 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		18730A831D2F685700A0BF35 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -394,10 +418,42 @@
 		183B03A41D3889790011BFFF /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				183B03A91D388BD60011BFFF /* View */,
+				183B03A81D388BD10011BFFF /* Model */,
 				183B03A51D3889EE0011BFFF /* ClassifyViewController.h */,
 				183B03A61D3889EE0011BFFF /* ClassifyViewController.m */,
+				183B03B91D38D76D0011BFFF /* ProductGoodsViewCotroller.h */,
+				183B03BA1D38D76D0011BFFF /* ProductGoodsViewCotroller.m */,
 			);
 			name = Project;
+			sourceTree = "<group>";
+		};
+		183B03A81D388BD10011BFFF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				183B03AA1D388BF10011BFFF /* ClassifyTableModel.h */,
+				183B03AB1D388BF10011BFFF /* ClassifyTableModel.m */,
+				183B03AC1D388BF10011BFFF /* ClassifyCollectionModel.h */,
+				183B03AD1D388BF10011BFFF /* ClassifyCollectionModel.m */,
+				183B03BC1D38D77D0011BFFF /* ProductGoodsModel.h */,
+				183B03BD1D38D77D0011BFFF /* ProductGoodsModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		183B03A91D388BD60011BFFF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				183B03B01D388BFF0011BFFF /* ClassifyTableViewCell.h */,
+				183B03B11D388BFF0011BFFF /* ClassifyTableViewCell.m */,
+				183B03B21D388BFF0011BFFF /* ClassifyCollectionCell.h */,
+				183B03B31D388BFF0011BFFF /* ClassifyCollectionCell.m */,
+				183B03B41D388BFF0011BFFF /* ClassifyCollectionHeader.h */,
+				183B03B51D388BFF0011BFFF /* ClassifyCollectionHeader.m */,
+				183B03BF1D38D7980011BFFF /* ProductGoodsCell.h */,
+				183B03C01D38D7980011BFFF /* ProductGoodsCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		18730A7E1D2F683D00A0BF35 /* login */ = {
@@ -1167,6 +1223,7 @@
 				18B484CA1D2E46CF001703C0 /* GoodsTableViewCell.m in Sources */,
 				18D34FB71D3398EC002CE8E0 /* ShopSearchTableViewCell.m in Sources */,
 				18B4841D1D2E1DF1001703C0 /* OpenUDID.m in Sources */,
+				183B03BE1D38D77D0011BFFF /* ProductGoodsModel.m in Sources */,
 				18B484B91D2E324A001703C0 /* SybSession.m in Sources */,
 				18B484371D2E24A7001703C0 /* BKNodataView.m in Sources */,
 				18D34FC31D339902002CE8E0 /* ChooseSearchTypeView.m in Sources */,
@@ -1178,6 +1235,7 @@
 				18B4845D1D2E2A2B001703C0 /* UserDefaultsUtils.m in Sources */,
 				18B4843A1D2E24AD001703C0 /* BKNoNetView.m in Sources */,
 				18B4849A1D2E2A5B001703C0 /* UIButton+Addtional.m in Sources */,
+				183B03B81D388BFF0011BFFF /* ClassifyCollectionHeader.m in Sources */,
 				18B4844A1D2E25FA001703C0 /* HomePageViewController.m in Sources */,
 				18B484A21D2E2A5B001703C0 /* NSString+Additions.m in Sources */,
 				18D34FB51D3398EC002CE8E0 /* SearchViewController.m in Sources */,
@@ -1190,6 +1248,7 @@
 				18B4843F1D2E24C2001703C0 /* BKTabBarItem.m in Sources */,
 				D21EE7D91D322278008AE0B7 /* SybWebViewController.m in Sources */,
 				18B484B21D2E2A5B001703C0 /* NSString+Binary.m in Sources */,
+				183B03C11D38D7980011BFFF /* ProductGoodsCell.m in Sources */,
 				183B03A71D3889EE0011BFFF /* ClassifyViewController.m in Sources */,
 				18B4849D1D2E2A5B001703C0 /* AnimateTools.m in Sources */,
 				18B484281D2E2307001703C0 /* GXHttpRequest.m in Sources */,
@@ -1209,6 +1268,7 @@
 				F259B68D1D37ED39000410B3 /* CashingViewController.m in Sources */,
 				181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */,
 				18B484501D2E260C001703C0 /* ShopsViewController.m in Sources */,
+				183B03AE1D388BF10011BFFF /* ClassifyTableModel.m in Sources */,
 				18730AA91D2F68B800A0BF35 /* GeneralTextFiledViewController.m in Sources */,
 				18B484B61D2E2B3B001703C0 /* BKHelper.m in Sources */,
 				18B4842D1D2E2404001703C0 /* BaseCell.m in Sources */,
@@ -1236,9 +1296,13 @@
 				18D34FC41D339902002CE8E0 /* GoodsSearchModel.m in Sources */,
 				F259B6801D37E1BE000410B3 /* BalanceOfPaymentsViewController.m in Sources */,
 				18730AB51D2F691A00A0BF35 /* SingleManage.m in Sources */,
+				183B03B61D388BFF0011BFFF /* ClassifyTableViewCell.m in Sources */,
+				183B03BB1D38D76D0011BFFF /* ProductGoodsViewCotroller.m in Sources */,
 				18293A041D339223003ACD40 /* AppDelegate+KeyboardManager.m in Sources */,
 				18730ABC1D2F69AE00A0BF35 /* TimeTool.m in Sources */,
+				183B03B71D388BFF0011BFFF /* ClassifyCollectionCell.m in Sources */,
 				18B484981D2E2A5B001703C0 /* UIView+Additional.m in Sources */,
+				183B03AF1D388BF10011BFFF /* ClassifyCollectionModel.m in Sources */,
 				18730A8E1D2F686500A0BF35 /* ForgetPasswordViewController.m in Sources */,
 				18730AB91D2F694600A0BF35 /* CustomTextField.m in Sources */,
 				18B483E31D2E19C7001703C0 /* main.m in Sources */,

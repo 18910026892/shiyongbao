@@ -28,7 +28,7 @@
     [_platform sd_setImageWithURL:[NSURL URLWithString:platform]];
     
     //店铺名称
-    _shopName = [[UILabel alloc]initWithFrame:CGRectMake(60,10, SCREEN_WIDTH-90, 20)];
+    _shopName = [[UILabel alloc]initWithFrame:CGRectMake(60,10, SCREEN_WIDTH/2-60, 20)];
     _shopName.text = shopsModel.shop_name;
     _shopName.textColor = [UIColor blackColor];
     _shopName.font = [UIFont systemFontOfSize:14.0];
@@ -86,8 +86,12 @@
         _goodsImage.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
         _goodsImage.backgroundColor = [UIColor whiteColor];
     
-        NSString * imageUrl = [_shopsModel.recommend_goods[i] valueForKey:@"goods_img_url"];
-        [_goodsImage sd_setBackgroundImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal];
+        if ([_shopsModel.recommend_goods count]==3) {
+            NSString * imageUrl = [_shopsModel.recommend_goods[i] valueForKey:@"goods_img_url"];
+            [_goodsImage sd_setBackgroundImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal];
+        }
+        
+  
         [_goodsImage addTarget:self action:@selector(goodsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         _goodsImage.tag = i;
         [self.contentView addSubview:_goodsImage];

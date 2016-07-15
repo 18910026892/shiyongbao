@@ -45,6 +45,8 @@
     
     NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:_KeyWord,@"keyword",_page,@"page", nil];
     
+    NSLog(@" %@ ",postDict);
+    
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
     [request RequestDataWithUrl:URL_SearchStoreGoodsList pragma:postDict];
@@ -60,7 +62,7 @@
             
             NSMutableArray * tableArray = [resultDict valueForKey:@"data"];
             
-            NSLog(@" %@ ",tableArray);
+            NSLog(@" %@ ",response);
             
             if (IS_ARRAY_CLASS(tableArray)) {
                 
