@@ -46,6 +46,8 @@
     
     NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:_KeyWord,@"keyword",_page,@"page", nil];
     
+    NSLog(@" %@ ",postDict);
+    
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
     [request RequestDataWithUrl:URL_SearchShopList pragma:postDict];
@@ -54,6 +56,7 @@
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
+            NSLog(@" %@",response);
             
             _ShopsListArray = [response valueForKey:@"result"];
             
@@ -105,6 +108,9 @@
     } DataFaiure:^(id error) {
         [self stopLoadData];
         [HDHud showMessageInView:self.view title:error];
+        
+        NSLog(@" 报错信息 %@ ",error);
+        
     } Failure:^(id error) {
         [self stopLoadData];
         [HDHud showNetWorkErrorInView:self.view];
