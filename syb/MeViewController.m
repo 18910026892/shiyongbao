@@ -416,7 +416,6 @@
                     if (userSession.isLogin) {
                         
                         MyIntegralViewController * inyrthtslVC = [[MyIntegralViewController alloc] initWithNibName:@"MyIntegralViewController" bundle:nil];
-                        inyrthtslVC.hidesBottomBarWhenPushed = YES;
                         [self.navigationController pushViewController:inyrthtslVC animated:YES];
                         
                     }else if(!userSession.isLogin)

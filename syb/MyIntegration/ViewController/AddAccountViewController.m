@@ -30,6 +30,7 @@
     }else if (self.bandingType == bankType){
         [self setNavTitle:@"绑定银行卡"];
         self.typeName.text = @"银行卡号";
+        self.accountTF.placeholder = @"请输入银行卡号";
     }
     self.bandingBtn.cornerRadius = 5;
     self.bandingBtn.backgroundColor = kNavBackGround;
@@ -52,11 +53,10 @@
 - (void)bangdingAccount
 {
     [HDHud showHUDInView:self.view title:@"绑定中..."];
-    NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:@"user_id",user.userID,nil];
-    
+    NSDictionary *postDict = @{@"user_id":user.userID,@"type":@(self.bandingType),@"account":self.accountTF.text,@"full_name":self.nameTF.text};
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
-    [request RequestDataWithUrl:URL_GetUserIntegral pragma:postDict];
+    [request RequestDataWithUrl:URL_BindingUserAccountInfo pragma:postDict];
     
     [request getResultWithSuccess:^(id response) {
         //加载框消失

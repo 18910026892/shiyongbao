@@ -17,8 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *payBtn;
 @property (nonatomic,assign)int infoFlag;//1-收入 2-支出
 @property (nonatomic,assign)int pageNum;
-@property (nonatomic,assign)NSMutableArray *incomes;
-@property (nonatomic,assign)NSMutableArray *payments;
+@property (nonatomic,strong)NSMutableArray *incomes;
+@property (nonatomic,strong)NSMutableArray *payments;
 
 @end
 
@@ -28,7 +28,7 @@
 }
 -(int)infoFlag
 {
-    if (_infoFlag) {
+    if (!_infoFlag) {
         _infoFlag = 1;
     }
     return _infoFlag;
@@ -99,11 +99,14 @@
             }
         }
         [self.tableView.mj_header endRefreshing];
-        
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView reloadData];
     } DataFaiure:^(id error) {
         [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     } Failure:^(id error) {
         [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     }];
 
 }
@@ -123,7 +126,7 @@
 - (IBAction)incomeDidClick:(UIButton *)sender
 {
     if (sender.selected) return;
-    
+    self.infoFlag = 1;
     self.payBtn.selected = NO;
     sender.selected = YES;
     self.bottomLineCenter.constant = 0;
@@ -131,11 +134,12 @@
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
+    [self.tableView.mj_header beginRefreshing];
 }
 - (IBAction)payDidClick:(UIButton *)sender
 {
     if (sender.selected) return;
-    
+    self.infoFlag = 2;
     self.incomeBtn.selected = NO;
     sender.selected = YES;
     self.bottomLineCenter.constant = self.payBtn.center.x-self.incomeBtn.center.x;
@@ -143,6 +147,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         [self.view layoutIfNeeded];
     }];
+    [self.tableView.mj_header beginRefreshing];
 }
 #pragma mark - end btnCLick
 
@@ -154,7 +159,11 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"BalanceOfPaymentTableViewCell" owner:nil options:nil] lastObject];
     }
-    
+    if (self.infoFlag==1) {
+        cell.data = self.incomes[indexPath.row];
+    }else if(self.infoFlag==2){
+        cell.data = self.payments[indexPath.row];
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

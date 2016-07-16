@@ -8,8 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CashingViewController">
             <connections>
                 <outlet property="bankBtn" destination="yzy-77-tjB" id="MFi-lc-B8F"/>
+                <outlet property="bottomLineHeight" destination="6gv-WR-M18" id="nPh-IU-uJD"/>
                 <outlet property="cashBtn" destination="gCk-CZ-3H2" id="bwR-cl-T4i"/>
                 <outlet property="integralTextFild" destination="Jdf-FL-k6L" id="rtk-Pa-6fd"/>
+                <outlet property="interalLabel" destination="WxJ-iw-cIC" id="aLT-t2-nhi"/>
                 <outlet property="middleLineCenter" destination="KpJ-2x-1aS" id="KwT-v2-r2u"/>
                 <outlet property="tableView" destination="xcg-RX-oTB" id="fTN-UF-Q2s"/>
                 <outlet property="topMiddleLine" destination="Dcv-04-fAT" id="Ydr-yA-pno"/>
@@ -51,8 +53,8 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jdf-FL-k6L">
-                            <rect key="frame" x="97" y="51.5" width="213" height="17"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入兑换数量" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jdf-FL-k6L">
+                            <rect key="frame" x="97" y="51" width="213" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
@@ -87,6 +89,9 @@
                             <state key="normal" title="兑现">
                                 <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="cashAction:" destination="-1" eventType="touchUpInside" id="ofc-Oz-8f6"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
@@ -174,11 +179,21 @@
                                 <action selector="addAccount:" destination="-1" eventType="touchUpInside" id="X8O-pL-6iK"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rw5-2F-XaA">
+                            <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                            <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="6gv-WR-M18"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="rw5-2F-XaA" firstAttribute="leading" secondItem="C97-eU-jYi" secondAttribute="leading" id="5ZV-ZF-C0q"/>
+                        <constraint firstAttribute="bottom" secondItem="rw5-2F-XaA" secondAttribute="bottom" id="Ccf-QV-uWp"/>
                         <constraint firstItem="i3p-Uk-lfh" firstAttribute="leading" secondItem="qgV-2O-1sc" secondAttribute="trailing" constant="8" id="DdL-JH-eHq"/>
                         <constraint firstAttribute="height" constant="50" id="V4M-7T-s7N"/>
+                        <constraint firstAttribute="trailing" secondItem="rw5-2F-XaA" secondAttribute="trailing" id="V9d-Tq-iSv"/>
                         <constraint firstItem="qgV-2O-1sc" firstAttribute="centerY" secondItem="C97-eU-jYi" secondAttribute="centerY" id="VrG-Ca-CSM"/>
                         <constraint firstItem="qgV-2O-1sc" firstAttribute="leading" secondItem="C97-eU-jYi" secondAttribute="leading" constant="20" id="iof-bw-xte"/>
                         <constraint firstItem="rvj-EK-m1p" firstAttribute="top" secondItem="C97-eU-jYi" secondAttribute="top" id="ir8-dI-iBg"/>
@@ -188,7 +203,7 @@
                         <constraint firstAttribute="trailing" secondItem="rvj-EK-m1p" secondAttribute="trailing" id="yvq-Bd-Kjq"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xcg-RX-oTB">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xcg-RX-oTB">
                     <rect key="frame" x="0.0" y="309" width="320" height="259"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>

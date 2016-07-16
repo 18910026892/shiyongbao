@@ -121,6 +121,21 @@
 		F259B6951D380BC2000410B3 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F259B6931D380BC2000410B3 /* AddAccountViewController.m */; };
 		F259B6961D380BC2000410B3 /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F259B6941D380BC2000410B3 /* AddAccountViewController.xib */; };
 		F2A987D11D388EDC00A48B25 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987D01D388EDC00A48B25 /* UIView+Extension.m */; };
+		F2A987D71D391E9E00A48B25 /* CashingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987D51D391E9E00A48B25 /* CashingTableViewCell.m */; };
+		F2A987D81D391E9E00A48B25 /* CashingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A987D61D391E9E00A48B25 /* CashingTableViewCell.xib */; };
+		F2A987DC1D394AB000A48B25 /* PayTheGasolineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987DA1D394AB000A48B25 /* PayTheGasolineViewController.m */; };
+		F2A987DD1D394AB000A48B25 /* PayTheGasolineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A987DB1D394AB000A48B25 /* PayTheGasolineViewController.xib */; };
+		F2A987E11D3958EC00A48B25 /* PayTheGasolineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987DF1D3958EC00A48B25 /* PayTheGasolineTableViewCell.m */; };
+		F2A987E21D3958EC00A48B25 /* PayTheGasolineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A987E01D3958EC00A48B25 /* PayTheGasolineTableViewCell.xib */; };
+		F2A987E51D39CC2200A48B25 /* ItemViewButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987E41D39CC2200A48B25 /* ItemViewButton.m */; };
+		F2A987E71D39D2BB00A48B25 /* ItemViewButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A987E61D39D2BB00A48B25 /* ItemViewButton.xib */; };
+		F2A987EA1D39FABC00A48B25 /* InteralGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987E91D39FABC00A48B25 /* InteralGoodsModel.m */; };
+		F2A987ED1D3A031200A48B25 /* InteralGoodsContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987EC1D3A031200A48B25 /* InteralGoodsContentView.m */; };
+		F2A987EF1D3A031E00A48B25 /* InteralGoodsContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A987EE1D3A031E00A48B25 /* InteralGoodsContentView.xib */; };
+		F2A987F31D3A06F200A48B25 /* IteralGoodCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987F11D3A06F200A48B25 /* IteralGoodCollectionViewCell.m */; };
+		F2A987F41D3A06F200A48B25 /* IteralGoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A987F21D3A06F200A48B25 /* IteralGoodCollectionViewCell.xib */; };
+		F2A987F81D3A5C6200A48B25 /* MobilePhoneRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A987F61D3A5C6200A48B25 /* MobilePhoneRechargeViewController.m */; };
+		F2A987F91D3A5C6200A48B25 /* MobilePhoneRechargeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2A987F71D3A5C6200A48B25 /* MobilePhoneRechargeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -366,6 +381,32 @@
 		F259B6941D380BC2000410B3 /* AddAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
 		F2A987CF1D388EDC00A48B25 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		F2A987D01D388EDC00A48B25 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		F2A987D41D391E9E00A48B25 /* CashingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashingTableViewCell.h; sourceTree = "<group>"; };
+		F2A987D51D391E9E00A48B25 /* CashingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashingTableViewCell.m; sourceTree = "<group>"; };
+		F2A987D61D391E9E00A48B25 /* CashingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashingTableViewCell.xib; sourceTree = "<group>"; };
+		F2A987D91D394AB000A48B25 /* PayTheGasolineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayTheGasolineViewController.h; sourceTree = "<group>"; };
+		F2A987DA1D394AB000A48B25 /* PayTheGasolineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayTheGasolineViewController.m; sourceTree = "<group>"; };
+		F2A987DB1D394AB000A48B25 /* PayTheGasolineViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayTheGasolineViewController.xib; sourceTree = "<group>"; };
+		F2A987DE1D3958EC00A48B25 /* PayTheGasolineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayTheGasolineTableViewCell.h; sourceTree = "<group>"; };
+		F2A987DF1D3958EC00A48B25 /* PayTheGasolineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayTheGasolineTableViewCell.m; sourceTree = "<group>"; };
+		F2A987E01D3958EC00A48B25 /* PayTheGasolineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayTheGasolineTableViewCell.xib; sourceTree = "<group>"; };
+		F2A987E31D39CC2200A48B25 /* ItemViewButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewButton.h; sourceTree = "<group>"; };
+		F2A987E41D39CC2200A48B25 /* ItemViewButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewButton.m; sourceTree = "<group>"; };
+		F2A987E61D39D2BB00A48B25 /* ItemViewButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemViewButton.xib; sourceTree = "<group>"; };
+		F2A987E81D39FABC00A48B25 /* InteralGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteralGoodsModel.h; sourceTree = "<group>"; };
+		F2A987E91D39FABC00A48B25 /* InteralGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteralGoodsModel.m; sourceTree = "<group>"; };
+		F2A987EB1D3A031200A48B25 /* InteralGoodsContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteralGoodsContentView.h; sourceTree = "<group>"; };
+		F2A987EC1D3A031200A48B25 /* InteralGoodsContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteralGoodsContentView.m; sourceTree = "<group>"; };
+		F2A987EE1D3A031E00A48B25 /* InteralGoodsContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteralGoodsContentView.xib; sourceTree = "<group>"; };
+		F2A987F01D3A06F200A48B25 /* IteralGoodCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IteralGoodCollectionViewCell.h; sourceTree = "<group>"; };
+		F2A987F11D3A06F200A48B25 /* IteralGoodCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IteralGoodCollectionViewCell.m; sourceTree = "<group>"; };
+		F2A987F21D3A06F200A48B25 /* IteralGoodCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IteralGoodCollectionViewCell.xib; sourceTree = "<group>"; };
+		F2A987F51D3A5C6200A48B25 /* MobilePhoneRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobilePhoneRechargeViewController.h; sourceTree = "<group>"; };
+		F2A987F61D3A5C6200A48B25 /* MobilePhoneRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobilePhoneRechargeViewController.m; sourceTree = "<group>"; };
+		F2A987F71D3A5C6200A48B25 /* MobilePhoneRechargeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobilePhoneRechargeViewController.xib; sourceTree = "<group>"; };
+		F2A987FA1D3A659200A48B25 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		F2A987FC1D3A65E000A48B25 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		F2A987FD1D3A65E000A48B25 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -945,6 +986,9 @@
 		D60C8D3E7E519D1558169935 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2A987FC1D3A65E000A48B25 /* AddressBook.framework */,
+				F2A987FD1D3A65E000A48B25 /* AddressBookUI.framework */,
+				F2A987FA1D3A659200A48B25 /* CoreTelephony.framework */,
 				98E430D4CE5EF0097D81D5B5 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -975,6 +1019,8 @@
 			children = (
 				F259B6871D37E5B2000410B3 /* BalanceOfPaymentModel.h */,
 				F259B6881D37E5B2000410B3 /* BalanceOfPaymentModel.m */,
+				F2A987E81D39FABC00A48B25 /* InteralGoodsModel.h */,
+				F2A987E91D39FABC00A48B25 /* InteralGoodsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -985,6 +1031,21 @@
 				F259B6821D37E592000410B3 /* BalanceOfPaymentTableViewCell.h */,
 				F259B6831D37E592000410B3 /* BalanceOfPaymentTableViewCell.m */,
 				F259B6841D37E592000410B3 /* BalanceOfPaymentTableViewCell.xib */,
+				F2A987D41D391E9E00A48B25 /* CashingTableViewCell.h */,
+				F2A987D51D391E9E00A48B25 /* CashingTableViewCell.m */,
+				F2A987D61D391E9E00A48B25 /* CashingTableViewCell.xib */,
+				F2A987DE1D3958EC00A48B25 /* PayTheGasolineTableViewCell.h */,
+				F2A987DF1D3958EC00A48B25 /* PayTheGasolineTableViewCell.m */,
+				F2A987E01D3958EC00A48B25 /* PayTheGasolineTableViewCell.xib */,
+				F2A987E31D39CC2200A48B25 /* ItemViewButton.h */,
+				F2A987E41D39CC2200A48B25 /* ItemViewButton.m */,
+				F2A987E61D39D2BB00A48B25 /* ItemViewButton.xib */,
+				F2A987EB1D3A031200A48B25 /* InteralGoodsContentView.h */,
+				F2A987EC1D3A031200A48B25 /* InteralGoodsContentView.m */,
+				F2A987EE1D3A031E00A48B25 /* InteralGoodsContentView.xib */,
+				F2A987F01D3A06F200A48B25 /* IteralGoodCollectionViewCell.h */,
+				F2A987F11D3A06F200A48B25 /* IteralGoodCollectionViewCell.m */,
+				F2A987F21D3A06F200A48B25 /* IteralGoodCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1004,6 +1065,12 @@
 				F259B6921D380BC2000410B3 /* AddAccountViewController.h */,
 				F259B6931D380BC2000410B3 /* AddAccountViewController.m */,
 				F259B6941D380BC2000410B3 /* AddAccountViewController.xib */,
+				F2A987D91D394AB000A48B25 /* PayTheGasolineViewController.h */,
+				F2A987DA1D394AB000A48B25 /* PayTheGasolineViewController.m */,
+				F2A987DB1D394AB000A48B25 /* PayTheGasolineViewController.xib */,
+				F2A987F51D3A5C6200A48B25 /* MobilePhoneRechargeViewController.h */,
+				F2A987F61D3A5C6200A48B25 /* MobilePhoneRechargeViewController.m */,
+				F2A987F71D3A5C6200A48B25 /* MobilePhoneRechargeViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1123,15 +1190,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2A987F41D3A06F200A48B25 /* IteralGoodCollectionViewCell.xib in Resources */,
 				F259B6861D37E592000410B3 /* BalanceOfPaymentTableViewCell.xib in Resources */,
 				18B483F11D2E19C7001703C0 /* LaunchScreen.storyboard in Resources */,
+				F2A987DD1D394AB000A48B25 /* PayTheGasolineViewController.xib in Resources */,
 				F259B67C1D37DD6C000410B3 /* MyIntegralViewController.xib in Resources */,
+				F2A987E21D3958EC00A48B25 /* PayTheGasolineTableViewCell.xib in Resources */,
+				F2A987E71D39D2BB00A48B25 /* ItemViewButton.xib in Resources */,
 				18B483EE1D2E19C7001703C0 /* Assets.xcassets in Resources */,
+				F2A987F91D3A5C6200A48B25 /* MobilePhoneRechargeViewController.xib in Resources */,
 				F259B6961D380BC2000410B3 /* AddAccountViewController.xib in Resources */,
 				18B484251D2E2183001703C0 /* Podfile in Resources */,
+				F2A987EF1D3A031E00A48B25 /* InteralGoodsContentView.xib in Resources */,
 				18B483EC1D2E19C7001703C0 /* Main.storyboard in Resources */,
 				F259B68E1D37ED39000410B3 /* CashingViewController.xib in Resources */,
 				F259B6811D37E1BE000410B3 /* BalanceOfPaymentsViewController.xib in Resources */,
+				F2A987D81D391E9E00A48B25 /* CashingTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1233,6 +1307,7 @@
 				D21EE7D51D320E6C008AE0B7 /* MeHeaderLogoutView.m in Sources */,
 				18D34FB91D3398EC002CE8E0 /* ShopsSearchResultViewController.m in Sources */,
 				18B4845D1D2E2A2B001703C0 /* UserDefaultsUtils.m in Sources */,
+				F2A987DC1D394AB000A48B25 /* PayTheGasolineViewController.m in Sources */,
 				18B4843A1D2E24AD001703C0 /* BKNoNetView.m in Sources */,
 				18B4849A1D2E2A5B001703C0 /* UIButton+Addtional.m in Sources */,
 				183B03B81D388BFF0011BFFF /* ClassifyCollectionHeader.m in Sources */,
@@ -1243,6 +1318,7 @@
 				18730AA71D2F68B800A0BF35 /* UserInfoViewController.m in Sources */,
 				18D34FC61D339902002CE8E0 /* GoodsSearchTableViewCell.m in Sources */,
 				18B484A01D2E2A5B001703C0 /* NSDate+TimeInterval.m in Sources */,
+				F2A987E11D3958EC00A48B25 /* PayTheGasolineTableViewCell.m in Sources */,
 				18B484531D2E2618001703C0 /* ShiYongBaoViewController.m in Sources */,
 				18730A811D2F684900A0BF35 /* LoginViewController.m in Sources */,
 				18B4843F1D2E24C2001703C0 /* BKTabBarItem.m in Sources */,
@@ -1265,9 +1341,12 @@
 				18922B291D37311900B82890 /* AppDelegate+Request.m in Sources */,
 				18B4849E1D2E2A5B001703C0 /* NSDate+Additions.m in Sources */,
 				181A663A1D34B6C500ABDE29 /* OrderItem.m in Sources */,
+				F2A987D71D391E9E00A48B25 /* CashingTableViewCell.m in Sources */,
 				F259B68D1D37ED39000410B3 /* CashingViewController.m in Sources */,
+				F2A987ED1D3A031200A48B25 /* InteralGoodsContentView.m in Sources */,
 				181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */,
 				18B484501D2E260C001703C0 /* ShopsViewController.m in Sources */,
+				F2A987F81D3A5C6200A48B25 /* MobilePhoneRechargeViewController.m in Sources */,
 				183B03AE1D388BF10011BFFF /* ClassifyTableModel.m in Sources */,
 				18730AA91D2F68B800A0BF35 /* GeneralTextFiledViewController.m in Sources */,
 				18B484B61D2E2B3B001703C0 /* BKHelper.m in Sources */,
@@ -1278,6 +1357,7 @@
 				18B4844D1D2E2603001703C0 /* GoodsViewController.m in Sources */,
 				F259B67B1D37DD6C000410B3 /* MyIntegralViewController.m in Sources */,
 				18730A9E1D2F68A300A0BF35 /* ContactUsViewController.m in Sources */,
+				F2A987F31D3A06F200A48B25 /* IteralGoodCollectionViewCell.m in Sources */,
 				18730A8F1D2F686500A0BF35 /* VerifyViewController.m in Sources */,
 				18B484A41D2E2A5B001703C0 /* NSTimer+Addition.m in Sources */,
 				18730AA81D2F68B800A0BF35 /* IntroductionViewController.m in Sources */,
@@ -1288,6 +1368,7 @@
 				18922B1D1D372FB300B82890 /* ShopsCell.m in Sources */,
 				18730AAD1D2F68D900A0BF35 /* MessageModel.m in Sources */,
 				F259B6951D380BC2000410B3 /* AddAccountViewController.m in Sources */,
+				F2A987E51D39CC2200A48B25 /* ItemViewButton.m in Sources */,
 				18B484561D2E2623001703C0 /* CartViewController.m in Sources */,
 				18B484A31D2E2A5B001703C0 /* NSString+FontAwesome.m in Sources */,
 				181A66341D34A59700ABDE29 /* OrderCell.m in Sources */,
@@ -1298,6 +1379,7 @@
 				18730AB51D2F691A00A0BF35 /* SingleManage.m in Sources */,
 				183B03B61D388BFF0011BFFF /* ClassifyTableViewCell.m in Sources */,
 				183B03BB1D38D76D0011BFFF /* ProductGoodsViewCotroller.m in Sources */,
+				F2A987EA1D39FABC00A48B25 /* InteralGoodsModel.m in Sources */,
 				18293A041D339223003ACD40 /* AppDelegate+KeyboardManager.m in Sources */,
 				18730ABC1D2F69AE00A0BF35 /* TimeTool.m in Sources */,
 				183B03B71D388BFF0011BFFF /* ClassifyCollectionCell.m in Sources */,

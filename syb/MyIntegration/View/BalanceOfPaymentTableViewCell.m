@@ -28,17 +28,18 @@
 -(void)setData:(BalanceOfPaymentModel *)data
 {
     _data = data;
-    
+    [self setUpUI];
 }
 - (void)setUpUI
 {
     NSTimeInterval timeInterval = self.data.adjust_date.doubleValue;
     self.date.text = [self getDateByTimeInterval:timeInterval];
     self.orderNumber.text = self.data.rel_order_id;
-    self.integral.text = [NSString stringWithFormat:@"%@",self.data.point_num];
+    self.integral.text = [NSString stringWithFormat:@"%@积分",self.data.point_num];
 }
 - (NSString *)getDateByTimeInterval:(NSTimeInterval)stamp
 {
+    stamp = stamp/1000;
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"YYYY-MM.dd"];
     [formatter setTimeZone:[NSTimeZone defaultTimeZone]];

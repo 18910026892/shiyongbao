@@ -8,9 +8,9 @@
 
 #import "BaseViewController.h"
 typedef enum {
-    zhifubaoType,
+    zhifubaoType =1,
     bankType
 }AccountType;
 @interface CashingViewController : BaseViewController
-
+@property (nonatomic,copy)NSString *gift_cate_id;
 @end
