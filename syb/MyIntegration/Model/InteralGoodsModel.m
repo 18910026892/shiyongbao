@@ -15,8 +15,11 @@
     if (self) {
         for (NSString* key in dict.allKeys) {
             id value = [dict valueForKey:key];
-            if (value) {
-                [self setValue:[dict valueForKey:key] forKey:key];
+            SEL setPropertySelctor = NSSelectorFromString(key);
+            if ( [self respondsToSelector:setPropertySelctor]) {
+                if (value) {
+                    [self setValue:[dict valueForKey:key] forKey:key];
+                }
             }
         }
     }

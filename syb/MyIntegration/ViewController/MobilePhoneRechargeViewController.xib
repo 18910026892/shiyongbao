@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MobilePhoneRechargeViewController">
             <connections>
                 <outlet property="bottomLine" destination="hvQ-DP-wpQ" id="aqt-3s-Cpw"/>
+                <outlet property="contentView" destination="4BD-78-V05" id="46w-bX-SZp"/>
                 <outlet property="contentViewWidth" destination="qdH-4J-Qt9" id="yd2-tv-NwD"/>
                 <outlet property="phoneTF" destination="y70-Zt-bIi" id="gfK-Qs-mW1"/>
                 <outlet property="phoneType" destination="pOv-4c-Bif" id="mlg-Xp-mnk"/>
@@ -125,7 +126,7 @@
                 <constraint firstItem="dvq-sS-BLa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="Xe2-4o-6aX"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="218" y="108"/>
+            <point key="canvasLocation" x="118" y="61"/>
         </view>
     </objects>
 </document>

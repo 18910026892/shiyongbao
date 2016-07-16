@@ -9,17 +9,21 @@
 #import "MobilePhoneRechargeViewController.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
-@interface MobilePhoneRechargeViewController ()<UITextFieldDelegate,ABPeoplePickerNavigationControllerDelegate>
+#import "InteralGoodsContentView.h"
+#import "InteralGoodsModel.h"
+@interface MobilePhoneRechargeViewController ()<UITextFieldDelegate,ABPeoplePickerNavigationControllerDelegate,InteralGoodsContentViewDelegate>
 {
     ABPeoplePickerNavigationController *picker;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scorllView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet UILabel *phoneType;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLine;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (nonatomic,copy)NSString *name;
 @property (strong,nonatomic) NSMutableArray *people;
+@property (strong,nonatomic) InteralGoodsContentView *collectionView;
 @end
 
 @implementation MobilePhoneRechargeViewController
@@ -34,6 +38,16 @@
     }
     return _people;
 }
+-(InteralGoodsContentView *)collectionView
+{
+    if (!_collectionView) {
+        _collectionView = [[[NSBundle mainBundle] loadNibNamed:@"InteralGoodsContentView" owner:nil options:nil] lastObject];
+        _collectionView.frame = self.contentView.bounds;
+        _collectionView.delegate = self;
+        [self.contentView addSubview:_collectionView];
+    }
+    return _collectionView;
+}
 - (BOOL)isNum:(NSString *)checkedNumString {
     
     checkedNumString = [checkedNumString stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
@@ -46,6 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self accessTheAddress];
+    self.collectionView.delegate = self;
     user = [SybSession sharedSession];
     self.phoneTF.text = [self changeString:user.userName];
     self.name = @"账户绑定账号";
@@ -56,6 +71,7 @@
      self.automaticallyAdjustsScrollViewInsets = YES;
     [self showBackButton:YES];
     [self setNavTitle:@"充话费"];
+    [self requestCategroies];
 }
 - (NSString *)changeString:(NSString *)phoneNumber
 {
@@ -333,6 +349,40 @@
     } Failure:^(id error) {
         
     }];
+}
+
+- (void)requestCategroies
+{
+    //        NSDictionary *postDict = @{@"gift_cat_id":self.gift_cate_id,@"gift_type":@"zsy"};
+    NSDictionary *postDict = @{@"gift_cat_id":self.gift_cate_id};
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_GetGiftList pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        NSLog(@"%@",response);
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            if ([[response objectForKey:@"code"] intValue]==1) {
+                NSArray *gift = [InteralGoodsModel arrayWithArrays:[response objectForKey:@"result"]];
+                self.collectionView.datas = gift;
+            }
+        }
+    } DataFaiure:^(id error) {
+        
+        
+    } Failure:^(id error) {
+        
+    }];
+}
+
+
+-(void)itemDidClicked:(InteralGoodsModel *)goods
+{
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
