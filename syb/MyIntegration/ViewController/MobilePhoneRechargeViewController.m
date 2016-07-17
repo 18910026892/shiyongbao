@@ -42,6 +42,7 @@
 {
     if (!_collectionView) {
         _collectionView = [[[NSBundle mainBundle] loadNibNamed:@"InteralGoodsContentView" owner:nil options:nil] lastObject];
+        NSLog(@"%f",self.contentView.width);
         _collectionView.frame = self.contentView.bounds;
         _collectionView.delegate = self;
         [self.contentView addSubview:_collectionView];
@@ -60,7 +61,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self accessTheAddress];
-    self.collectionView.delegate = self;
     user = [SybSession sharedSession];
     self.phoneTF.text = [self changeString:user.userName];
     self.name = @"账户绑定账号";
@@ -179,7 +179,6 @@
     //联系人姓名
     
     NSString * name = (__bridge NSString *)ABRecordCopyCompositeName(person);
-//    NSString * place = (__bridge NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
     //判断点击区域
     
     if (property == kABPersonPhoneProperty) {
@@ -190,8 +189,10 @@
         
         //根据点击的哪一行对应的identifier取出所在的索引
         
-        int index = ABMultiValueGetIdentifierAtIndex(phoneMulti, identifier);
-        
+        long index = ABMultiValueGetIndexForIdentifier(phoneMulti,identifier);
+        if (index<0) {
+            index=0;
+        }
         //根据索引把相应的值取出
         
         NSString * phone = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phoneMulti, index);
@@ -244,8 +245,11 @@
         
         //根据电机的哪一行对应的identifier取出所在的索引
         
-        int index = ABMultiValueGetIdentifierAtIndex(phone, identifier);
-        
+        long index = ABMultiValueGetIndexForIdentifier(phone,identifier);
+        if (index<0) {
+            index=0;
+        }
+
         NSString * thePhone = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phone, index);
         if ([thePhone containsString:@"-"]) {
             thePhone = [thePhone stringByReplacingOccurrencesOfString:@"-" withString:@""];
@@ -327,8 +331,8 @@
 }
 - (void)requestPhoneType:(NSString *)phoneNumber
 {
-    
-    NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:@"phone",phoneNumber,nil];
+    phoneNumber = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSDictionary * postDict = @{@"phone":phoneNumber};
     
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
@@ -338,10 +342,11 @@
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
-            
-            NSLog(@" %@",response);
-#warning 手机归属地
-            self.phoneType.text = [NSString stringWithFormat:@"%@(%@)",self.name,@"中国联通"];
+            if ([[response objectForKey:@"code"] intValue]==1) {
+                NSDictionary *dic = [response objectForKey:@"result"];
+                 self.phoneType.text = [NSString stringWithFormat:@"%@(%@)",self.name,[dic objectForKey:@"carrier"]];
+            }
+           
         }
         
     } DataFaiure:^(id error) {
@@ -382,6 +387,38 @@
 
 -(void)itemDidClicked:(InteralGoodsModel *)goods
 {
+    NSDate *date = [NSDate date];
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:@"yyyyMMdd"];
+    NSString *dateString = [fomatter stringFromDate:date];
+    NSString * md5 = [NSString stringWithFormat:@"spyg:user_id=%@date=%@",user.userID,dateString];
+    NSString * PostMD5 = [NSString MD5WithString:md5];
+    NSString *phone = [self.phoneTF.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSDictionary * postDict = @{@"user_sign":PostMD5,@"gift_id":goods.gift_id,@"account":phone};
+    GXHttpRequest *request1 = [[GXHttpRequest alloc]init];
+    [HDHud showHUDInView:self.view title:@"换购中..."];
+    [request1 RequestDataWithUrl:URL_PurchaseGift pragma:postDict];
+    
+    [request1 getResultWithSuccess:^(id response) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        NSLog(@"%@",response);
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            if ([[response objectForKey:@"code"] intValue]==1) {
+               [self.navigationController popViewControllerAnimated:YES];
+            }
+            
+        }
+    } DataFaiure:^(id error) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        
+    } Failure:^(id error) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+    }];
 
 }
 - (void)didReceiveMemoryWarning {

@@ -32,7 +32,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self requestMyIntegral];
     [self setTabBarHide:YES];
     [MobClick beginLogPageView:@"我的积分"];
     
@@ -54,7 +54,7 @@
     
     user = [SybSession sharedSession];
     [self.RightBtn addTarget:self action:@selector(toBalanceVC:) forControlEvents:UIControlEventTouchUpInside];
-    [self requestMyIntegral];
+    
     [self requestCategory];
 }
 - (void)requestMyIntegral

@@ -27,6 +27,8 @@
 @property (nonatomic,strong)NSMutableArray *bankAccounts;
 
 @property (nonatomic,assign)NSInteger selectRow;
+@property (nonatomic,copy)NSString *gift_id;
+@property (nonatomic,copy)NSString *accountNumber;
 @end
 
 @implementation CashingViewController
@@ -60,6 +62,7 @@
     self.cashBtn.cornerRadius = 5;
     // Do any additional setup after loading the view from its nib.
     self.accountType = zhifubaoType;
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -67,8 +70,35 @@
     
     [self setTabBarHide:YES];
     [self requestData];
+    [self requestMyIntegral];
+    [self requestCategroies];
 }
-
+- (void)requestMyIntegral
+{
+    NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:@"user_id",user.userID,nil];
+    
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_GetUserIntegral pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            
+            NSLog(@" %@",response);
+            NSDictionary *userInfo = [response objectForKey:@"result"];
+            self.interalLabel.text = [NSString stringWithFormat:@"%@",[userInfo valueForKey:@"point_num"]];
+            [[NSUserDefaults standardUserDefaults] setObject:[userInfo valueForKey:@"point_num"] forKey:@"GetMyInteral"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+    } DataFaiure:^(id error) {
+        
+    } Failure:^(id error) {
+        
+    }];
+}
 - (void)requestData
 {
     NSDictionary *postDict = @{@"user_id":user.userID,@"type":@(self.accountType)};
@@ -106,6 +136,37 @@
         
     }];
 
+}
+
+- (void)requestCategroies
+{
+    //        NSDictionary *postDict = @{@"gift_cat_id":self.gift_cate_id,@"gift_type":@"zsy"};
+    NSDictionary *postDict = @{@"gift_cat_id":self.gift_cate_id};
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_GetGiftList pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        NSLog(@"%@",response);
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            if ([[response objectForKey:@"code"] intValue]==1) {
+                NSArray *result = [response objectForKey:@"result"];
+                if (result.count>0) {
+                    NSDictionary *dic = result[0];
+                    self.gift_id = [NSString stringWithFormat:@"%@",[dic objectForKey:@"gift_id"]];
+                }
+            }
+        }
+    } DataFaiure:^(id error) {
+        
+        
+    } Failure:^(id error) {
+        
+    }];
 }
 #pragma mark - btnClick
 - (IBAction)zhifubaoDidClick:(UIButton *)sender
@@ -180,6 +241,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectRow = indexPath.row;
+    NSDictionary *accountInfo = nil;
+    if (self.accountType==zhifubaoType) {
+        accountInfo = self.zhifubaoAccounts[indexPath.row];
+    }else if(self.accountType==bankType){
+        accountInfo = self.bankAccounts[indexPath.row];
+    }
+    NSDictionary *infoDic = [accountInfo objectForKey:@"binding_info"];
+    self.accountNumber = [NSString stringWithFormat:@"%@",[infoDic objectForKey:@"account"]];
     [self.tableView reloadData];
 }
 #pragma mark - end tableViewDelegate
@@ -207,38 +276,38 @@
 }
 - (void)cash
 {
-//    NSDate *date = [NSDate date];
-//    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
-//    [fomatter setDateFormat:@"yyyyMMdd"];
-//    NSString *dateString = [fomatter stringFromDate:date];
-//    NSString * md5 = [NSString stringWithFormat:@"spyg:user_id=%@date=%@",user.userID,dateString];
-//    NSString * PostMD5 = [NSString MD5WithString:md5];
-//    NSDictionary * postDict = @{@"user_sign":PostMD5,@"gift_id":goods.gift_id,@"account":self.number};
-//    GXHttpRequest *request1 = [[GXHttpRequest alloc]init];
-//    [HDHud showHUDInView:self.view title:@"换购中..."];
-//    [request1 RequestDataWithUrl:URL_PurchaseGift pragma:postDict];
-//    
-//    [request1 getResultWithSuccess:^(id response) {
-//        //加载框消失
-//        [HDHud hideHUDInView:self.view];
-//        NSLog(@"%@",response);
-//        /// 加保护
-//        if ([response isKindOfClass:[NSDictionary class]])
-//        {
-//            if ([[response objectForKey:@"code"] intValue]==1) {
-//                
-//            }
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//    } DataFaiure:^(id error) {
-//        //加载框消失
-//        [HDHud hideHUDInView:self.view];
-//        
-//    } Failure:^(id error) {
-//        //加载框消失
-//        [HDHud hideHUDInView:self.view];
-//    }];
-//
+    NSDate *date = [NSDate date];
+    NSDateFormatter *fomatter = [[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:@"yyyyMMdd"];
+    NSString *dateString = [fomatter stringFromDate:date];
+    NSString * md5 = [NSString stringWithFormat:@"spyg:user_id=%@date=%@",user.userID,dateString];
+    NSString * PostMD5 = [NSString MD5WithString:md5];
+    NSDictionary * postDict = @{@"user_sign":PostMD5,@"gift_id":self.gift_id,@"user_ext_id":self.accountNumber,@"money":self.integralTextFild.text};
+    GXHttpRequest *request1 = [[GXHttpRequest alloc]init];
+    [HDHud showHUDInView:self.view title:@"换购中..."];
+    [request1 RequestDataWithUrl:URL_PurchaseGift pragma:postDict];
+    
+    [request1 getResultWithSuccess:^(id response) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        NSLog(@"%@",response);
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            if ([[response objectForKey:@"code"] intValue]==1) {
+                
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } DataFaiure:^(id error) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+        
+    } Failure:^(id error) {
+        //加载框消失
+        [HDHud hideHUDInView:self.view];
+    }];
+
     
 }
 - (void)didReceiveMemoryWarning {

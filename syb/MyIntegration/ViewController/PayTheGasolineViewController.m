@@ -184,8 +184,8 @@ NSString * const zshHistroies = @"zshHistroies";
 {
     NSArray *categories = self.categories[self.typeFlag-1];
     if (categories.count>0) {
-        int hang = categories.count/3+1;
-        int lie = categories.count%3;
+        NSInteger hang = categories.count/3+1;
+        NSInteger lie = categories.count%3;
         if (lie==0) {
             hang--;
         }
