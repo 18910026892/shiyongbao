@@ -7,7 +7,8 @@
 //
 
 #import "MyAttentionViewController.h"
-
+#import "shopAttentionViewController.h"
+#import "goodsAttentionViewController.h"
 @implementation MyAttentionViewController
 -(void)viewWillAppear:(BOOL)animated
 {

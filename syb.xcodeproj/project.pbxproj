@@ -43,6 +43,7 @@
 		18730AB91D2F694600A0BF35 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730AB81D2F694600A0BF35 /* CustomTextField.m */; };
 		18730ABC1D2F69AE00A0BF35 /* TimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730ABB1D2F69AE00A0BF35 /* TimeTool.m */; };
 		18730ABF1D2F6CD900A0BF35 /* PooCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730ABE1D2F6CD900A0BF35 /* PooCodeView.m */; };
+		187D68E51D3C7DFE00618923 /* attentionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D68E41D3C7DFE00618923 /* attentionLabel.m */; };
 		18922B1D1D372FB300B82890 /* ShopsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18922B1A1D372FB300B82890 /* ShopsCell.m */; };
 		18922B1E1D372FB300B82890 /* ShopsTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18922B1C1D372FB300B82890 /* ShopsTitle.m */; };
 		18922B231D372FCF00B82890 /* ShopsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18922B221D372FCF00B82890 /* ShopsModel.m */; };
@@ -238,6 +239,8 @@
 		18730ABB1D2F69AE00A0BF35 /* TimeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTool.m; sourceTree = "<group>"; };
 		18730ABD1D2F6CD900A0BF35 /* PooCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PooCodeView.h; sourceTree = "<group>"; };
 		18730ABE1D2F6CD900A0BF35 /* PooCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PooCodeView.m; sourceTree = "<group>"; };
+		187D68E31D3C7DFE00618923 /* attentionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attentionLabel.h; sourceTree = "<group>"; };
+		187D68E41D3C7DFE00618923 /* attentionLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = attentionLabel.m; sourceTree = "<group>"; };
 		18922B191D372FB300B82890 /* ShopsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopsCell.h; sourceTree = "<group>"; };
 		18922B1A1D372FB300B82890 /* ShopsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopsCell.m; sourceTree = "<group>"; };
 		18922B1B1D372FB300B82890 /* ShopsTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopsTitle.h; sourceTree = "<group>"; };
@@ -588,6 +591,15 @@
 			name = message;
 			sourceTree = "<group>";
 		};
+		187D68E21D3C7D7600618923 /* attention */ = {
+			isa = PBXGroup;
+			children = (
+				187D68E31D3C7DFE00618923 /* attentionLabel.h */,
+				187D68E41D3C7DFE00618923 /* attentionLabel.m */,
+			);
+			name = attention;
+			sourceTree = "<group>";
+		};
 		18922B1F1D372FB800B82890 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -880,6 +892,7 @@
 		18B484471D2E25E5001703C0 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				187D68E21D3C7D7600618923 /* attention */,
 				D2DB6F061D3BDB35001510AF /* shopAttention */,
 				D2DB6F051D3BDB2B001510AF /* goodsAttention */,
 				181A662E1D34A54C00ABDE29 /* order */,
@@ -1376,6 +1389,7 @@
 				18B4849E1D2E2A5B001703C0 /* NSDate+Additions.m in Sources */,
 				181A663A1D34B6C500ABDE29 /* OrderItem.m in Sources */,
 				181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */,
+				187D68E51D3C7DFE00618923 /* attentionLabel.m in Sources */,
 				18B484501D2E260C001703C0 /* ShopsViewController.m in Sources */,
 				183B03AE1D388BF10011BFFF /* ClassifyTableModel.m in Sources */,
 				18730AA91D2F68B800A0BF35 /* GeneralTextFiledViewController.m in Sources */,

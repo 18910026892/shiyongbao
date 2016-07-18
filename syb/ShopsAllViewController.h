@@ -13,7 +13,6 @@
 {
     UIScrollView * bigScrollView;
     UIScrollView *smallScrollView;
-    UIButton * backButton;
 }
 //标题数组
 @property (nonatomic,strong)NSMutableArray * TitleArray;
