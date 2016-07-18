@@ -48,18 +48,18 @@
                 </subviews>
                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="tqn-ez-oJN" firstAttribute="leading" secondItem="57r-xe-Rw3" secondAttribute="trailing" constant="8" id="9D2-JB-hbP"/>
+                    <constraint firstItem="57r-xe-Rw3" firstAttribute="centerY" secondItem="tqn-ez-oJN" secondAttribute="centerY" id="5bv-RN-VLk"/>
                     <constraint firstItem="kMw-EV-CzM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-12" id="Ivr-iQ-Yzk"/>
-                    <constraint firstItem="tqn-ez-oJN" firstAttribute="centerY" secondItem="57r-xe-Rw3" secondAttribute="centerY" id="L7X-of-v8e"/>
-                    <constraint firstItem="57r-xe-Rw3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="RT4-7J-wyj"/>
+                    <constraint firstItem="57r-xe-Rw3" firstAttribute="leading" secondItem="kMw-EV-CzM" secondAttribute="leading" id="Oqe-q7-yFU"/>
                     <constraint firstAttribute="bottom" secondItem="OND-CR-iXv" secondAttribute="bottom" id="SrT-MD-rVC"/>
                     <constraint firstItem="kMw-EV-CzM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Z5Z-e1-QeH"/>
                     <constraint firstAttribute="trailing" secondItem="tqn-ez-oJN" secondAttribute="trailing" constant="10" id="aWM-p5-DFE"/>
-                    <constraint firstItem="57r-xe-Rw3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="12" id="bTh-Jy-HyI"/>
+                    <constraint firstItem="tqn-ez-oJN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="12.25" id="bEA-rR-Tsk"/>
                     <constraint firstAttribute="trailing" secondItem="OND-CR-iXv" secondAttribute="trailing" id="cV4-tb-qB2"/>
                     <constraint firstItem="iDv-Ec-449" firstAttribute="centerY" secondItem="kMw-EV-CzM" secondAttribute="centerY" id="m1v-Uc-6da"/>
                     <constraint firstAttribute="trailing" secondItem="iDv-Ec-449" secondAttribute="trailing" constant="10" id="svh-ne-9Hk"/>
                     <constraint firstItem="OND-CR-iXv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uiz-Pp-Flv"/>
+                    <constraint firstItem="tqn-ez-oJN" firstAttribute="leading" secondItem="57r-xe-Rw3" secondAttribute="trailing" constant="8" id="xkA-M9-rHx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
