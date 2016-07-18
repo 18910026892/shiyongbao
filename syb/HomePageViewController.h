@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "GoodsViewController.h"
+#import "CCAdsPlayView.h"
 @interface HomePageViewController : BaseViewController
 
 @property(nonatomic,strong)UIButton * searchButton;
@@ -16,5 +17,5 @@
 
 @property(nonatomic,strong)UIImageView * logoImageView;
 
-
+@property (nonatomic,strong)CCAdsPlayView * BannerView;
 @end

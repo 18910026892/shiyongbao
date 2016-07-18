@@ -27,10 +27,40 @@
      self.navigationController.navigationBarHidden = YES;
 }
 
+-(CCAdsPlayView*)BannerView
+{
+    if (!_BannerView) {
+        
+        _BannerView = [CCAdsPlayView adsPlayViewWithFrame:CGRectMake(0, 0,kMainScreenWidth,107*Proportion) imageGroup:nil];
+        
+        _BannerView.placeHoldImage  = [UIImage imageNamed:@"fillimage"];
+        //设置小圆点位置
+        _BannerView.pageContolAliment = CCPageContolAlimentCenter;
+        //设置动画时间
+        _BannerView.animationDuration = 3.;
+        
+        __weak HomePageViewController * hpVC = self;
+        
+ 
+        
+        [_BannerView startWithTapActionBlock:^(NSInteger index) {
+            
+            
+        
+            
+        }];
+        
+    }
+    
+    
+    return _BannerView;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
- 
+    [self.view addSubview:self.BannerView];
     [self setupViews];
     
 }
