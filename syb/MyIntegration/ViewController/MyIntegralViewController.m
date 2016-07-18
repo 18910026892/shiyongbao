@@ -48,6 +48,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self setNavTitle:@"我的积分"];
     [self showBackButton:YES];
     self.myIntegral = @"0";
@@ -122,7 +123,7 @@
     // Do any additional setup after loading the view.
     self.Customview.backgroundColor = [UIColor clearColor];
     [self.RightBtn setTitle:@"收支明细" forState:UIControlStateNormal];
-    self.automaticallyAdjustsScrollViewInsets = NO;
+//
     
     /*********用户头像**********/
     self.userIV.cornerRadius = self.userIV.height/2;

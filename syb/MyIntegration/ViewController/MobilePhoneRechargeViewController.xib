@@ -31,7 +31,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y70-Zt-bIi">
-                                            <rect key="frame" x="10" y="20" width="223" height="40"/>
+                                            <rect key="frame" x="10" y="20" width="257" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="2bY-O1-GEB"/>
                                             </constraints>
@@ -41,18 +41,18 @@
                                                 <outlet property="delegate" destination="-1" id="aAk-QN-7Ld"/>
                                             </connections>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8s-bj-sfi">
-                                            <rect key="frame" x="254" y="15" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8s-bj-sfi">
+                                            <rect key="frame" x="288" y="19" width="12" height="22"/>
+                                            <state key="normal" image="shouji"/>
                                             <connections>
                                                 <action selector="bookAddress:" destination="-1" eventType="touchUpInside" id="zuw-2f-Ql8"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPq-G5-QYl">
-                                            <rect key="frame" x="262" y="50" width="30" height="24"/>
+                                            <rect key="frame" x="279" y="46" width="30" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <state key="normal" title="换号码">
-                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleColor" red="0.54841056030000002" green="0.53817349140000004" blue="0.51441271550000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="bookAddress:" destination="-1" eventType="touchUpInside" id="zqO-Ee-NFT"/>
@@ -129,4 +129,7 @@
             <point key="canvasLocation" x="118" y="61"/>
         </view>
     </objects>
+    <resources>
+        <image name="shouji" width="12" height="21"/>
+    </resources>
 </document>

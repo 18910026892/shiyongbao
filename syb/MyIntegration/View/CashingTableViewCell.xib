@@ -27,9 +27,9 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3c7-4L-AJL">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="danxuan" translatesAutoresizingMaskIntoConstraints="NO" id="3c7-4L-AJL">
                         <rect key="frame" x="280" y="23" width="30" height="30"/>
-                        <color key="backgroundColor" red="0.5484105603448276" green="0.53817349137931036" blue="0.51441271551724133" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="F3V-sl-UkP"/>
                             <constraint firstAttribute="width" constant="30" id="hQs-2A-cTD"/>
@@ -64,4 +64,7 @@
             <point key="canvasLocation" x="217" y="181"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="danxuan" width="17" height="17"/>
+    </resources>
 </document>

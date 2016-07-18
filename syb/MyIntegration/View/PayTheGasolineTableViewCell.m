@@ -25,9 +25,9 @@
 {
     _isSelected = isSelected;
     if (isSelected) {
-        self.selectIV.backgroundColor = [UIColor blackColor];
+        self.selectIV.image = [UIImage imageNamed:@"danxuan"];
     }else{
-        self.selectIV.backgroundColor = [UIColor whiteColor];
+        self.selectIV.image = [UIImage imageNamed:@"huise"];
     }
 }
 -(void)setSelected:(BOOL)selected
