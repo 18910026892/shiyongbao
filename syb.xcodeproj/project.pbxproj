@@ -147,6 +147,7 @@
 		D2DB6F121D3BDC1E001510AF /* shopAttentionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DB6F111D3BDC1E001510AF /* shopAttentionCell.m */; };
 		D2DB6F151D3BDC38001510AF /* goodsAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DB6F141D3BDC38001510AF /* goodsAttentionViewController.m */; };
 		D2DB6F181D3BDC48001510AF /* shopAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DB6F171D3BDC48001510AF /* shopAttentionViewController.m */; };
+		D2DFFC621D3D2C1A00BCB1FA /* CCAdsPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2DFFC611D3D2C1A00BCB1FA /* CCAdsPlayView.m */; };
 		F2EC16F21D3C9C0000DE0896 /* BalanceOfPaymentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EC16C61D3C9C0000DE0896 /* BalanceOfPaymentModel.m */; };
 		F2EC16F31D3C9C0000DE0896 /* InteralGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EC16C81D3C9C0000DE0896 /* InteralGoodsModel.m */; };
 		F2EC16F41D3C9C0000DE0896 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EC16CB1D3C9C0000DE0896 /* UIView+Extension.m */; };
@@ -457,6 +458,8 @@
 		D2DB6F141D3BDC38001510AF /* goodsAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = goodsAttentionViewController.m; sourceTree = "<group>"; };
 		D2DB6F161D3BDC48001510AF /* shopAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shopAttentionViewController.h; sourceTree = "<group>"; };
 		D2DB6F171D3BDC48001510AF /* shopAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shopAttentionViewController.m; sourceTree = "<group>"; };
+		D2DFFC601D3D2C1A00BCB1FA /* CCAdsPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAdsPlayView.h; sourceTree = "<group>"; };
+		D2DFFC611D3D2C1A00BCB1FA /* CCAdsPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAdsPlayView.m; sourceTree = "<group>"; };
 		D7C3699B88F3AE309E260902 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F2EC16C51D3C9C0000DE0896 /* BalanceOfPaymentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceOfPaymentModel.h; sourceTree = "<group>"; };
 		F2EC16C61D3C9C0000DE0896 /* BalanceOfPaymentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceOfPaymentModel.m; sourceTree = "<group>"; };
@@ -920,6 +923,8 @@
 		18B484421D2E25A6001703C0 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				D2DFFC601D3D2C1A00BCB1FA /* CCAdsPlayView.h */,
+				D2DFFC611D3D2C1A00BCB1FA /* CCAdsPlayView.m */,
 				18B484481D2E25FA001703C0 /* HomePageViewController.h */,
 				18B484491D2E25FA001703C0 /* HomePageViewController.m */,
 			);
@@ -1512,6 +1517,7 @@
 				18D34FB81D3398EC002CE8E0 /* ShopsSearchModel.m in Sources */,
 				181A663D1D35015100ABDE29 /* OrderDetailViewController.m in Sources */,
 				18B484CA1D2E46CF001703C0 /* GoodsTableViewCell.m in Sources */,
+				D2DFFC621D3D2C1A00BCB1FA /* CCAdsPlayView.m in Sources */,
 				F2EC16F51D3C9C0000DE0896 /* BalanceOfPaymentTableViewCell.m in Sources */,
 				18D34FB71D3398EC002CE8E0 /* ShopSearchTableViewCell.m in Sources */,
 				18B4841D1D2E1DF1001703C0 /* OpenUDID.m in Sources */,

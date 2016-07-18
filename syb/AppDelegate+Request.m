@@ -51,7 +51,7 @@
             NSMutableArray * goodCatList = [response valueForKey:@"result"];
             
             [UserDefaultsUtils saveValue:goodCatList forKey:@"goodCatList"];
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshHomePageCategory" object:nil];
         }
         
     } DataFaiure:^(id error) {
