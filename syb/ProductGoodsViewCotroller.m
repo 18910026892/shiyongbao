@@ -39,7 +39,7 @@
 {
     [self hideNoDataView];
     
-    NSDictionary * parameter = @{@"num":@"20",@"page":_page,@"cat_id":_cat_id};
+    NSDictionary * parameter = @{@"num":@"10",@"page":_page,@"cat_id":_cat_id};
     
     NSLog(@" 商品列表的参数是 %@ ",parameter);
     

@@ -7,7 +7,7 @@
 //
 
 #import "ShopsViewController.h"
-
+#import "LoginViewController.h"
 @interface ShopsViewController ()
 
 @end
@@ -243,7 +243,90 @@
     NSLog(@" %@ ",dict);
 }
 #pragma TableViewDelegate
-
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
+{
+    NSLog(@" attention");
+    
+    
+    ShopsModel * shopModel = (ShopsModel*)celldata;
+    
+    if ([shopModel.user_id length]>0) {
+        [HDHud showMessageInView:self.view title:@"您已关注过该店铺"];
+    }else
+    {
+        UIButton * btn = (UIButton*)sender;
+        
+        btn.userInteractionEnabled = NO;
+        
+        if(!userSession)
+        {
+            userSession = [SingleManage shareManage];
+        }
+        
+        
+        
+        if (userSession.isLogin) {
+            
+            [HDHud showHUDInView:self.view title:@"关注中..."];
+            
+            NSString * shopID = [NSString stringWithFormat:@"%@",shopModel.shop_id];
+            NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:shopID,@"shop_id", nil];
+            
+            
+            
+            GXHttpRequest *request = [[GXHttpRequest alloc]init];
+            
+            [request RequestDataWithUrl:URL_DoAttentShop pragma:postDict];
+            
+            [request getResultWithSuccess:^(id response) {
+                /// 加保护
+                if ([response isKindOfClass:[NSDictionary class]])
+                {
+                    
+                    //加载框消失
+                    [HDHud hideHUDInView:self.view];
+                    
+                    
+                    btn.userInteractionEnabled = YES;
+                    
+                    [btn setTitle:@"已关注" forState:UIControlStateNormal];
+                    
+                }
+                
+            } DataFaiure:^(id error) {
+                [HDHud hideHUDInView:self.view];
+                [HDHud showMessageInView:self.view title:error];
+                
+                btn.userInteractionEnabled = YES;
+            } Failure:^(id error) {
+                [HDHud hideHUDInView:self.view];
+                [HDHud showNetWorkErrorInView:self.view];
+                
+                btn.userInteractionEnabled = YES;
+            }];
+            
+            
+            
+            
+            
+            
+            
+            
+        }else if(!userSession.isLogin)
+        {
+            LoginViewController * loginVC = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }
+        
+        
+ 
+    }
+    
+    
+    
+    
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

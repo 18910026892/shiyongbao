@@ -10,8 +10,6 @@
 
 #import "BKTabBarItem.h"
 
-#import "GoodsViewController.h"
-
 static NSInteger num =0;
 
 @interface BaseTabBarController()
@@ -67,7 +65,7 @@ static BaseTabBarController* _myTabBarVC = nil;
     _ViewControllerCount = 5;
 
     
-    GoodsViewController * hpVc = [GoodsViewController viewController];
+    HomePageViewController * hpVc = [HomePageViewController viewController];
     [self setupItemWithViewController:hpVc ItemData:@{@"title":@"商品汇",@"imageStr":@"tab1",@"imageStr_s":@"tabs1"}];
     
     ShopsAllViewController * shopsVc = [ShopsAllViewController viewController];

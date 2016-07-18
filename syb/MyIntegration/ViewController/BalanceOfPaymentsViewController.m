@@ -78,7 +78,7 @@
 - (void)requestData
 {
     NSString *point_type = [NSString stringWithFormat:@"%d",self.infoFlag];
-    NSDictionary *postDict = @{@"user_id":user.userID,@"point_type":point_type,@"page":@(self.pageNum),@"num":@"20"};
+    NSDictionary *postDict = @{@"user_id":user.userID,@"point_type":point_type,@"page":@(self.pageNum),@"num":@"10"};
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
     [request RequestDataWithUrl:URL_GetUserPointRecord pragma:postDict];

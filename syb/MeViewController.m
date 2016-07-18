@@ -14,13 +14,12 @@
 #import "ContactUsViewController.h"
 #import "FeedBackViewController.h"
 #import "SybWebViewController.h"
-
 #import "MyIntegralViewController.h"
 #import "MyAttentionViewController.h"
 #import "MyOrderViewController.h"
 #import "RegisterViewController.h"
 
-#import "ClassifyViewController.h"
+
 @interface MeViewController ()
 
 @end
@@ -176,7 +175,7 @@
 -(void)MeHeaderLoginViewMessageBtn:(UIButton *)messageBtn;
 {
 
-    ClassifyViewController * messageVc = [ClassifyViewController viewController];
+    MyMessageViewController * messageVc = [MyMessageViewController viewController];
     [self.navigationController pushViewController:messageVc animated:YES];
     
 

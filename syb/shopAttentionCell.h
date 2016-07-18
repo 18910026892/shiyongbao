@@ -10,10 +10,10 @@
 #import "shopAttentionModel.h"
 @class shopAttentionCell;
 
-@protocol ShopsCellDelegate <NSObject>
+@protocol shopAttentionCellDelegate <NSObject>
 
 @optional
--(void)attentionButtonClick:(UIButton*)sender ;
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
 -(void)goodsButtonClickWithDict:(NSDictionary*)dict;
 
 @end
@@ -22,7 +22,7 @@
 
 @property(nonatomic,strong)shopAttentionModel * shopsModel;
 
-@property (weak, nonatomic) id <ShopsCellDelegate> delegate;
+@property (weak, nonatomic) id <shopAttentionCellDelegate> delegate;
 
 //平台来源
 @property (nonatomic,strong)UIImageView * platform;

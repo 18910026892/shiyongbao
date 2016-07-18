@@ -13,7 +13,7 @@
 @protocol ShopsCellDelegate <NSObject>
 
 @optional
--(void)attentionButtonClick:(UIButton*)sender ;
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
 -(void)goodsButtonClickWithDict:(NSDictionary*)dict;
 
 @end

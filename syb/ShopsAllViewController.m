@@ -9,12 +9,20 @@
 #import "ShopsAllViewController.h"
 #import "ShopsViewController.h"
 @implementation ShopsAllViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setTabBarHide:NO];
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     [self setupDatas];
     
-    
+    [self setNavTitle:@"卖家汇"];
 }
 
 -(void)setupDatas

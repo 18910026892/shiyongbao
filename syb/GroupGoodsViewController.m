@@ -1,21 +1,23 @@
+
 //
-//  goodsAttentionViewController.m
+//  GroupGoodsViewController.m
 //  syb
 //
-//  Created by 巩鑫 on 16/7/17.
+//  Created by GongXin on 16/7/18.
 //  Copyright © 2016年 spyg. All rights reserved.
 //
 
-#import "goodsAttentionViewController.h"
+#import "GroupGoodsViewController.h"
 
-@implementation goodsAttentionViewController
+@implementation GroupGoodsViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self setupDatas];
     [self setupViews];
-   
+    
+    [self showBackButton:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -38,27 +40,27 @@
 {
     [self hideNoDataView];
     
-    NSDictionary * parameter = @{@"num":@"10",@"page":_page};
+    NSDictionary * parameter = @{@"num":@"10",@"page":_page,@"group_id":_group_id};
     
-
+    NSLog(@" 商品列表的参数是 %@ ",parameter);
+    
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
-    [request RequestDataWithUrl:URL_AttentedStoreGoodsList  pragma:parameter];
+    [request RequestDataWithUrl:URL_GetStoreGoodsByGroupId pragma:parameter];
     
     [request getResultWithSuccess:^(id response) {
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
-            NSLog(@" %@ ",response);
             
-            NSMutableArray * array = [response valueForKey:@"result"] ;
+            NSMutableArray * array = [[response valueForKey:@"result"] valueForKey:@"goods_list"];
             
             //列表数据
             
             
             if (IS_ARRAY_CLASS(array)) {
                 _goodArray = array;
-                _goodModelArray = [goodsAttentionModel mj_objectArrayWithKeyValuesArray:_goodArray];
+                _goodModelArray = [good320Model mj_objectArrayWithKeyValuesArray:_goodArray];
                 
                 if (Type == 1) {
                     _goodListArray = [NSMutableArray arrayWithArray:_goodModelArray];
@@ -124,7 +126,7 @@
     if (!_TableView)
     {
         
-        _TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth,kMainScreenHeight-64) style:UITableViewStyleGrouped];
+        _TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kMainScreenWidth,kMainScreenHeight-64) style:UITableViewStyleGrouped];
         _TableView.dataSource = self;
         _TableView.delegate = self;
         _TableView.scrollEnabled = YES;
@@ -179,13 +181,13 @@
 {
     
     
-    static NSString * cellid = @"goodsAttentionCell";
+    static NSString * goodsTableViewCell = @"GoodsTableViewCell";
     
-    goodsAttentionCell * goodscell = [tableView dequeueReusableCellWithIdentifier:cellid];
+    GoodsTableViewCell * goodscell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCell];
     
     if (!goodscell) {
         
-        goodscell = [[goodsAttentionCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
+        goodscell = [[GoodsTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goodsTableViewCell];
         
     }
     

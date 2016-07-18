@@ -7,6 +7,8 @@
 //
 
 #import "HomePageViewController.h"
+#import "SearchViewController.h"
+#import "ClassifyViewController.h"
 
 @interface HomePageViewController ()
 
@@ -14,12 +16,80 @@
 
 @implementation HomePageViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setTabBarHide:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+ 
+    [self setupViews];
+    
+}
+-(void)setupViews
+{
+    [self.Customview addSubview:self.logoImageView];
+    [self.Customview addSubview:self.searchButton];
+    [self.Customview addSubview:self.messageButton];
+}
+
+-(UIImageView*)logoImageView
+{
+    if (!_logoImageView) {
+        _logoImageView = [[UIImageView alloc]init];
+        _logoImageView.frame = CGRectMake(20, 35, 45, 15);
+        _logoImageView.image = [UIImage imageNamed:@"shiyongbaologo"];
+    }
+    return _logoImageView;
+}
+
+-(UIButton*)searchButton
+{
+    if (!_searchButton) {
+        _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _searchButton.frame = CGRectMake(kMainScreenWidth/2-67.5, 30, 175, 25);
+        [_searchButton setImage:[UIImage imageNamed:@"searchButton"] forState:UIControlStateNormal];
+        [_searchButton addTarget:self action:@selector(searchButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _searchButton;
+}
+
+-(UIButton*)messageButton
+{
+    
+    if (!_messageButton) {
+        UIImage * messageImage = [UIImage imageNamed:@"message_pink"];
+        _messageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _messageButton.frame = CGRectMake(SCREEN_WIDTH-44,20, 44, 44);
+        [_messageButton setImage:messageImage forState:UIControlStateNormal];
+        [_messageButton addTarget:self action:@selector(messageClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _messageButton;
+    
+    
+}
+-(void)searchButtonClick:(UIButton*)sender
+
+{
+    [self.navigationController pushViewController:[SearchViewController viewController] animated:YES];
+}
+
+
+-(void)messageClick:(UIButton*)sender
+{
+    NSLog(@"message");
+    
+     [self.navigationController pushViewController:[ClassifyViewController viewController] animated:YES];
 
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

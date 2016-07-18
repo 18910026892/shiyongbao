@@ -44,7 +44,7 @@
 {
     [self hideNoDataView];
     
-    NSDictionary * parameter = @{@"num":@"20",@"page":_page,@"cat_id":_cat_id};
+    NSDictionary * parameter = @{@"num":@"10",@"page":_page,@"cat_id":_cat_id};
     
     
     GXHttpRequest *request = [[GXHttpRequest alloc]init];

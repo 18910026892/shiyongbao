@@ -14,8 +14,8 @@
 
 @optional
 
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
 -(void)goodsButtonClickWithDict:(NSDictionary*)dict;
--(void)attentionButtonClick:(UIButton*)sender ;
 
 @end
 

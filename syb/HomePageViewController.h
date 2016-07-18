@@ -10,4 +10,11 @@
 #import "GoodsViewController.h"
 @interface HomePageViewController : BaseViewController
 
+@property(nonatomic,strong)UIButton * searchButton;
+
+@property(nonatomic,strong)UIButton * messageButton;
+
+@property(nonatomic,strong)UIImageView * logoImageView;
+
+
 @end

@@ -75,7 +75,7 @@
 {
     if(!_goodsNameLabel)
     {
-        _goodsNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 10, SCREEN_WIDTH-170, 40)];
+        _goodsNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 10, SCREEN_WIDTH-180, 40)];
         _goodsNameLabel.textColor = [UIColor blackColor];
         _goodsNameLabel.font = [UIFont systemFontOfSize:15.0];
         _goodsNameLabel.textAlignment = NSTextAlignmentLeft;
@@ -115,7 +115,7 @@
         _shopNameLabel = [UILabel labelWithFrame:CGRectMake(110,
                                                          70,
                                                          kMainScreenWidth-150,
-                                                         20) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
+                                                         20) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
     }
     return _shopNameLabel;
 }
@@ -154,7 +154,7 @@
 -(UILabel*)platformLabel
 {
     if (!_platformLabel) {
-        _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,55, 60, 30) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
+        _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,55, 60, 30) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
     }
     return _platformLabel;
 }

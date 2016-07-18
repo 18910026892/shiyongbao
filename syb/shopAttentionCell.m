@@ -18,7 +18,7 @@
     return self;
 }
 
--(void)setShopModel:(shopAttentionModel *)shopsModel
+-(void)setShopsModel:(shopAttentionModel *)shopsModel;
 {
     _shopsModel = shopsModel;
     
@@ -42,14 +42,7 @@
     _AttentionButton.layer.cornerRadius = 10;
     _AttentionButton.backgroundColor = [UIColor whiteColor];
     
-    NSString * buttonTitle;
-    
-    if ([shopsModel.user_id isEmpty]) {
-        buttonTitle = @"+关注";
-    }else
-    {
-        buttonTitle = @"已关注";
-    }
+    NSString * buttonTitle = @"取消关注";
     
     [_AttentionButton setTitle:buttonTitle forState:UIControlStateNormal];
     _AttentionButton.tag = [shopsModel.tag integerValue];
@@ -57,19 +50,7 @@
     _AttentionButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_AttentionButton addTarget:self action:@selector(attentionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    _AttentionCount = [[UILabel alloc]init];
-    _AttentionCount.frame = CGRectMake(60,30, 120, 20);
-    NSString  * userCount = shopsModel.atte_count;
-    if ([userCount integerValue] > 10000) {
-        userCount = [NSString stringWithFormat:@"共%.1ld万人认为靠谱",[userCount integerValue]/10000];
-    }else{
-        userCount = [NSString stringWithFormat:@"共%.0ld人认为靠谱",(long)[userCount integerValue]];
-    }
-    _AttentionCount.text = userCount;
-    _AttentionCount.textColor = [UIColor blackColor];
-    _AttentionCount.textAlignment = NSTextAlignmentLeft;
-    _AttentionCount.font = [UIFont systemFontOfSize:12];
-    _AttentionCount.tag = 9999;
+
     
     //中间那根线
     _cellLine = [[UILabel alloc]initWithFrame:CGRectMake(10, 60, SCREEN_WIDTH-20,.5)];
@@ -110,7 +91,7 @@
     [self.contentView addSubview:_platform];
     [self.contentView addSubview:_shopName];
     [self.contentView addSubview:_AttentionButton];
-    [self.contentView addSubview:_AttentionCount];
+
     [self.contentView addSubview:_cellLine];
     [self.contentView addSubview:_clickImage];
     
@@ -121,6 +102,7 @@
 -(void)goodsButtonClick:(UIButton*)sender;
 {
     UIButton * btn = (UIButton*)sender;
+    
     
     if (_delegate) {
         
@@ -133,10 +115,12 @@
     UIButton * btn = (UIButton*)sender;
     
     
-    if ([self.delegate respondsToSelector:@selector(attentionButtonClick:)]) {
+    if (_delegate) {
         
-        [self.delegate attentionButtonClick:btn];
+        [self.delegate attentionButtonClick:btn clickedWithData:_shopsModel];
     }
 }
+
+
 
 @end

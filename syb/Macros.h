@@ -405,6 +405,20 @@ typedef NSUInteger FrameType;
 //店铺列表
 #define URL_StoreListByCat [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"StoreListByCat"]]
 
+//商品关注列表
+#define URL_AttentedStoreGoodsList [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"AttentedStoreGoodsList"]]
+
+//品牌商品
+#define URL_GetStoreGoodsByGroupId [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsByGroupId"]]
+
+//关注商品
+#define URL_DoAttentStoreGoods [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"DoAttentStoreGoods"]]
+//取消关注商品
+#define URL_UndoAttentStoreGoods [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"UndoAttentStoreGoods"]]
+
+
+
+
 /*********获取我的积分**********/
 #define URL_GetUserIntegral [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetUserIntegral"]]
 /*********获取积分收入支出明细**********/

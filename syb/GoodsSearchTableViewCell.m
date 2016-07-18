@@ -79,7 +79,7 @@
     _goodsStore = [UILabel labelWithFrame:CGRectMake(110,
                                                      70,
                                                      kMainScreenWidth-150,
-                                                     20) text:GoodsModel.store_name textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
+                                                     20) text:GoodsModel.store_name textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
 
     [self.contentView addSubview:_goodsStore];
 }
