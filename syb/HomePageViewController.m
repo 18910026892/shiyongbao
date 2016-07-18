@@ -26,6 +26,36 @@
     
      self.navigationController.navigationBarHidden = YES;
 }
+-(UIButton*)GoTopButton
+{
+    if(!_GoTopButton)
+    {
+        _GoTopButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _GoTopButton.backgroundColor = [UIColor clearColor];
+        _GoTopButton.frame = CGRectMake(SCREEN_WIDTH-60, SCREEN_HEIGHT-107, 50, 50);
+        _GoTopButton.alpha = 1;
+        [_GoTopButton setImage:[UIImage imageNamed:@"gotop"] forState:UIControlStateNormal];
+        [_GoTopButton addTarget:self action:@selector(goToTop) forControlEvents:UIControlEventTouchUpInside];
+     
+        
+    }
+    return _GoTopButton;
+}
+//回到顶部
+- (void)goToTop
+{
+    NSLog(@"go to top");
+//    [UIView animateWithDuration:0.5 animations:^{
+//        CGRect frame = CGRectMake(0,64,SCREEN_WIDTH, SCREEN_HEIGHT-64);
+//        self.TableView.frame = frame;
+//        
+//    }completion:^(BOOL finished){
+//    }];
+//    
+//    [self.TableView setContentOffset:CGPointZero animated:YES];
+    
+}
+
 
 -(CCAdsPlayView*)BannerView
 {
@@ -69,6 +99,8 @@
     [self.Customview addSubview:self.logoImageView];
     [self.Customview addSubview:self.searchButton];
     [self.Customview addSubview:self.messageButton];
+    
+    [self.view addSubview:self.GoTopButton];
 }
 
 -(UIImageView*)logoImageView

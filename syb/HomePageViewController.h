@@ -17,5 +17,8 @@
 
 @property(nonatomic,strong)UIImageView * logoImageView;
 
+@property (nonatomic,strong)//Go Top Button
+UIButton * GoTopButton;
+
 @property (nonatomic,strong)CCAdsPlayView * BannerView;
 @end
