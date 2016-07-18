@@ -10,4 +10,6 @@
 
 @interface CartViewController : BaseViewController
 
+@property(nonatomic,strong)UIImageView* CustomNavView;
+
 @end

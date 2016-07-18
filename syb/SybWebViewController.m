@@ -8,6 +8,7 @@
 
 #import "SybWebViewController.h"
 
+
 @implementation SybWebViewController
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -21,9 +22,10 @@
     [self setupViews];
     // Do any additional setup after loading the view.
     [self setNavTitle:_WebTitle];
-    
+
     
 }
+
 -(UIButton*)BackButton
 {
     if (!_BackButton) {

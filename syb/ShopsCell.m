@@ -80,23 +80,25 @@
     _clickImage = [[UIImageView alloc]init];
     _clickImage.frame = CGRectMake(kMainScreenWidth-70, 7, 60, 30);
 
+    NSInteger GoodsCount = [_shopsModel.recommend_goods count];
     
-    for (int i=0; i<3; i++) {
-        _goodsImage = [UIButton buttonWithType:UIButtonTypeCustom];
-        _goodsImage.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
-        _goodsImage.backgroundColor = [UIColor whiteColor];
-    
-        if ([_shopsModel.recommend_goods count]==3) {
+    if (GoodsCount!=0) {
+        for (int i=0; i<GoodsCount; i++) {
+            _goodsImage = [UIButton buttonWithType:UIButtonTypeCustom];
+            _goodsImage.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
+            _goodsImage.backgroundColor = [UIColor whiteColor];
+            
+            
             NSString * imageUrl = [_shopsModel.recommend_goods[i] valueForKey:@"goods_img_url"];
             [_goodsImage sd_setBackgroundImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal];
+            
+            [_goodsImage addTarget:self action:@selector(goodsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            _goodsImage.tag = i;
+            [self.contentView addSubview:_goodsImage];
         }
-        
-  
-        [_goodsImage addTarget:self action:@selector(goodsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        _goodsImage.tag = i;
-        [self.contentView addSubview:_goodsImage];
+
     }
-    
+
     for (int i=1; i<3; i++) {
         _cellLine1 = [[UILabel alloc]initWithFrame:CGRectMake(kMainScreenWidth/3*i, 60, 0.5,kMainScreenWidth/3)];
         _cellLine1.backgroundColor = RGBACOLOR(210,210,210,.5);
