@@ -397,6 +397,10 @@
         return 100;
     }
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01;
+}
 #pragma mark - end tableView
 
 #pragma mark - request
