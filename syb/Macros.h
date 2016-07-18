@@ -405,6 +405,24 @@ typedef NSUInteger FrameType;
 //店铺列表
 #define URL_StoreListByCat [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"StoreListByCat"]]
 
+/*********获取我的积分**********/
+#define URL_GetUserIntegral [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetUserIntegral"]]
+/*********获取积分收入支出明细**********/
+#define URL_GetUserPointRecord [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetUserPointRecord"]]
+/*********绑定账户**********/
+#define URL_BindingUserAccountInfo [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"BindingUserAccountInfo"]]
+
+/*********用户账户信息**********/
+#define URL_GetUserAccountInfo [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetUserAccountInfo"]]
+
+/*********换购品分类**********/
+#define URL_GetGiftCategory [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetGiftCategory"]]
+/*********获取积分兑换商品接口**********/
+#define URL_GetGiftList [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetGiftList"]]
+/*********兑换**********/
+#define URL_PurchaseGift [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"PurchaseGift"]]
+/********验证手机号归属地**********/
+#define URL_GetMobileTelInfo [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetMobileTelInfo"]]
 //商品分类
 #define URL_GetStoreGoodsSubCats [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsSubCats"]]
 

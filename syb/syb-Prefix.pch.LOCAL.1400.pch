@@ -15,7 +15,5 @@
 #import "Macros.h"
 #import "AppDelegate.h"
 #import <ALBBSDK/TaeSDK.h>
-#import "UIView+Extension.h"
-
 
 #endif /* PrefixHeader_pch */
