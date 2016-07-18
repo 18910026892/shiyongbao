@@ -53,6 +53,18 @@
     }
     return _GoTopButton;
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    //下面tableview移到大概4个cell时显示向上按钮
+    if (scrollView.tag == 1 && scrollView.contentOffset.y > 600) {
+        self.GoTopButton.alpha = .8;
+    } else {
+        self.GoTopButton.alpha = 0;
+    }
+    
+}
+
+
 //回到顶部
 - (void)goToTop
 {
