@@ -155,8 +155,9 @@
         [weakSelf addParameter];
         [weakSelf requestDataWithPage:1];
     }];
-    
-    
+    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+        [weakSelf requestDataWithPage:1];
+    }];
     
     [self.tableView.mj_header beginRefreshing];
 
@@ -174,6 +175,7 @@
     [self.Customview addSubview:self.messageButton];
     
     [self.view addSubview:self.GoTopButton];
+    [self.view bringSubviewToFront:self.GoTopButton];
 }
 
 -(UIImageView*)logoImageView
@@ -337,13 +339,6 @@
     [self scrollViewDidEndScrollingAnimation:scrollView];
 }
 
-/** 正在滚动 */
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    
-    
-}
-
 /*********分类**********/
 - (void)fenleiAction
 {
@@ -398,9 +393,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row<self.brandArray.count) {
-        return 100;
-    }else{
         return 102*Proportion;
+    }else{
+        return 100;
     }
 }
 #pragma mark - end tableView
@@ -426,7 +421,6 @@
             NSArray *array1 = [[response valueForKey:@"result"] valueForKey:@"brand_group"];
             
             NSArray *array2 = [[response valueForKey:@"result"] valueForKey:@"goods_list"];
-            
             //列表数据
             
             if ( IS_ARRAY_CLASS(array1))
