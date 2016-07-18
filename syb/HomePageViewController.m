@@ -12,7 +12,7 @@
 #import "ShopsViewController.h"
 
 #import "brandGoodsViewController.h"
-@interface HomePageViewController ()<UIScrollViewDelegate>
+@interface HomePageViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic) UITableView *tableView;
 @property (strong,nonatomic) NSArray *categoryArray;
 @property (strong,nonatomic) NSMutableArray *catIdArray;
@@ -24,19 +24,7 @@
     UIScrollView * bigScrollView;
     UIScrollView *smallScrollView;
 }
--(UIScrollView *)contentSV
-{
-    if (!_contentSV) {
-        _contentSV  = [[UIScrollView alloc] initWithFrame:CGRectMake(0,64,SCREEN_WIDTH , SCREEN_HEIGHT-64-49)];
-        _contentSV.backgroundColor = [UIColor whiteColor];
-        _contentSV.bounces = YES;
-        _contentSV.pagingEnabled = YES;
-        _contentSV.showsHorizontalScrollIndicator = NO;
-        _contentSV.showsVerticalScrollIndicator = NO;
-        _contentSV.opaque = YES;
-    }
-    return _contentSV;
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -48,13 +36,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.contentSV];;
+    
     // Do any additional setup after loading the view.
+    [self setUpTableView];
     [self setUpDatas];
     [self setupViews];
     
 }
-
+- (void)setUpTableView
+{
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49) style:UITableViewStylePlain];
+    [self.view addSubview:self.tableView];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+}
 -(void)setupViews
 {
     [self.Customview addSubview:self.logoImageView];
