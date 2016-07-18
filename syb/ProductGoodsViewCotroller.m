@@ -7,8 +7,10 @@
 //
 
 #import "ProductGoodsViewCotroller.h"
-
+#import "LoginViewController.h"
 @implementation ProductGoodsViewCotroller
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -23,7 +25,7 @@
 {
     [super viewWillAppear:animated];
     
-    
+    [self setTabBarHide:YES];
 }
 
 -(void)setupViews
@@ -33,7 +35,6 @@
 }
 
 #pragma mark - ********************** Functions **********************
-
 //请求数据的方法
 -(void)requestDataWithPage:(int)Type
 {
@@ -51,15 +52,15 @@
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
-     
-            NSMutableArray * array = [[response valueForKey:@"result"] valueForKey:@"goods_list"];
+            
+            NSMutableArray * array = [[response valueForKey:@"result"] valueForKey:@"data"];
             
             //列表数据
             
-   
+            
             if (IS_ARRAY_CLASS(array)) {
                 _goodArray = array;
-                _goodModelArray = [good320Model mj_objectArrayWithKeyValuesArray:_goodArray];
+                _goodModelArray = [ProductGoodsModel mj_objectArrayWithKeyValuesArray:_goodArray];
                 
                 if (Type == 1) {
                     _goodListArray = [NSMutableArray arrayWithArray:_goodModelArray];
@@ -97,6 +98,7 @@
     
 }
 
+
 //停止刷新
 -(void)stopLoadData
 {
@@ -109,7 +111,7 @@
 -(void)addParameter
 {
     _page = @"1";
-  
+    
 }
 
 //加载更多数据
@@ -151,14 +153,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-  
-        return 102*Proportion;
+    
+    return 102*Proportion;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
     return 1;
-
+    
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 {
@@ -178,22 +180,101 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 {
-
-        
-    static NSString * goodsTableViewCell = @"GoodsTableViewCell";
-        
-    GoodsTableViewCell * goodscell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCell];
-        
+    
+    ProductGoodsModel * goodsModel = _goodListArray[indexPath.section];
+    
+    goodsModel.tag = [NSString stringWithFormat:@"%ld",(long)indexPath.section];
+    
+    
+    static NSString * goodsTableViewCell = @"ProductGoodsCell";
+    
+    ProductGoodsCell * goodscell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCell];
+    
     if (!goodscell) {
         
-        goodscell = [[GoodsTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goodsTableViewCell];
-            
+        goodscell = [[ProductGoodsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goodsTableViewCell];
+        
+        goodscell.delegate = self;
+        
     }
-        
-    goodscell.goodsModel = _goodListArray[indexPath.row];
-        
-
+    
+    goodscell.goodsModel = goodsModel;
+    
+    
     return goodscell;
+    
+}
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
+
+{
+    ProductGoodsModel * goodsModel = (ProductGoodsModel *)celldata;
+    
+    if ([goodsModel.user_id length]>0) {
+        [HDHud showMessageInView:self.view title:@"您已关注过该商品"];
+    }else
+    {
+        UIButton * btn = (UIButton*)sender;
+        
+        btn.userInteractionEnabled = NO;
+        
+        if(!userSession)
+        {
+            userSession = [SingleManage shareManage];
+        }
+        
+        
+        
+        if (userSession.isLogin) {
+            
+            [HDHud showHUDInView:self.view title:@"关注中..."];
+            
+            NSString * goodID = [NSString stringWithFormat:@"%@",goodsModel.goods_id];
+            NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:goodID,@"goods_id", nil];
+            
+            
+            
+            GXHttpRequest *request = [[GXHttpRequest alloc]init];
+            
+            [request RequestDataWithUrl:URL_DoAttentStoreGoods pragma:postDict];
+            
+            [request getResultWithSuccess:^(id response) {
+                /// 加保护
+                if ([response isKindOfClass:[NSDictionary class]])
+                {
+                    
+                    //加载框消失
+                    [HDHud hideHUDInView:self.view];
+                    
+                    
+                    btn.userInteractionEnabled = YES;
+                    
+                    [btn setTitle:@"已关注" forState:UIControlStateNormal];
+                    
+                }
+                
+            } DataFaiure:^(id error) {
+                [HDHud hideHUDInView:self.view];
+                [HDHud showMessageInView:self.view title:error];
+                
+                btn.userInteractionEnabled = YES;
+            } Failure:^(id error) {
+                [HDHud hideHUDInView:self.view];
+                [HDHud showNetWorkErrorInView:self.view];
+                
+                btn.userInteractionEnabled = YES;
+            }];
+
+            
+        }else if(!userSession.isLogin)
+        {
+            LoginViewController * loginVC = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }
+        
+        
+        
+    }
+    
     
 }
 

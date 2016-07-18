@@ -8,7 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "ProductGoodsModel.h"
+
+@class ProductGoodsCell ;
+
+@protocol ProductGoodsCellDelegate <NSObject>
+
+@optional
+
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
+
+
+@end
+
+
 @interface ProductGoodsCell : UITableViewCell
+
+@property (weak, nonatomic) id <ProductGoodsCellDelegate> delegate;
+
 @property(nonatomic,strong)ProductGoodsModel * goodsModel;
 
 @property(nonatomic,strong)UIImageView * goodsImageView;

@@ -10,6 +10,14 @@
 
 #import "BKTabBarItem.h"
 
+#import "SybWebViewController.h"
+
+
+#import <ALBBTradeSDK/ALBBTradeService.h>
+#import <ALBBTradeSDK/ALBBCartService.h>
+
+
+
 static NSInteger num =0;
 
 @interface BaseTabBarController()
@@ -22,6 +30,14 @@ static NSInteger num =0;
 
 
 @property (nonatomic,assign)NSInteger ViewControllerCount;
+
+
+@property(nonatomic, strong) id<ALBBTradeService> tradeService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) addCartCacelledCallback addCartCacelledCallback;
+@property(nonatomic, strong) addCartSuccessCallback addCartSuccessCallback;
+
 
 @end
 
@@ -50,9 +66,33 @@ static BaseTabBarController* _myTabBarVC = nil;
     [self.view addSubview:barView];
     [self initSubViews];
 
-  
+     [self initAliCart];
 }
 
+-(void)initAliCart
+{
+    
+    _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
+
+}
+
+-(void)myCartsPage{
+    
+    TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+    ALBBTradePage * page = [ALBBTradePage myCartsPage];
+    [_tradeService  show:self isNeedPush:YES webViewUISettings:viewSettings page:page taoKeParams:nil tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+}
+
+-(TaeWebViewUISettings *)getWebViewSetting{
+    
+    TaeWebViewUISettings *settings = [[TaeWebViewUISettings alloc] init];
+    settings.titleColor = [UIColor blueColor];
+    settings.tintColor = [UIColor redColor];
+    settings.barTintColor = kNavBackGround;
+    
+    
+    return settings;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -122,9 +162,31 @@ static BaseTabBarController* _myTabBarVC = nil;
 //点击方法
 -(void)SelectSubItemIndex:(UIGestureRecognizer *)gesture
 {
-     NSInteger selectindex = gesture.view.tag;
-  
-     [self setTabBarSelectedIndex:selectindex];
+    NSInteger selectindex = gesture.view.tag;
+    
+    if(selectindex==2){
+        
+        SybWebViewController * webVc = [SybWebViewController viewController];
+        
+        webVc.RequestUlr = @"http://www.baidu.com";
+        
+        webVc.isPush = @"nopush";
+        
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:webVc];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+    }else if(selectindex==3)
+    {
+          [self myCartsPage];
+        
+        NSLog(@"呵呵");
+        
+    }else
+    {
+        
+        [self setTabBarSelectedIndex:selectindex];
+    }
    
 }
 

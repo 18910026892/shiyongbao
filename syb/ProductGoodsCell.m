@@ -59,6 +59,21 @@
     
     self.platformLabel.text = goodsModel.site_name;
     
+     self.attentionButton.tag = [goodsModel.tag integerValue];
+    
+    
+    NSString * buttonTitle;
+    
+    if ([goodsModel.user_id isEmpty]) {
+        buttonTitle = @"+关注";
+    }else
+    {
+        buttonTitle = @"已关注";
+    }
+    
+    [self.attentionButton setTitle:buttonTitle forState:UIControlStateNormal];
+    
+    
 }
 
 -(UIImageView*)goodsImageView
@@ -130,16 +145,7 @@
         _attentionButton.layer.cornerRadius = 10;
         _attentionButton.backgroundColor = [UIColor whiteColor];
         
-        NSString * buttonTitle;
-        
-        if ([_goodsModel.user_id isEmpty]) {
-            buttonTitle = @"+关注";
-        }else
-        {
-            buttonTitle = @"已关注";
-        }
-        
-        [_attentionButton setTitle:buttonTitle forState:UIControlStateNormal];
+
 
         [_attentionButton setTitleColor:ThemeColor forState:UIControlStateNormal];
         _attentionButton.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -157,6 +163,16 @@
         _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,55, 60, 30) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
     }
     return _platformLabel;
+}
+-(void)attentionButtonClick:(UIButton*)sender;
+{
+    UIButton * btn = (UIButton*)sender;
+    
+    
+    if (_delegate) {
+        
+        [self.delegate attentionButtonClick:btn clickedWithData:_goodsModel];
+    }
 }
 
 @end

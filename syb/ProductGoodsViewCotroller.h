@@ -10,8 +10,12 @@
 #import "ProductGoodsModel.h"
 #import "ProductGoodsCell.h"
 @interface ProductGoodsViewCotroller : BaseViewController
-<UITableViewDelegate,UITableViewDataSource>
-
+<UITableViewDelegate,UITableViewDataSource,ProductGoodsCellDelegate>
+{
+    
+    SybSession * userSession;
+    
+}
 @property (nonatomic,strong)UITableView * TableView;
 
 

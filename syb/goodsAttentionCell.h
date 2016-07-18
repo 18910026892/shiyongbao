@@ -8,7 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "goodsAttentionModel.h"
+
+@class goodsAttentionCell ;
+
+@protocol goodsAttentionCellDelegate <NSObject>
+
+@optional
+
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
+
+
+@end
+
+
 @interface goodsAttentionCell : UITableViewCell
+
+@property (weak, nonatomic) id <goodsAttentionCellDelegate> delegate;
 
 @property (nonatomic,strong)goodsAttentionModel * goodsModel;
 

@@ -15,6 +15,7 @@
 #import "Macros.h"
 #import "AppDelegate.h"
 #import <ALBBSDK/TaeSDK.h>
+#import <TBAppLinkSDK/TBAppLinkSDK.h>
 #import "UIView+Extension.h"
 
 

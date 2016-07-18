@@ -8,15 +8,38 @@
 
 #import <UIKit/UIKit.h>
 #import "GoodsSearchModel.h"
+
+
+@class GoodsSearchTableViewCell ;
+
+@protocol GoodsSearchTableViewCellDelegate <NSObject>
+
+@optional
+
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
+
+
+@end
+
 @interface GoodsSearchTableViewCell : UITableViewCell
 
-@property (nonatomic,strong)GoodsSearchModel * GoodsModel;
-@property (nonatomic,strong)UIImageView * goodsImage;
-@property (nonatomic,strong)UILabel * goodsName;
-@property (nonatomic,strong)UILabel * goodsPrice;
-@property (nonatomic,strong)UILabel * goodsStore;
-@property (nonatomic,strong)UILabel * goodsFrom;
-@property (nonatomic,strong)UILabel * goodsintegral;
+@property (weak, nonatomic) id <GoodsSearchTableViewCellDelegate> delegate;
+
+
+@property (nonatomic,strong)GoodsSearchModel * goodsModel;
+
+@property(nonatomic,strong)UIImageView * goodsImageView;
+
+@property (nonatomic,strong)UILabel * goodsNameLabel;
+
+@property (nonatomic,strong)UILabel * priceLabel;
+
+@property (nonatomic,strong)UILabel * integralLabel;
+
+@property (nonatomic,strong)UILabel * shopNameLabel;
+
 @property (nonatomic,strong)UIButton * attentionButton;
+
+@property (nonatomic,strong)UILabel * platformLabel;
 
 @end

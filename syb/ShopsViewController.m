@@ -8,6 +8,8 @@
 
 #import "ShopsViewController.h"
 #import "LoginViewController.h"
+
+
 @interface ShopsViewController ()
 
 @end
@@ -237,6 +239,25 @@
     return cell;
     
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+
+    
+    ShopsModel * shopModel = _ShopsList[indexPath.section];
+
+    TBShopParam  * shopParam = [[TBShopParam alloc]initWithShopId:shopModel.tb_shop_id];
+    
+    
+    
+    [[TBAppLinkSDK sharedInstance] jumpShop:shopParam];
+ 
+    
+    
+    
+}
+
 
 -(void)goodsButtonClickWithDict:(NSDictionary*)dict;
 {

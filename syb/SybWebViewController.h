@@ -24,4 +24,7 @@
 @property(nonatomic,copy)NSString *  RequestUlr;
 
 @property(nonatomic,copy)NSString * WebTitle;
+
+@property (nonatomic,copy)NSString * isPush;
+
 @end

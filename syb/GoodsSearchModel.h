@@ -21,5 +21,7 @@
 @property (nonatomic,copy)NSString * store_name;
 @property (nonatomic,copy)NSString * goods_img_url;
 
+@property (nonatomic,copy)NSString * tag;
+
 + (instancetype)goodsModelWithDict:(NSDictionary *)dict;
 @end

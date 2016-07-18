@@ -36,7 +36,7 @@
     return self;
 }
 
--(void)setGoodsModel:(goodsAttentionModel *)goodsModel
+-(void)setGoodsModel:(goodsAttentionModel *)goodsModel;
 {
     _goodsModel  = goodsModel;
     
@@ -58,6 +58,8 @@
     self.shopNameLabel.text = goodsModel.store_name;
     
     self.platformLabel.text = goodsModel.site_name;
+    
+    self.attentionButton.tag = [goodsModel.tag integerValue];
     
 }
 
@@ -150,6 +152,16 @@
         _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,55, 60, 30) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
     }
     return _platformLabel;
+}
+-(void)attentionButtonClick:(UIButton*)sender;
+{
+    UIButton * btn = (UIButton*)sender;
+    
+    
+    if (_delegate) {
+        
+        [self.delegate attentionButtonClick:btn clickedWithData:_goodsModel];
+    }
 }
 
 

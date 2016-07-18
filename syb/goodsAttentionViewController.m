@@ -178,22 +178,69 @@
 
 {
     
+    goodsAttentionModel * goodsModel = _goodListArray[indexPath.section];
+    
+    goodsModel.tag = [NSString stringWithFormat:@"%ld",(long)indexPath.section];
     
     static NSString * cellid = @"goodsAttentionCell";
-    
+
     goodsAttentionCell * goodscell = [tableView dequeueReusableCellWithIdentifier:cellid];
     
     if (!goodscell) {
         
         goodscell = [[goodsAttentionCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellid];
-        
+        goodscell.delegate = self;
     }
     
-    goodscell.goodsModel = _goodListArray[indexPath.row];
+    goodscell.goodsModel = goodsModel;
     
     
     return goodscell;
     
 }
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
+{
+    [HDHud showHUDInView:self.view title:@"取消中.."];
+    
+    goodsAttentionModel * goodModel = (goodsAttentionModel*)celldata;
+    
 
+    NSString * goodId = [NSString stringWithFormat:@"%@",goodModel.goods_id];
+    NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:goodId,@"goods_id", nil];
+    
+
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+    
+    [request RequestDataWithUrl:URL_UndoAttentStoreGoods pragma:postDict];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            
+            //加载框消失
+            [HDHud hideHUDInView:self.view];
+            
+            [_goodListArray removeObjectAtIndex:sender.tag];
+            
+            [self.TableView deleteSections:[NSIndexSet indexSetWithIndex:sender.tag] withRowAnimation:UITableViewRowAnimationRight];
+            
+            [self.TableView reloadData];
+            
+        }
+        
+    } DataFaiure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showMessageInView:self.view title:error];
+        
+        
+    } Failure:^(id error) {
+        [HDHud hideHUDInView:self.view];
+        [HDHud showNetWorkErrorInView:self.view];
+        
+        
+    }];
+    
+    
+}
 @end

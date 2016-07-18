@@ -9,6 +9,15 @@
 #import "LoginViewController.h"
 #import "RegisterViewController.h"
 #import "ForgetPasswordViewController.h"
+
+#import <ALBBLoginSDK/ALBBLoginService.h>
+
+
+@interface LoginViewController ()
+@property(nonatomic, strong) id<ALBBLoginService> loginService;
+
+@end
+
 @interface LoginViewController ()
 
 @end
@@ -38,9 +47,15 @@
 
     [self initTFView];
     [self initBtns];
-    
-
+    [self initAli];
   
+}
+-(void)initAli
+{
+    
+    _loginService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBLoginService)];
+
+    
 }
 
 //输入区域

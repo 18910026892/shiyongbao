@@ -19,4 +19,6 @@
 @property (nonatomic,copy)NSString * site_name;
 @property (nonatomic,copy)NSString * store_name;
 @property (nonatomic,copy)NSString * user_id;
+
+@property (nonatomic,copy)NSString * tag;
 @end

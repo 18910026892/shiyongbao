@@ -21,6 +21,13 @@
     } failure:^(NSError *error) {
         NSLog(@"init failure, %@", error);
     }];
+    
+    TBAppLinkSDK * tblinkSdk;
+    
+    if (!tblinkSdk) {
+        tblinkSdk = [TBAppLinkSDK initWithAppkey:@"23264858"];
+    }
+    
 }
 
 @end

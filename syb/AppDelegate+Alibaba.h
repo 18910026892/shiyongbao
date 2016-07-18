@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import <ALBBSDK/ALBBSDK.h>
+
 @interface AppDelegate (Alibaba)
 
 -(void)initAliBBSDK;
+
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface good320Model : NSObject
+
 @property (nonatomic,copy)NSString * click_count;
 @property (nonatomic,copy)NSString * goods_id;
 @property (nonatomic,copy)NSString * goods_img_url;

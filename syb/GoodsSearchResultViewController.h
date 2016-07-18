@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GoodsSearchModel.h"
 #import "GoodsSearchTableViewCell.h"
-@interface GoodsSearchResultViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface GoodsSearchResultViewController : BaseViewController<UITableViewDelegate,UITableViewDataSource,GoodsSearchTableViewCellDelegate>
 {
      SybSession * userSession;
 }

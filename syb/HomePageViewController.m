@@ -10,6 +10,8 @@
 #import "SearchViewController.h"
 #import "ClassifyViewController.h"
 
+
+#import "brandGoodsViewController.h"
 @interface HomePageViewController ()
 
 @end
@@ -21,6 +23,8 @@
     [super viewWillAppear:animated];
     
     [self setTabBarHide:NO];
+    
+     self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidLoad {
@@ -84,7 +88,7 @@
 {
     NSLog(@"message");
     
-     [self.navigationController pushViewController:[ClassifyViewController viewController] animated:YES];
+     [self.navigationController pushViewController:[brandGoodsViewController viewController] animated:YES];
 
     
 }
