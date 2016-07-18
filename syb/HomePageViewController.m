@@ -56,7 +56,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //下面tableview移到大概4个cell时显示向上按钮
-    if (scrollView.tag == 1 && scrollView.contentOffset.y > 600) {
+    if (scrollView ==self.tableView&&scrollView.contentOffset.y>=self.tableView.height/2) {
         self.GoTopButton.alpha = .8;
     } else {
         self.GoTopButton.alpha = 0;
@@ -69,8 +69,7 @@
 - (void)goToTop
 {
     NSLog(@"go to top");
-    [self.tableView scrollsToTop];
-    
+    [self.tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 
