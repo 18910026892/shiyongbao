@@ -155,7 +155,7 @@
         [weakSelf requestDataWithPage:1];
     }];
     self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-        [weakSelf requestDataWithPage:1];
+        [weakSelf requestDataWithPage:2];
     }];
     
     [self.tableView.mj_header beginRefreshing];
@@ -420,7 +420,10 @@
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
-            
+            if (Type==1) {
+                self.brandArray = [NSMutableArray array];
+                self.goodsList = [NSMutableArray array];
+            }
             NSArray *array1 = [[response valueForKey:@"result"] valueForKey:@"brand_group"];
             
             NSArray *array2 = [[response valueForKey:@"result"] valueForKey:@"goods_list"];
