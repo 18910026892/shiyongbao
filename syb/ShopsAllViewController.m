@@ -41,9 +41,6 @@
         [_catIdArray addObject:catid];
         [_TitleArray addObject:title];
     }
-    
-    
-    
     [self initScroll];
 }
 -(void)initScroll
@@ -69,12 +66,6 @@
         bigScrollView.delegate = self;
         bigScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*[_categoryArray count],bigScrollView.frame.size.height);
         bigScrollView.scrollEnabled = YES;
-        
-        
-        
-        
-        
-        
     }
     
     

@@ -39,8 +39,8 @@
     
     
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
-    
-    [request RequestDataWithUrl:URL_StoreGoodsFirstLevelCats pragma:nil];
+    NSDictionary *pargma = @{@"type":@"home"};
+    [request RequestDataWithUrl:URL_StoreGoodsFirstLevelCats pragma:pargma];
     
     [request getResultWithSuccess:^(id response) {
         /// 加保护
@@ -51,7 +51,7 @@
             NSMutableArray * goodCatList = [response valueForKey:@"result"];
             
             [UserDefaultsUtils saveValue:goodCatList forKey:@"goodCatList"];
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshHomePageCategory" object:nil];
         }
         
     } DataFaiure:^(id error) {
