@@ -244,7 +244,7 @@
     
     ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:nil];
     //params 指定isv code等。
-    [_tradeService  show:self.navigationController isNeedPush:YES webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+    [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
 }
 
 -(TaeWebViewUISettings *)getWebViewSetting{
