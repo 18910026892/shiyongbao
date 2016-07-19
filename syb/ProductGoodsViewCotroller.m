@@ -8,6 +8,16 @@
 
 #import "ProductGoodsViewCotroller.h"
 #import "LoginViewController.h"
+#import <ALBBTradeSDK/ALBBTradeService.h>
+#import <ALBBTradeSDK/ALBBCartService.h>
+@interface ProductGoodsViewCotroller ()
+@property(nonatomic, strong) id<ALBBTradeService> tradeService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) addCartCacelledCallback addCartCacelledCallback;
+@property(nonatomic, strong) addCartSuccessCallback addCartSuccessCallback;
+
+@end
 @implementation ProductGoodsViewCotroller
 
 
@@ -19,6 +29,9 @@
     [self setupViews];
     
     [self showBackButton:YES];
+    
+    _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -206,6 +219,33 @@
     return goodscell;
     
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    ProductGoodsModel * goodsModel = _goodListArray[indexPath.section];
+    
+    TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+    //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+    
+    ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+    taoKeParams.pid= goodsModel.goods_id;
+    
+    ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:nil];
+    //params 指定isv code等。
+    [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+}
+
+-(TaeWebViewUISettings *)getWebViewSetting{
+    
+    TaeWebViewUISettings *settings = [[TaeWebViewUISettings alloc] init];
+    settings.titleColor = [UIColor blueColor];
+    settings.tintColor = [UIColor redColor];
+    settings.barTintColor = kNavBackGround;
+    
+    return settings;
+}
+
 -(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
 
 {

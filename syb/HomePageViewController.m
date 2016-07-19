@@ -333,6 +333,18 @@
     
     NSLog(@" %@ ",_cat_id);
     
+    NSUInteger index = titlelable.tag;
+    [smallScrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (idx != index) {
+            ShopsTitle *temlabel = smallScrollView.subviews[idx];
+            temlabel.scale = 0.0;
+        }else if (idx==index)
+        {
+            ShopsTitle *temlabel = smallScrollView.subviews[idx];
+            temlabel.scale = 1.0;
+        }
+    }];
+    
     
    [self.tableView.mj_header beginRefreshing];
 }
@@ -343,7 +355,7 @@
 {
     if (scrollView==smallScrollView) {
         // 获得索引
-        NSUInteger index = scrollView.contentOffset.x /bigScrollView.frame.size.width;
+        NSUInteger index = scrollView.contentOffset.x /smallScrollView.frame.size.width;
         // 滚动标题栏
         ShopsTitle *titleLable = (ShopsTitle *)smallScrollView.subviews[index];
         
@@ -361,6 +373,10 @@
         
         CGPoint offset = CGPointMake(offsetx,smallScrollView.contentOffset.y);
         [smallScrollView setContentOffset:offset animated:YES];
+        
+
+
+        
     }
     
     

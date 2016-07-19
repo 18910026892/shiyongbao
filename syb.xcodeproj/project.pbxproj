@@ -13,6 +13,7 @@
 		181A663A1D34B6C500ABDE29 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A66391D34B6C500ABDE29 /* OrderItem.m */; };
 		181A663D1D35015100ABDE29 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A663C1D35015100ABDE29 /* OrderDetailViewController.m */; };
 		181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A663F1D3502F300ABDE29 /* OrderDetailCell.m */; };
+		181C82E91D3E3AEB00572672 /* shopGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181C82E81D3E3AEB00572672 /* shopGoodsViewController.m */; };
 		18293A041D339223003ACD40 /* AppDelegate+KeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */; };
 		183B03A71D3889EE0011BFFF /* ClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03A61D3889EE0011BFFF /* ClassifyViewController.m */; };
 		183B03AE1D388BF10011BFFF /* ClassifyTableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03AB1D388BF10011BFFF /* ClassifyTableModel.m */; };
@@ -207,6 +208,8 @@
 		181A663C1D35015100ABDE29 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		181A663E1D3502F300ABDE29 /* OrderDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailCell.h; sourceTree = "<group>"; };
 		181A663F1D3502F300ABDE29 /* OrderDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailCell.m; sourceTree = "<group>"; };
+		181C82E71D3E3AEB00572672 /* shopGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shopGoodsViewController.h; sourceTree = "<group>"; };
+		181C82E81D3E3AEB00572672 /* shopGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shopGoodsViewController.m; sourceTree = "<group>"; };
 		18293A021D339223003ACD40 /* AppDelegate+KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+KeyboardManager.h"; sourceTree = "<group>"; };
 		18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+KeyboardManager.m"; sourceTree = "<group>"; };
 		183B03A51D3889EE0011BFFF /* ClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyViewController.h; sourceTree = "<group>"; };
@@ -578,6 +581,15 @@
 			name = order;
 			sourceTree = "<group>";
 		};
+		181C82E61D3E3AD800572672 /* shopGoods */ = {
+			isa = PBXGroup;
+			children = (
+				181C82E71D3E3AEB00572672 /* shopGoodsViewController.h */,
+				181C82E81D3E3AEB00572672 /* shopGoodsViewController.m */,
+			);
+			name = shopGoods;
+			sourceTree = "<group>";
+		};
 		183B03A41D3889790011BFFF /* Project */ = {
 			isa = PBXGroup;
 			children = (
@@ -903,6 +915,7 @@
 		18B484411D2E259D001703C0 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				181C82E61D3E3AD800572672 /* shopGoods */,
 				187D69351D3CCC3C00618923 /* brandGoods */,
 				18B484441D2E25CC001703C0 /* Shops */,
 				183B03A41D3889790011BFFF /* Project */,
@@ -1520,6 +1533,7 @@
 				D2DFFC621D3D2C1A00BCB1FA /* CCAdsPlayView.m in Sources */,
 				F2EC16F51D3C9C0000DE0896 /* BalanceOfPaymentTableViewCell.m in Sources */,
 				18D34FB71D3398EC002CE8E0 /* ShopSearchTableViewCell.m in Sources */,
+				181C82E91D3E3AEB00572672 /* shopGoodsViewController.m in Sources */,
 				18B4841D1D2E1DF1001703C0 /* OpenUDID.m in Sources */,
 				183B03BE1D38D77D0011BFFF /* ProductGoodsModel.m in Sources */,
 				187D69381D3CCC5700618923 /* brandGoodsViewController.m in Sources */,
