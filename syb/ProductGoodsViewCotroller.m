@@ -48,12 +48,14 @@
     
     [request RequestDataWithUrl:URL_GetStoreGoodsByCatId pragma:parameter];
     
+
+    
     [request getResultWithSuccess:^(id response) {
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
             
-            NSMutableArray * array = [[response valueForKey:@"result"] valueForKey:@"data"];
+            NSMutableArray * array = [[response valueForKey:@"result"] valueForKey:@"goods_list"];
             
             //列表数据
             

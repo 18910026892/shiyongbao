@@ -9,16 +9,20 @@
 #import "BaseViewController.h"
 #import "GoodsViewController.h"
 #import "CCAdsPlayView.h"
-@interface HomePageViewController : BaseViewController
-
+#import "ProductGoodsModel.h"
+#import "ProductGoodsCell.h"
+#import "SybSession.h"
+@interface HomePageViewController : BaseViewController<ProductGoodsCellDelegate>
+{
+    SybSession * userSession;
+}
 @property(nonatomic,strong)UIButton * searchButton;
 
 @property(nonatomic,strong)UIButton * messageButton;
 
 @property(nonatomic,strong)UIImageView * logoImageView;
 
-@property (nonatomic,strong)//Go Top Button
-UIButton * GoTopButton;
+@property (nonatomic,strong)UIButton * GoTopButton;
 
 @property (nonatomic,strong)CCAdsPlayView * BannerView;
 @end

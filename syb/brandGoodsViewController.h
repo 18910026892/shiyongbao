@@ -12,9 +12,7 @@
 @interface brandGoodsViewController : BaseViewController
 <UITableViewDelegate,UITableViewDataSource,ProductGoodsCellDelegate>
 {
-    
     SybSession * userSession;
-    
 }
 @property (nonatomic,strong)UITableView * TableView;
 

@@ -12,6 +12,12 @@
 #import "ShopsViewController.h"
 #import "brandGoodsViewController.h"
 #import "ClassifyViewController.h"
+#import "LoginViewController.h"
+#import <ALBBTradeSDK/ALBBTradeService.h>
+#import <ALBBTradeSDK/ALBBCartService.h>
+#import "MyMessageViewController.h"
+#import "SybWebViewController.h"
+
 @interface HomePageViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic) UITableView *tableView;
 @property (nonatomic,assign)int page;
@@ -23,6 +29,15 @@
 @property (strong,nonatomic) NSArray *adDatas;
 @property (strong,nonatomic) NSMutableArray *brandArray;
 @property (strong,nonatomic) NSMutableArray *goodsList;
+
+
+@property(nonatomic, strong) id<ALBBTradeService> tradeService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) addCartCacelledCallback addCartCacelledCallback;
+@property(nonatomic, strong) addCartSuccessCallback addCartSuccessCallback;
+
+
 @end
 
 @implementation HomePageViewController{
@@ -101,6 +116,9 @@
     [self setUpDatas];
     [self setupViews];
     
+    
+    _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
+    
 }
 - (void)refreshHomePageCategory
 {
@@ -129,6 +147,12 @@
             
             [self.BannerView startWithTapActionBlock:^(NSInteger index) {
                 
+                
+                NSDictionary * adDict = self.adDatas[index];
+                SybWebViewController * WebVc = [SybWebViewController viewController];
+                WebVc.RequestUlr = [adDict valueForKey:@"url_link"];
+                WebVc.WebTitle = [adDict valueForKey:@"url_title"];
+                [hpVC.navigationController pushViewController:WebVc animated:YES];
             
             }];
         }
@@ -224,7 +248,9 @@
 {
     NSLog(@"message");
     
-     [self.navigationController pushViewController:[brandGoodsViewController viewController] animated:YES];
+    MyMessageViewController * messageVc = [MyMessageViewController viewController];
+    [self.navigationController pushViewController:messageVc animated:YES];
+    
 
     
 }
@@ -252,12 +278,13 @@
 {
     self.contentSmallSV = [[UIView alloc] initWithFrame:CGRectMake(0, 64*2,SCREEN_WIDTH , 40)];
     UIButton *fenlei = [UIButton buttonWithType:UIButtonTypeCustom];
-    [fenlei setFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/7, 0, SCREEN_WIDTH/7, self.contentSmallSV.height)];
-    [fenlei setTitle:@"分类" forState:UIControlStateNormal];
-    [fenlei setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [fenlei setFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/7, 0, 60, self.contentSmallSV.height)];
+    [fenlei setBackgroundImage:[UIImage imageNamed:@"catbutton"] forState:UIControlStateNormal];
     [fenlei addTarget:self action:@selector(fenleiAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentSmallSV addSubview:fenlei];
-    smallScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH , 40)];
+    
+    
+    smallScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH-60, 40)];
     smallScrollView.backgroundColor = [UIColor whiteColor];
     smallScrollView.bounces = YES;
     smallScrollView.pagingEnabled = YES;
@@ -358,20 +385,33 @@
             cell = [[BrandCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:brandCell];
             
         }
-        brandModel * brandModel = self.brandArray[indexPath.section];
+        brandModel * brandModel = self.brandArray[indexPath.row];
         cell.model = brandModel;
         return cell;
     }else{
-        static NSString * goodsTableViewCell = @"GoodsTableViewCell";
         
-        GoodsTableViewCell * goodscell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCell];
+        NSInteger index = indexPath.row- self.brandArray.count;
+        
+        ProductGoodsModel * goodsModel = self.goodsList[index];
+        
+        goodsModel.tag = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        
+        
+        static NSString * goodsTableViewCell = @"ProductGoodsCell";
+        
+        ProductGoodsCell * goodscell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCell];
         
         if (!goodscell) {
-            goodscell = [[GoodsTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goodsTableViewCell];
+            
+            goodscell = [[ProductGoodsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goodsTableViewCell];
+            
+            goodscell.delegate = self;
             
         }
-        good320Model *model = self.goodsList[indexPath.row-self.brandArray.count];
-        goodscell.goodsModel = model;
+        
+        goodscell.goodsModel = goodsModel;
+        
+        
         return goodscell;
     }
     
@@ -401,6 +441,123 @@
 {
     return 0.01;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    if (indexPath.row<self.brandArray.count) {
+      
+        brandModel * brandModel = self.brandArray[indexPath.row];
+        
+        brandGoodsViewController * Vc = [brandGoodsViewController viewController];
+        Vc.group_id = brandModel.group_id;
+        
+        [self.navigationController pushViewController:Vc animated:YES];
+        
+        
+    }else{
+      
+        NSInteger index = indexPath.row- self.brandArray.count;
+        
+        ProductGoodsModel * goodsModel = self.goodsList[index];
+        
+        TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+        //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+        
+        ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+        taoKeParams.pid= goodsModel.goods_id;
+        
+        ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:nil];
+        //params 指定isv code等。
+        [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        
+        
+    }
+}
+
+-(TaeWebViewUISettings *)getWebViewSetting{
+    
+    TaeWebViewUISettings *settings = [[TaeWebViewUISettings alloc] init];
+    settings.titleColor = [UIColor blueColor];
+    settings.tintColor = [UIColor redColor];
+    settings.barTintColor = kNavBackGround;
+    
+    return settings;
+}
+
+-(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
+
+{
+    ProductGoodsModel * goodsModel = (ProductGoodsModel *)celldata;
+    
+    if ([goodsModel.user_id length]>0) {
+        [HDHud showMessageInView:self.view title:@"您已关注过该商品"];
+    }else
+    {
+        UIButton * btn = (UIButton*)sender;
+        
+        btn.userInteractionEnabled = NO;
+        
+        if(!userSession)
+        {
+            userSession = [SingleManage shareManage];
+        }
+        
+        
+        
+        if (userSession.isLogin) {
+            
+            [HDHud showHUDInView:self.view title:@"关注中..."];
+            
+            NSString * goodID = [NSString stringWithFormat:@"%@",goodsModel.goods_id];
+            NSDictionary * postDict = [NSDictionary dictionaryWithObjectsAndKeys:goodID,@"goods_id", nil];
+            
+            
+            
+            GXHttpRequest *request = [[GXHttpRequest alloc]init];
+            
+            [request RequestDataWithUrl:URL_DoAttentStoreGoods pragma:postDict];
+            
+            [request getResultWithSuccess:^(id response) {
+                /// 加保护
+                if ([response isKindOfClass:[NSDictionary class]])
+                {
+                    
+                    //加载框消失
+                    [HDHud hideHUDInView:self.view];
+                    
+                    
+                    btn.userInteractionEnabled = YES;
+                    
+                    [btn setTitle:@"已关注" forState:UIControlStateNormal];
+                    
+                }
+                
+            } DataFaiure:^(id error) {
+                [HDHud hideHUDInView:self.view];
+                [HDHud showMessageInView:self.view title:error];
+                
+                btn.userInteractionEnabled = YES;
+            } Failure:^(id error) {
+                [HDHud hideHUDInView:self.view];
+                [HDHud showNetWorkErrorInView:self.view];
+                
+                btn.userInteractionEnabled = YES;
+            }];
+            
+            
+        }else if(!userSession.isLogin)
+        {
+            LoginViewController * loginVC = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }
+        
+        
+        
+    }
+    
+    
+}
+
 #pragma mark - end tableView
 
 #pragma mark - request
@@ -410,6 +567,8 @@
     [self hideNoDataView];
     
     NSDictionary * parameter = @{@"num":@"10",@"page":@(_page),@"cat_id":_cat_id};
+    
+    NSLog(@"  %@ ",parameter);
     
     
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
@@ -435,10 +594,14 @@
             }
             if (IS_ARRAY_CLASS(array2)) {
                 
-                NSArray *goods = [good320Model mj_objectArrayWithKeyValuesArray:array2];
+                NSArray *goods = [ProductGoodsModel mj_objectArrayWithKeyValuesArray:array2];
                 [self.goodsList addObjectsFromArray:goods];
                 [self stopLoadData];
                 [self.tableView reloadData];
+                
+                
+
+                
             }
         }
         

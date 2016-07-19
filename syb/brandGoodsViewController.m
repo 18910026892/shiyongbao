@@ -40,9 +40,7 @@
     
     [self setTabBarHide:YES];
     
-    
-    self.navigationController.navigationBarHidden = NO;
-    
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     

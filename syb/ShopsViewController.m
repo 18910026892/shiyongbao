@@ -8,9 +8,16 @@
 
 #import "ShopsViewController.h"
 #import "LoginViewController.h"
-
+#import <ALBBTradeSDK/ALBBTradeService.h>
+#import <ALBBTradeSDK/ALBBCartService.h>
 
 @interface ShopsViewController ()
+
+@property(nonatomic, strong) id<ALBBTradeService> tradeService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) addCartCacelledCallback addCartCacelledCallback;
+@property(nonatomic, strong) addCartSuccessCallback addCartSuccessCallback;
 
 @end
 
@@ -22,7 +29,7 @@
     
     [self setupDatas];
     [self setupViews];
-    
+        _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
     
 }
 
@@ -244,24 +251,43 @@
 {
     
 
-    
     ShopsModel * shopModel = _ShopsList[indexPath.section];
 
     TBShopParam  * shopParam = [[TBShopParam alloc]initWithShopId:shopModel.tb_shop_id];
-    
-    
-    
-    [[TBAppLinkSDK sharedInstance] jumpShop:shopParam];
  
     
+    [[TBAppLinkSDK sharedInstance] jumpShop:shopParam];
+
     
+}
+
+
+-(TaeWebViewUISettings *)getWebViewSetting{
     
+    TaeWebViewUISettings *settings = [[TaeWebViewUISettings alloc] init];
+    settings.titleColor = [UIColor blueColor];
+    settings.tintColor = [UIColor redColor];
+    settings.barTintColor = kNavBackGround;
+    
+    return settings;
 }
 
 
 -(void)goodsButtonClickWithDict:(NSDictionary*)dict;
 {
-    NSLog(@" %@ ",dict);
+  
+    NSString * goodId = [dict valueForKey:@"goods_id"];
+    
+    
+    TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+    //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+    
+    ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+    taoKeParams.pid= goodId;
+    
+    ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodId params:nil];
+    //params 指定isv code等。
+    [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
 }
 #pragma TableViewDelegate
 -(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
