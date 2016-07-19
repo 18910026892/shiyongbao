@@ -115,7 +115,7 @@
     [self setUpTableView];
     [self setUpDatas];
     [self setupViews];
-    
+    _cat_id = @"RX";
     
     _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
     
@@ -189,7 +189,8 @@
 -(void)addParameter
 {
     _page = 1;
-    _cat_id = @"RX";
+
+   
 }
 -(void)setupViews
 {
@@ -329,7 +330,11 @@
     CGPoint offset = CGPointMake(offsetX, offsetY);
     [bigScrollView setContentOffset:offset animated:YES];
     _cat_id = self.catIdArray[titlelable.tag];
-    [self.tableView.mj_header beginRefreshing];
+    
+    NSLog(@" %@ ",_cat_id);
+    
+    
+   [self.tableView.mj_header beginRefreshing];
 }
 #pragma mark - ******************** scrollView代理方法
 
@@ -357,6 +362,10 @@
         CGPoint offset = CGPointMake(offsetx,smallScrollView.contentOffset.y);
         [smallScrollView setContentOffset:offset animated:YES];
     }
+    
+    
+    
+    
 }
 
 /** 滚动结束（手势导致） */

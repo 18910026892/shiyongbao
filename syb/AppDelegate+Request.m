@@ -47,6 +47,7 @@
         if ([response isKindOfClass:[NSDictionary class]])
         {
     
+            NSLog(@" %@ ",response);
             
             NSMutableArray * goodCatList = [response valueForKey:@"result"];
             
