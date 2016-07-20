@@ -9,7 +9,7 @@
 #import "ShopsSearchResultViewController.h"
 #import "LoginViewController.h"
 #import "SybWebViewController.h"
-//#import "CommodityViewController.h"
+#import "shopGoodsViewController.h"
 @implementation ShopsSearchResultViewController
 
 - (void)viewDidLoad {
@@ -96,11 +96,7 @@
             }
             
             
-            if([_ShopsListArray count]==0)
-            {
-                [self.TableView.mj_footer endRefreshingWithNoMoreData];
-            }
-            
+    
             
             
         }
@@ -266,39 +262,12 @@
 {
     ShopsSearchModel * shopModel = _ShopsList[indexPath.section];
     
-    
-    if (!userSession) {
-        userSession = [SybSession sharedSession];
-    }
-    
-    if (userSession.isLogin) {
+  
+    shopGoodsViewController * shopGoodsVc = [shopGoodsViewController viewController];
+    shopGoodsVc.shop_id = shopModel.shop_id;
         
-        if ([shopModel.shop_type isEqualToString:@"1"]) {
-            
-            SybWebViewController * webVC = [[SybWebViewController alloc]init];
-            webVC.WebTitle = shopModel.shop_name;
-            webVC.RequestUlr = shopModel.shop_click_url;
-           
-            [self.navigationController pushViewController:webVC animated:YES];
-        }
-//        else if ([shopModel.shop_type isEqualToString:@"2"])
-//        {
-//            
-//            CommodityViewController * commodityVC = [[CommodityViewController alloc]init];
-//            commodityVC.shop_id = shopModel.shop_id;
-//            commodityVC.title = shopModel.shop_name;
-//            [self.navigationController pushViewController:commodityVC animated:YES];
-//        }
-//        
-//        
-        
-    }else if(!userSession.isLogin)
-    {
-        LoginViewController * loginVC = [[LoginViewController alloc]init];
-        [self.navigationController pushViewController:loginVC animated:YES];
-    }
-    
-    
+    [self.navigationController pushViewController:shopGoodsVc animated:YES];
+
     
 }
 -(void)goodsButtonClickWithDict:(NSDictionary*)dict;

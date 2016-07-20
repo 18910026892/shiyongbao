@@ -76,6 +76,28 @@
                 }
                 
                 
+         
+            
+            
+            if ([_goodListArray count]>9) {
+                
+                __unsafe_unretained __typeof(self) weakSelf = self;
+                
+                self.TableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                    // 进入刷新状态后会自动调用这个block
+                    [weakSelf loadMoreData];
+                }];
+                
+                
+            }
+            if([_goodListArray count]==0)
+                
+            {
+                [HDHud showMessageInView:self.view title:@"暂无数据"];
+            }
+            
+
+            
             }
             
             

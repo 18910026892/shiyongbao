@@ -63,12 +63,12 @@
 {
     [self hideNoDataView];
     
-    NSDictionary * parameter = @{@"num":@"10",@"page":_page,@"group_id":@"1"};
+    NSDictionary * parameter = @{@"num":@"10",@"page":_page,@"store_id":_shop_id};
     
     
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
-    [request RequestDataWithUrl:URL_GetStoreGoodsByGroupId pragma:parameter];
+    [request RequestDataWithUrl:URL_GetStoreGoodsByStoreId pragma:parameter];
     
     [request getResultWithSuccess:^(id response) {
         /// 加保护
@@ -76,7 +76,7 @@
         {
             NSLog(@"respones %@",response);
             
-            NSMutableArray * array = [[response valueForKey:@"result"] valueForKey:@"data"];
+            NSMutableArray * array = [[response valueForKey:@"result"] valueForKey:@"goods_list"];
             
             //列表数据
             
@@ -102,6 +102,25 @@
                 
                 
             }
+            
+            
+            if ([_goodListArray count]>9) {
+                
+                __unsafe_unretained __typeof(self) weakSelf = self;
+                
+                self.TableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                    // 进入刷新状态后会自动调用这个block
+                    [weakSelf loadMoreData];
+                }];
+                
+                
+            }
+            if([_goodListArray count]==0)
+                
+            {
+                [HDHud showMessageInView:self.view title:@"暂无数据"];
+            }
+            
             
             
             

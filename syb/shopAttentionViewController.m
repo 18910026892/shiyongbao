@@ -7,7 +7,7 @@
 //
 
 #import "shopAttentionViewController.h"
-
+#import "shopGoodsViewController.h"
 @implementation shopAttentionViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -96,10 +96,7 @@
             }
             
             
-            if([_ShopsList count]==0)
-            {
-                [self.TableView.mj_footer endRefreshingWithNoMoreData];
-            }
+ 
             
             
             
@@ -238,6 +235,19 @@
 {
     NSLog(@" %@ ",dict);
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    shopAttentionModel * shopModel = _ShopsList[indexPath.section];
+    shopGoodsViewController * shopGoodsVc = [shopGoodsViewController viewController];
+    shopGoodsVc.shop_id = shopModel.shop_id;
+    
+    [self.navigationController pushViewController:shopGoodsVc animated:YES];
+    
+    
+}
+
+
 #pragma TableViewDelegate
 -(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;
 {

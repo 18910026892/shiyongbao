@@ -15,6 +15,7 @@
 		181A66401D3502F300ABDE29 /* OrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181A663F1D3502F300ABDE29 /* OrderDetailCell.m */; };
 		181C82E91D3E3AEB00572672 /* shopGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181C82E81D3E3AEB00572672 /* shopGoodsViewController.m */; };
 		18293A041D339223003ACD40 /* AppDelegate+KeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */; };
+		182F89451D3F3FE6003E8B09 /* AppDelegate+Umeng.m in Sources */ = {isa = PBXBuildFile; fileRef = 182F89441D3F3FE6003E8B09 /* AppDelegate+Umeng.m */; };
 		183B03A71D3889EE0011BFFF /* ClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03A61D3889EE0011BFFF /* ClassifyViewController.m */; };
 		183B03AE1D388BF10011BFFF /* ClassifyTableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03AB1D388BF10011BFFF /* ClassifyTableModel.m */; };
 		183B03AF1D388BF10011BFFF /* ClassifyCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183B03AD1D388BF10011BFFF /* ClassifyCollectionModel.m */; };
@@ -212,6 +213,8 @@
 		181C82E81D3E3AEB00572672 /* shopGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shopGoodsViewController.m; sourceTree = "<group>"; };
 		18293A021D339223003ACD40 /* AppDelegate+KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+KeyboardManager.h"; sourceTree = "<group>"; };
 		18293A031D339223003ACD40 /* AppDelegate+KeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+KeyboardManager.m"; sourceTree = "<group>"; };
+		182F89431D3F3FE6003E8B09 /* AppDelegate+Umeng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Umeng.h"; sourceTree = "<group>"; };
+		182F89441D3F3FE6003E8B09 /* AppDelegate+Umeng.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Umeng.m"; sourceTree = "<group>"; };
 		183B03A51D3889EE0011BFFF /* ClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyViewController.h; sourceTree = "<group>"; };
 		183B03A61D3889EE0011BFFF /* ClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassifyViewController.m; sourceTree = "<group>"; };
 		183B03AA1D388BF10011BFFF /* ClassifyTableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassifyTableModel.h; sourceTree = "<group>"; };
@@ -751,6 +754,8 @@
 				18B483E51D2E19C7001703C0 /* AppDelegate.m */,
 				18922B271D37311900B82890 /* AppDelegate+Request.h */,
 				18922B281D37311900B82890 /* AppDelegate+Request.m */,
+				182F89431D3F3FE6003E8B09 /* AppDelegate+Umeng.h */,
+				182F89441D3F3FE6003E8B09 /* AppDelegate+Umeng.m */,
 				D28012BF1D3B301E007A3FED /* AppDelegate+Alibaba.h */,
 				D28012C01D3B301E007A3FED /* AppDelegate+Alibaba.m */,
 				18293A021D339223003ACD40 /* AppDelegate+KeyboardManager.h */,
@@ -1576,6 +1581,7 @@
 				18B484971D2E2A5B001703C0 /* UIImage+Additional.m in Sources */,
 				F2EC16F41D3C9C0000DE0896 /* UIView+Extension.m in Sources */,
 				18730A871D2F685700A0BF35 /* RegisterViewController.m in Sources */,
+				182F89451D3F3FE6003E8B09 /* AppDelegate+Umeng.m in Sources */,
 				18B4849F1D2E2A5B001703C0 /* NSDate+Category.m in Sources */,
 				D2DB6F121D3BDC1E001510AF /* shopAttentionCell.m in Sources */,
 				18B4849C1D2E2A5B001703C0 /* NSString+Validation.m in Sources */,
@@ -1824,7 +1830,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = spyg.syb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26222c53-a0d0-4033-b17b-4cf8ed92bc4d";
+				PROVISIONING_PROFILE = "bcaa6e44-9960-4d2f-a996-5f05ce4770e6";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1881,7 +1887,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = spyg.syb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26222c53-a0d0-4033-b17b-4cf8ed92bc4d";
+				PROVISIONING_PROFILE = "bcaa6e44-9960-4d2f-a996-5f05ce4770e6";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

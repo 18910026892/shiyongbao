@@ -10,6 +10,7 @@
 #import "AppDelegate+KeyboardManager.h"
 #import "AppDelegate+Request.h"
 #import "AppDelegate+Alibaba.h"
+#import "AppDelegate+Umeng.h"
 @interface AppDelegate ()
 
 @end
@@ -19,10 +20,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-  
-    [self initAliBBSDK];
+
+    
+     [self initMobClick];
+     [self initAliBBSDK];
      [self InitUserSession];
     
+    [self getHtml];
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
 
     _window.backgroundColor = [UIColor whiteColor];

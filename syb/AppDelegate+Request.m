@@ -63,4 +63,32 @@
     
     
 }
+-(void)getHtml;
+{
+    
+    
+    GXHttpRequest *request = [[GXHttpRequest alloc]init];
+
+    [request RequestDataWithUrl:URL_SysHtmlInfo pragma:nil];
+    
+    [request getResultWithSuccess:^(id response) {
+        /// 加保护
+        if ([response isKindOfClass:[NSDictionary class]])
+        {
+            
+            NSLog(@" %@ ",response);
+            
+         
+        }
+        
+    } DataFaiure:^(id error) {
+        
+    } Failure:^(id error) {
+        
+    }];
+    
+    
+}
+
+
 @end

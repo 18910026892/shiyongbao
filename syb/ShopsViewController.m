@@ -10,7 +10,7 @@
 #import "LoginViewController.h"
 #import <ALBBTradeSDK/ALBBTradeService.h>
 #import <ALBBTradeSDK/ALBBCartService.h>
-
+#import "shopGoodsViewController.h"
 @interface ShopsViewController ()
 
 @property(nonatomic, strong) id<ALBBTradeService> tradeService;
@@ -29,7 +29,7 @@
     
     [self setupDatas];
     [self setupViews];
-        _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
+    _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
     
 }
 
@@ -109,10 +109,7 @@
                 }
                 
                 
-                if([_ShopsList count]==0)
-                {
-                    [self.TableView.mj_footer endRefreshingWithNoMoreData];
-                }
+        
 
             
             
@@ -164,7 +161,7 @@
     if (!_TableView)
     {
         
-        _TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth,kMainScreenHeight) style:UITableViewStyleGrouped];
+        _TableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth,kMainScreenHeight-113) style:UITableViewStyleGrouped];
         _TableView.dataSource = self;
         _TableView.delegate = self;
         _TableView.scrollEnabled = YES;
@@ -249,15 +246,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-
     ShopsModel * shopModel = _ShopsList[indexPath.section];
-
-    TBShopParam  * shopParam = [[TBShopParam alloc]initWithShopId:shopModel.tb_shop_id];
  
+    shopGoodsViewController * shopGoodsVc = [shopGoodsViewController viewController];
+    shopGoodsVc.shop_id = shopModel.shop_id;
     
-    [[TBAppLinkSDK sharedInstance] jumpShop:shopParam];
-
+    [self.navigationController pushViewController:shopGoodsVc animated:YES];
     
 }
 
@@ -288,6 +282,10 @@
     ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodId params:nil];
     //params 指定isv code等。
     [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+    
+    
+    NSLog(@" %@  ",goodId);
+    
 }
 #pragma TableViewDelegate
 -(void)attentionButtonClick:(UIButton*)sender clickedWithData:(id)celldata;

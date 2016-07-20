@@ -52,9 +52,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
+## JPush
+
+Copyright jpush.cn
+
 ## MBProgressHUD
 
-Copyright (c) 2009-2015 Matej Bukovinski
+Copyright © 2009-2016 Matej Bukovinski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

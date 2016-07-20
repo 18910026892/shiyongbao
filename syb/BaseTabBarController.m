@@ -168,7 +168,7 @@ static BaseTabBarController* _myTabBarVC = nil;
         
         SybWebViewController * webVc = [SybWebViewController viewController];
         
-        webVc.RequestUlr = @"http://www.baidu.com";
+        webVc.RequestUlr = @"http://static.spygmall.com/article_html/7/dfb09b3e7b264633956fe4d26f69c215.html";
         
         webVc.isPush = @"nopush";
         

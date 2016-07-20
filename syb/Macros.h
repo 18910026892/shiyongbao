@@ -416,7 +416,8 @@ typedef NSUInteger FrameType;
 //取消关注商品
 #define URL_UndoAttentStoreGoods [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"UndoAttentStoreGoods"]]
 
-
+//店铺商品列表
+#define URL_GetStoreGoodsByStoreId [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsByStoreId"]]
 
 
 /*********获取我的积分**********/

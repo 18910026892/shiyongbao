@@ -102,11 +102,7 @@
                 }
                 
                 
-                if([_tableArray count]==0)
-                {
-                    [self.TableView.mj_footer endRefreshingWithNoMoreData];
-                }
-                
+     
                 
                 
                 
