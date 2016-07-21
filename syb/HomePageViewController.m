@@ -232,8 +232,11 @@
         [weakSelf addParameter];
         [weakSelf requestDataWithPage:1];
     }];
+    
+    
     self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-        [weakSelf requestDataWithPage:2];
+
+        [weakSelf loadMoreData];
     }];
     
     [self.tableView.mj_header beginRefreshing];
@@ -347,7 +350,7 @@
 {
     self.contentSmallSV = [[UIView alloc] initWithFrame:CGRectMake(0, 64*2,SCREEN_WIDTH , 40)];
     UIButton *fenlei = [UIButton buttonWithType:UIButtonTypeCustom];
-    [fenlei setFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/7, 0, 60, self.contentSmallSV.height)];
+    [fenlei setFrame:CGRectMake(SCREEN_WIDTH-60, 0, 60, self.contentSmallSV.height)];
     [fenlei setBackgroundImage:[UIImage imageNamed:@"catbutton"] forState:UIControlStateNormal];
     [fenlei addTarget:self action:@selector(fenleiAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentSmallSV addSubview:fenlei];
@@ -709,6 +712,13 @@
         [self stopLoadData];
         [HDHud showNetWorkErrorInView:self.view];
     }];
+}
+//加载更多数据
+-(void)loadMoreData
+{
+  
+    _page ++;
+    [self requestDataWithPage:2];
 }
 
 //停止刷新

@@ -156,7 +156,9 @@
 //加载更多数据
 -(void)loadMoreData
 {
-    
+    int page = [_page intValue];
+    page ++;
+    _page = [NSString stringWithFormat:@"%d",page];
     [self requestDataWithPage:2];
 }
 
