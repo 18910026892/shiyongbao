@@ -45,6 +45,7 @@
 		18730AB91D2F694600A0BF35 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730AB81D2F694600A0BF35 /* CustomTextField.m */; };
 		18730ABC1D2F69AE00A0BF35 /* TimeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730ABB1D2F69AE00A0BF35 /* TimeTool.m */; };
 		18730ABF1D2F6CD900A0BF35 /* PooCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18730ABE1D2F6CD900A0BF35 /* PooCodeView.m */; };
+		187BDD291D3F55CE0036FB7B /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BDD281D3F55CE0036FB7B /* GuideViewController.m */; };
 		187D68E51D3C7DFE00618923 /* attentionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D68E41D3C7DFE00618923 /* attentionLabel.m */; };
 		187D69381D3CCC5700618923 /* brandGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D69371D3CCC5700618923 /* brandGoodsViewController.m */; };
 		18922B1D1D372FB300B82890 /* ShopsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18922B1A1D372FB300B82890 /* ShopsCell.m */; };
@@ -273,6 +274,8 @@
 		18730ABB1D2F69AE00A0BF35 /* TimeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTool.m; sourceTree = "<group>"; };
 		18730ABD1D2F6CD900A0BF35 /* PooCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PooCodeView.h; sourceTree = "<group>"; };
 		18730ABE1D2F6CD900A0BF35 /* PooCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PooCodeView.m; sourceTree = "<group>"; };
+		187BDD271D3F55CE0036FB7B /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
+		187BDD281D3F55CE0036FB7B /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
 		187D68E31D3C7DFE00618923 /* attentionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attentionLabel.h; sourceTree = "<group>"; };
 		187D68E41D3C7DFE00618923 /* attentionLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = attentionLabel.m; sourceTree = "<group>"; };
 		187D69361D3CCC5700618923 /* brandGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = brandGoodsViewController.h; sourceTree = "<group>"; };
@@ -678,6 +681,15 @@
 			name = message;
 			sourceTree = "<group>";
 		};
+		187BDD261D3F55B50036FB7B /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				187BDD271D3F55CE0036FB7B /* GuideViewController.h */,
+				187BDD281D3F55CE0036FB7B /* GuideViewController.m */,
+			);
+			name = Guide;
+			sourceTree = "<group>";
+		};
 		187D68E21D3C7D7600618923 /* attention */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,6 +932,7 @@
 		18B484411D2E259D001703C0 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				187BDD261D3F55B50036FB7B /* Guide */,
 				181C82E61D3E3AD800572672 /* shopGoods */,
 				187D69351D3CCC3C00618923 /* brandGoods */,
 				18B484441D2E25CC001703C0 /* Shops */,
@@ -1532,6 +1545,7 @@
 				D21EE7E01D3245CF008AE0B7 /* MyAttentionViewController.m in Sources */,
 				18B484C01D2E411A001703C0 /* brandModel.m in Sources */,
 				F2EC17051D3C9C0000DE0896 /* CashingViewController.m in Sources */,
+				187BDD291D3F55CE0036FB7B /* GuideViewController.m in Sources */,
 				18D34FB81D3398EC002CE8E0 /* ShopsSearchModel.m in Sources */,
 				181A663D1D35015100ABDE29 /* OrderDetailViewController.m in Sources */,
 				18B484CA1D2E46CF001703C0 /* GoodsTableViewCell.m in Sources */,
@@ -1830,7 +1844,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = spyg.syb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bcaa6e44-9960-4d2f-a996-5f05ce4770e6";
+				PROVISIONING_PROFILE = "2554bd18-5b4a-4070-83d1-2d991df0d822";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1887,7 +1901,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = spyg.syb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bcaa6e44-9960-4d2f-a996-5f05ce4770e6";
+				PROVISIONING_PROFILE = "2554bd18-5b4a-4070-83d1-2d991df0d822";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

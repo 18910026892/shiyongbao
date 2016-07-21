@@ -67,8 +67,8 @@
     
     //Cell提示点击
     _clickImage = [[UIImageView alloc]init];
-    _clickImage.frame = CGRectMake(kMainScreenWidth-70, 7, 60, 30);
-    
+    _clickImage.frame = CGRectMake(kMainScreenWidth-60, 22.5, 41, 15);
+    _clickImage.image = [UIImage imageNamed:@"goshop"];
     
     for (int i=0; i<3; i++) {
         _goodsImage = [UIButton buttonWithType:UIButtonTypeCustom];

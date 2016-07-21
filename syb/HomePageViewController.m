@@ -52,7 +52,61 @@
     [self setTabBarHide:NO];
     
      self.navigationController.navigationBarHidden = YES;
+    
+     [self getMessageData];
+    
 }
+//请求新消息数据
+-(void)getMessageData;
+{
+    
+    if (userSession.isLogin) {
+        GXHttpRequest *request = [[GXHttpRequest alloc]init];
+        
+        [request RequestDataWithUrl:URL_MyNewestMessage pragma:nil];
+        
+        [request getResultWithSuccess:^(id response) {
+            /// 加保护
+            if ([response isKindOfClass:[NSDictionary class]])
+            {
+                
+                NSLog(@" 新消息接口 %@ ",response);
+                
+                NSDictionary * resultDict = [response valueForKey:@"result"];
+                
+                NSString * itemCount = [NSString stringWithFormat:@"%@",[resultDict valueForKey:@"item_count"]];
+                
+                
+                if ([itemCount isEqualToString:@"0"]) {
+                    self.pointImage.hidden = YES;
+                }else if ([itemCount isEqualToString:@"1"])
+                {
+                   self.pointImage.hidden = NO;
+                }
+                
+            }
+            
+        } DataFaiure:^(id error) {
+            [HDHud hideHUDInView:self.view];
+            [HDHud showMessageInView:self.view title:error];
+        } Failure:^(id error) {
+            [HDHud hideHUDInView:self.view];
+            [HDHud showNetWorkErrorInView:self.view];
+        }];
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
 -(UIButton*)GoTopButton
 {
     if(!_GoTopButton)
@@ -197,9 +251,23 @@
     [self.Customview addSubview:self.logoImageView];
     [self.Customview addSubview:self.searchButton];
     [self.Customview addSubview:self.messageButton];
+    [self.Customview addSubview:self.pointImage];
     
     [self.view addSubview:self.GoTopButton];
     [self.view bringSubviewToFront:self.GoTopButton];
+}
+
+-(UIImageView*)pointImage
+{
+    if (!_pointImage) {
+        _pointImage = [[UIImageView alloc]init];
+        _pointImage.backgroundColor = ThemeColor;
+        _pointImage.layer.cornerRadius = 4.5;
+        _pointImage.frame = CGRectMake(SCREEN_WIDTH-16, 30, 9, 9);
+        _pointImage.hidden = YES;
+        
+    }
+    return _pointImage;
 }
 
 -(UIImageView*)logoImageView
@@ -303,7 +371,7 @@
 - (void)addLable
 {
     for (int i = 0; i < [self.categoryArray count]; i++) {
-        CGFloat lblW = 70;
+        CGFloat lblW = 60;
         CGFloat lblH = 40;
         CGFloat lblY = 0;
         CGFloat lblX = i * lblW;
@@ -318,7 +386,7 @@
         
         [lbl1 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lblClick:)]];
     }
-    smallScrollView.contentSize = CGSizeMake(70 * [_titleArray count]+SCREEN_WIDTH/7, 0);
+    smallScrollView.contentSize = CGSizeMake(60 * [_titleArray count]+SCREEN_WIDTH/6, 0);
     
 }
 /** 标题栏label的点击事件 */
@@ -330,9 +398,7 @@
     CGPoint offset = CGPointMake(offsetX, offsetY);
     [bigScrollView setContentOffset:offset animated:YES];
     _cat_id = self.catIdArray[titlelable.tag];
-    
-    NSLog(@" %@ ",_cat_id);
-    
+
     NSUInteger index = titlelable.tag;
     [smallScrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if (idx != index) {
@@ -598,12 +664,14 @@
     
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
-    [request RequestDataWithUrl:URL_GetStoreGoodsByCatId pragma:parameter];
+    [request RequestDataWithUrl:URL_GetStoreGoodsByRootCatId pragma:parameter];
     
     [request getResultWithSuccess:^(id response) {
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
+            NSLog(@" %@ ",response);
+            
             if (Type==1) {
                 self.brandArray = [NSMutableArray array];
                 self.goodsList = [NSMutableArray array];

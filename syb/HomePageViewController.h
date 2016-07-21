@@ -20,6 +20,8 @@
 
 @property(nonatomic,strong)UIButton * messageButton;
 
+@property (nonatomic,strong)UIImageView * pointImage;
+
 @property(nonatomic,strong)UIImageView * logoImageView;
 
 @property (nonatomic,strong)UIButton * GoTopButton;

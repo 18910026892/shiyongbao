@@ -393,6 +393,9 @@ typedef NSUInteger FrameType;
 
 #define URL_GetStoreGoodsByCatId [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsByCatId"]]
 
+#define URL_GetStoreGoodsByRootCatId [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"GetStoreGoodsByRootCatId"]]
+
+
 //商品搜索
 #define URL_SearchStoreGoodsList [OnLineURL stringByAppendingString:[NSString stringWithFormat:@"SearchStoreGoodsList"]]
 

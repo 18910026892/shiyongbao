@@ -63,10 +63,15 @@
     _cellLine.backgroundColor = RGBACOLOR(210,210,210,.5);
     
     
+    
+    
     //Cell提示点击
     _clickImage = [[UIImageView alloc]init];
-    _clickImage.frame = CGRectMake(kMainScreenWidth-70, 7, 60, 30);
-
+    _clickImage.frame = CGRectMake(kMainScreenWidth-60, 22.5, 41, 15);
+    _clickImage.image = [UIImage imageNamed:@"goshop"];
+    
+    
+    
     NSInteger GoodsCount = [_shopsModel.recommend_goods count];
     
     if (GoodsCount!=0) {

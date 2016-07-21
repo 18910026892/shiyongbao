@@ -10,8 +10,9 @@
 #import "BaseTabBarController.h"
 #import "SybSession.h"
 #import <ALBBSDK/ALBBSDK.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import "GuideViewController.h"
+#import "UserDefaultsUtils.h"
+@interface AppDelegate : UIResponder <UIApplicationDelegate,GuideViewControllerDelegate>
 {
     SybSession * userSession;
 }

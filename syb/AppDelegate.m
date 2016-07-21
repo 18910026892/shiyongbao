@@ -11,6 +11,8 @@
 #import "AppDelegate+Request.h"
 #import "AppDelegate+Alibaba.h"
 #import "AppDelegate+Umeng.h"
+
+#define KFirstRuning @"3.2.0"
 @interface AppDelegate ()
 
 @end
@@ -31,7 +33,16 @@
 
     _window.backgroundColor = [UIColor whiteColor];
     
-    _window.rootViewController = self.tabBarViewController;
+    if(![UserDefaultsUtils  boolValueWithKey:KFirstRuning]){
+        [self gotoGuidePageView];
+        [UserDefaultsUtils saveBoolValue:YES withKey:KFirstRuning];
+    }else{
+        
+        _window.rootViewController = self.tabBarViewController;
+    }
+    
+    
+
     
     [_window makeKeyAndVisible];
 
@@ -43,6 +54,28 @@
     
     return YES;
 }
+
+//跳转引导页
+-(void)gotoGuidePageView
+{
+    GuideViewController * guideViewController = [[GuideViewController alloc]init];
+    guideViewController.delegate = self;
+    _window.rootViewController = guideViewController;
+    
+}
+
+#pragma Guide delegate
+-(void)GuideViewControllerSureBtnClicked;
+{
+    [[UIApplication sharedApplication]setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    
+
+    _window.rootViewController = self.tabBarViewController;
+  
+    
+}
+
+
 
 -(void)InitUserSession
 {
