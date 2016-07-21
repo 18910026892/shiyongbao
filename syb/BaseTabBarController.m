@@ -112,7 +112,7 @@ static BaseTabBarController* _myTabBarVC = nil;
     [self setupItemWithViewController:shopsVc ItemData:@{@"title":@"卖家汇",@"imageStr":@"tab2",@"imageStr_s":@"tabs2"}];
     
     ShiYongBaoViewController * sybVc = [ShiYongBaoViewController viewController];
-    [self setupItemWithViewController:sybVc ItemData:@{@"title":@"真选惠认证",@"imageStr":@"tab3",@"imageStr_s":@"tabs3"}];
+    [self setupItemWithViewController:sybVc ItemData:@{@"title":@"真惠选认证",@"imageStr":@"tab3",@"imageStr_s":@"tabs3"}];
     
     CartViewController * cartVc = [CartViewController viewController];
     [self setupItemWithViewController:cartVc ItemData:@{@"title":@"购物车",@"imageStr":@"tab4",@"imageStr_s":@"tabs4"}];

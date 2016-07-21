@@ -118,7 +118,7 @@
     
     BOOL isHandledByALBBSDK=[[ALBBSDK sharedInstance] handleOpenURL:url];//处理其他app跳转到自己的app，如果百川处理过会返回YES
     
-    return YES;
+    return isHandledByALBBSDK;
     
     
 }
