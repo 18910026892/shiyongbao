@@ -71,9 +71,6 @@
     }];
     [self.tableView.mj_header beginRefreshing];
     
-    self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-        
-    }];
     self.tableView.mj_footer = self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [weakSelf requestData];
     }];
