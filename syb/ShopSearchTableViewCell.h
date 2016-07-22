@@ -35,7 +35,7 @@
 @property (nonatomic,strong)UILabel * AttentionCount;
 //店铺的商品图片
 @property (nonatomic,strong)UIButton * goodsImage;
-
+@property (nonatomic,strong)UIImageView * goodsImageView;
 //点击按钮
 @property (nonatomic,strong)UIImageView * clickImage;
 

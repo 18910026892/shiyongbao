@@ -7,8 +7,16 @@
 //
 
 #import "SybWebViewController.h"
+#import <ALBBTradeSDK/ALBBTradeService.h>
+#import <ALBBTradeSDK/ALBBCartService.h>
+@interface SybWebViewController ()
+@property(nonatomic, strong) id<ALBBTradeService> tradeService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) addCartCacelledCallback addCartCacelledCallback;
+@property(nonatomic, strong) addCartSuccessCallback addCartSuccessCallback;
 
-
+@end
 @implementation SybWebViewController
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -23,7 +31,7 @@
     // Do any additional setup after loading the view.
     [self setNavTitle:_WebTitle];
 
-    
+       _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
 }
 
 -(UIButton*)BackButton
@@ -119,6 +127,18 @@
 {
     [_webViewProgressView setProgress:progress animated:YES];
     self.title = [_WebView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    
+    
+    
+    //获取Html字符串
+    NSString *jsToGetHTMLSource = @"document.getElementsByTagName('html')[0].innerHTML";
+    _htmlString = [self.WebView stringByEvaluatingJavaScriptFromString:jsToGetHTMLSource];
+    
+    _endUrl = self.WebView.request.URL.absoluteString;
+    
+    
+    NSLog(@" %@  %@",_htmlString,_endUrl);
+    
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView;
@@ -129,10 +149,52 @@
 {
     
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error;
+#pragma WebView Delegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    
+    //判断是否是单击
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        NSURL *url = [request URL];
+        
+        NSString * urlString = [NSString stringWithFormat:@"%@",url];
+        
+        NSString*goods_id  = [urlString substringFromIndex:28];
+        
+        
+        TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+        //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+        
+        ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+        taoKeParams.pid= goods_id;
+        
+        ALBBTradePage *page=[ALBBTradePage itemDetailPage:goods_id params:nil];
+        //params 指定isv code等。
+        [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        
+        
+        
+        if([[UIApplication sharedApplication]canOpenURL:url])
+        {
+            [[UIApplication sharedApplication]openURL:url];
+        }
+        return NO;
+    }
+    return YES;
 }
+
+
+
+-(TaeWebViewUISettings *)getWebViewSetting{
+    
+    TaeWebViewUISettings *settings = [[TaeWebViewUISettings alloc] init];
+    settings.titleColor = [UIColor blueColor];
+    settings.tintColor = [UIColor redColor];
+    settings.barTintColor = kNavBackGround;
+    
+    return settings;
+}
+
 
 
 @end

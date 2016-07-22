@@ -23,7 +23,7 @@
 @property(nonatomic,strong)shopAttentionModel * shopsModel;
 
 @property (weak, nonatomic) id <shopAttentionCellDelegate> delegate;
-
+@property (nonatomic,strong)UIImageView * goodsImageView;
 //平台来源
 @property (nonatomic,strong)UIImageView * platform;
 //店铺名称

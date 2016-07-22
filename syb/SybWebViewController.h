@@ -27,4 +27,8 @@
 
 @property (nonatomic,copy)NSString * isPush;
 
+@property (nonatomic,copy)NSString * endUrl;
+
+@property (nonatomic,copy)NSString * htmlString;
+
 @end

@@ -62,6 +62,20 @@
     _clickImage.frame = CGRectMake(kMainScreenWidth-60, 22.5, 41, 15);
     _clickImage.image = [UIImage imageNamed:@"goshop"];
     
+    
+    UIImage * image = [UIImage imageNamed:@"noimage"];
+    
+    for (int i=0; i<3; i++) {
+        _goodsImageView = [[UIImageView alloc]init];
+        _goodsImageView.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
+        _goodsImageView.backgroundColor = [UIColor whiteColor];
+        
+        _goodsImageView.image = image;
+        
+        [self.contentView addSubview:_goodsImageView];
+    }
+    
+    
     NSInteger GoodsCount = [_shopsModel.recommend_goods count];
     
     if (GoodsCount!=0) {
@@ -72,10 +86,13 @@
             
             
             NSString * imageUrl = [_shopsModel.recommend_goods[i] valueForKey:@"goods_img_url"];
-            [_goodsImage sd_setBackgroundImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal];
+            UIImage * image = [UIImage imageNamed:@"noimage"];
+            
+            [_goodsImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal placeholderImage:image];
             
             [_goodsImage addTarget:self action:@selector(goodsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             _goodsImage.tag = i;
+            
             [self.contentView addSubview:_goodsImage];
         }
         

@@ -70,16 +70,41 @@
     _clickImage.frame = CGRectMake(kMainScreenWidth-60, 22.5, 41, 15);
     _clickImage.image = [UIImage imageNamed:@"goshop"];
     
+    
+    UIImage * image = [UIImage imageNamed:@"noimage"];
+    
     for (int i=0; i<3; i++) {
-        _goodsImage = [UIButton buttonWithType:UIButtonTypeCustom];
-        _goodsImage.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
-        _goodsImage.backgroundColor = [UIColor whiteColor];
+        _goodsImageView = [[UIImageView alloc]init];
+        _goodsImageView.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
+        _goodsImageView.backgroundColor = [UIColor whiteColor];
         
-        NSString * imageUrl = [_ShopsSearchModel.recommend_goods[i] valueForKey:@"goods_img_url"];
-        [_goodsImage sd_setBackgroundImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal];
-        [_goodsImage addTarget:self action:@selector(goodsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        _goodsImage.tag = i;
-        [self.contentView addSubview:_goodsImage];
+        _goodsImageView.image = image;
+        
+        [self.contentView addSubview:_goodsImageView];
+    }
+    
+    
+    
+    NSInteger GoodsCount = [ShopsSearchModel.recommend_goods count];
+    
+    if (GoodsCount!=0) {
+        for (int i=0; i<GoodsCount; i++) {
+            _goodsImage = [UIButton buttonWithType:UIButtonTypeCustom];
+            _goodsImage.frame = CGRectMake(kMainScreenWidth/3*i, 60, kMainScreenWidth/3-0.5, kMainScreenWidth/3);
+            _goodsImage.backgroundColor = [UIColor whiteColor];
+            
+            
+            NSString * imageUrl = [ShopsSearchModel.recommend_goods[i] valueForKey:@"goods_img_url"];
+            UIImage * image = [UIImage imageNamed:@"noimage"];
+            
+            [_goodsImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] forState:UIControlStateNormal placeholderImage:image];
+            
+            [_goodsImage addTarget:self action:@selector(goodsButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            _goodsImage.tag = i;
+            
+            [self.contentView addSubview:_goodsImage];
+        }
+        
     }
     
     for (int i=1; i<3; i++) {
