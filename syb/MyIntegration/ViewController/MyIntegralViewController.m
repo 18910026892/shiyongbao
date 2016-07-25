@@ -52,7 +52,7 @@
     [self setNavTitle:@"我的积分"];
     [self showBackButton:YES];
     self.myIntegral = @"0";
-    
+    [self.LeftBtn setImage:[UIImage imageNamed:@"nav_back_normal"] forState:UIControlStateNormal];
     user = [SybSession sharedSession];
     [self.RightBtn addTarget:self action:@selector(toBalanceVC:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -124,7 +124,7 @@
     self.Customview.backgroundColor = [UIColor clearColor];
     [self.RightBtn setTitle:@"收支明细" forState:UIControlStateNormal];
 //
-    
+    [self.RightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     /*********用户头像**********/
     self.userIV.cornerRadius = self.userIV.height/2;
     [self.userIV sd_setImageWithURL:[NSURL URLWithString:user.imageURL] placeholderImage:[UIImage imageNamed:@"touxiang"]];

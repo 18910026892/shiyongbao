@@ -9,7 +9,7 @@
 #import "ItemViewButton.h"
 
 @interface ItemViewButton ()
-@property (weak, nonatomic) IBOutlet UILabel *money;
+
 @property (weak, nonatomic) IBOutlet UILabel *interal;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 

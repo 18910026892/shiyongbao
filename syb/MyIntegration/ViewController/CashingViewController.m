@@ -60,6 +60,7 @@
     user = [SybSession sharedSession];
     [self setNavTitle:@"兑现"];
     self.cashBtn.cornerRadius = 5;
+    self.cashBtn.backgroundColor = ThemeColor;
     // Do any additional setup after loading the view from its nib.
     self.accountType = zhifubaoType;
     

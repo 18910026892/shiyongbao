@@ -17,6 +17,7 @@ NSString * const zshHistroies = @"zshHistroies";
 @property (weak, nonatomic) IBOutlet UIButton *zhongshihuaBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLineCenter;
 @property (weak, nonatomic) IBOutlet UITextField *numberTF;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray *bottomLIneHeights;
 @property (nonatomic,assign)int typeFlag;
@@ -157,7 +158,8 @@ NSString * const zshHistroies = @"zshHistroies";
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PayTheGasolineTableViewCell" owner:nil options:nil] lastObject];
     }
     cell.gasolineNumber = self.histroies[indexPath.row];
-    cell.selected = indexPath.row==self.selectedRow?YES:NO;
+    BOOL isSelected = indexPath.row==self.selectedRow?YES:NO;
+    cell.isSelected = isSelected;
     
     return cell;
 }
@@ -214,15 +216,19 @@ NSString * const zshHistroies = @"zshHistroies";
 #pragma mark - TFDelegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (self.selectedRow!=-1) {
-        self.selectedRow = -1;
-        [self.tableView reloadData];
+    if (textField ==self.numberTF) {
+        if (self.selectedRow!=-1) {
+            self.selectedRow = -1;
+            [self.tableView reloadData];
+        }
     }
     return YES;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    self.number = textField.text;
+    if (textField==self.numberTF) {
+        self.number = textField.text;
+    }
 }
 #pragma mark - end TFDelegate
 
@@ -230,11 +236,20 @@ NSString * const zshHistroies = @"zshHistroies";
 - (void)itemDidClicked:(InteralGoodsModel *)goods
 {
     if (self.number.length==0) {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请选输入卡号" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请输入卡号" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [av show];
         return;
     }
-    NSLog(@"%@",goods);
+
+    NSCharacterSet *setToRemove = [[ NSCharacterSet characterSetWithCharactersInString:@"0123456789"]
+                                   invertedSet ];
+    NSString *strPhone = [[self.phoneTF.text componentsSeparatedByCharactersInSet:setToRemove] componentsJoinedByString:@""];
+    if (strPhone.length!=11) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"号码格式有误" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [av show];
+        return ;
+    }
+    
     [self payAction:goods];
 }
 - (void)payAction:(InteralGoodsModel *)goods
@@ -245,7 +260,8 @@ NSString * const zshHistroies = @"zshHistroies";
     NSString *dateString = [fomatter stringFromDate:date];
     NSString * md5 = [NSString stringWithFormat:@"spyg:user_id=%@date=%@",user.userID,dateString];
     NSString * PostMD5 = [NSString MD5WithString:md5];
-    NSDictionary * postDict = @{@"user_sign":PostMD5,@"gift_id":goods.gift_id,@"account":self.number};
+    NSString *phone = self.phoneTF.text;
+    NSDictionary * postDict = @{@"user_sign":PostMD5,@"gift_id":goods.gift_id,@"account":self.number,@"gas_card_tel":phone};
     GXHttpRequest *request1 = [[GXHttpRequest alloc]init];
     [HDHud showHUDInView:self.view title:@"换购中..."];
     [request1 RequestDataWithUrl:URL_PurchaseGift pragma:postDict];

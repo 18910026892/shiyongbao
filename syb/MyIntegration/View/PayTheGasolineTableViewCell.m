@@ -30,11 +30,6 @@
         self.selectIV.image = [UIImage imageNamed:@"huise"];
     }
 }
--(void)setSelected:(BOOL)selected
-{
-    [super setSelected:selected];
-    self.isSelected = selected;
-}
 -(void)setGasolineNumber:(NSString *)gasolineNumber
 {
     _gasolineNumber = gasolineNumber;
