@@ -101,7 +101,7 @@
 - (void)addLable
 {
     for (int i = 0; i < [_TitleArray count]; i++) {
-        CGFloat lblW = 70;
+        CGFloat lblW = 60;
         CGFloat lblH = 40;
         CGFloat lblY = 0;
         CGFloat lblX = i * lblW;
@@ -115,7 +115,7 @@
         
         [lbl1 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lblClick:)]];
     }
-    smallScrollView.contentSize = CGSizeMake(70 * [_TitleArray count], 0);
+    smallScrollView.contentSize = CGSizeMake(60 * [_TitleArray count], 0);
     
 }
 

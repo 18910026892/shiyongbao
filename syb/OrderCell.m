@@ -16,8 +16,8 @@
         
         [self.contentView addSubview:self.orderFrom];
         [self.contentView addSubview:self.orderStore];
+        [self.contentView addSubview:self.orderStatus];
         [self.contentView addSubview:self.orderDate];
-      
         [self.contentView addSubview:self.orderPrice];
         [self.contentView addSubview:self.orderIntegral];
         
@@ -34,8 +34,8 @@
     if (!_orderFrom) {
         _orderFrom = [UILabel labelWithFrame:CGRectMake(10,
                                                          0,
-                                                         40,
-                                                         44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentCenter];
+                                                         80,
+                                                         44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
         
     }
     return _orderFrom;
@@ -45,14 +45,28 @@
 -(UILabel*)orderStore
 {
     if (!_orderStore) {
-        _orderStore = [UILabel labelWithFrame:CGRectMake(50,
+        _orderStore = [UILabel labelWithFrame:CGRectMake(90,
                                                         0,
-                                                        kMainScreenWidth-150,
+                                                        kMainScreenWidth-250,
                                                         44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
+
         
     }
     return _orderStore;
 }
+
+-(UILabel*)orderStatus
+{
+    if (!_orderStatus) {
+        _orderStatus = [UILabel labelWithFrame:CGRectMake(kMainScreenWidth-160,
+                                                        0,
+                                                        60,
+                                                        44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
+        
+    }
+    return _orderStatus;
+}
+
 
 -(UILabel*)orderDate
 {
@@ -60,7 +74,7 @@
         _orderDate = [UILabel labelWithFrame:CGRectMake(kMainScreenWidth-100,
                                                          0,
                                                          90,
-                                                         44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
+                                                         44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
         
     }
     return _orderDate;
@@ -72,7 +86,7 @@
         _orderPrice = [UILabel labelWithFrame:CGRectMake(100,
                                                         [self.orderModel.order_items count]*100+44,
                                                         100,
-                                                        44) text:@"" textColor:HexRGBAlpha(0x000000, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
+                                                        44) text:@"" textColor:HexRGBAlpha(0x000000, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
         
     }
     return _orderPrice;
@@ -83,7 +97,7 @@
         _orderIntegral = [UILabel labelWithFrame:CGRectMake(200,
                                                          [self.orderModel.order_items count]*100+44,
                                                          100,
-                                                         44) text:@"" textColor:HexRGBAlpha(0x000000, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
+                                                         44) text:@"" textColor:HexRGBAlpha(0x000000, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
         
     }
     return _orderIntegral;
@@ -173,9 +187,12 @@
     
 
     
-    self.orderFrom.text = @"淘宝";
+    self.orderFrom.text = orderModel.site_name;
     self.orderStore.text = orderModel.shop_title;
-    self.orderDate.text = orderModel.create_order_time;
+    self.orderStatus.text = orderModel.order_status;
+    
+    self.orderDate.text = [TimeTool timePrToTime:orderModel.create_order_time ];
+    
     
     _tableArray = orderModel.order_items;
     

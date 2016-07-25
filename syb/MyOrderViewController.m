@@ -224,12 +224,14 @@
         cell = [[OrderCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.delegate = self;
          cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }else{
-        
-        while ([cell.contentView.subviews lastObject] != nil) {
-            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
-        }
     }
+    
+//    else{
+//        
+//        while ([cell.contentView.subviews lastObject] != nil) {
+//            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
+//        }
+//    }
     cell.orderModel = orderModel;
     return cell;
     

@@ -19,5 +19,6 @@
 @property (nonatomic,strong)NSString * shop_title;
 @property (nonatomic,strong)NSString * user_id;
 @property (nonatomic,strong)NSString * total_point;
+@property (nonatomic,strong)NSString * site_name;
 
 @end

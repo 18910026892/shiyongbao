@@ -275,7 +275,7 @@
 {
     if (!_logoImageView) {
         _logoImageView = [[UIImageView alloc]init];
-        _logoImageView.frame = CGRectMake(20, 35, 45, 15);
+        _logoImageView.frame = CGRectMake(30, 35, 45, 15);
         _logoImageView.image = [UIImage imageNamed:@"shiyongbaologo"];
     }
     return _logoImageView;
@@ -621,6 +621,8 @@
                     btn.userInteractionEnabled = YES;
                     
                     [btn setTitle:@"已关注" forState:UIControlStateNormal];
+                    
+                        [btn setTitleColor:HexRGBAlpha(0x999999, 1) forState:UIControlStateNormal];
                     
                 }
                 
