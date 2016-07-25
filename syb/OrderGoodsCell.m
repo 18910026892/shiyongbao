@@ -78,7 +78,7 @@
     
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%@" , orderItem.real_pay];
     
-    self.goodsintegral.text = [NSString stringWithFormat:@"积分:%@" ,orderItem.obtain_point];
+    self.goodsintegral.text = [NSString stringWithFormat:@" 积分:%@ " ,orderItem.obtain_point];
     
     [self.goodsintegral sizeToFit];
     

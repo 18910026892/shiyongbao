@@ -22,10 +22,11 @@
 {
     _shopsModel = shopsModel;
     
+       UIImage * image = [UIImage imageNamed:@"noimage"];
     //平台来源
     _platform = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 40,40)];
     NSString * platform = shopsModel.shop_logo;
-    [_platform sd_setImageWithURL:[NSURL URLWithString:platform]];
+     [_platform sd_setImageWithURL:[NSURL URLWithString:platform] placeholderImage:image];
     
     //店铺名称
     _shopName = [[UILabel alloc]initWithFrame:CGRectMake(60,10, SCREEN_WIDTH/2-60, 20)];
@@ -39,7 +40,7 @@
     _AttentionButton.frame = CGRectMake(SCREEN_WIDTH-140,15, 60, 30);
     _AttentionButton.layer.borderWidth = .5;
     _AttentionButton.layer.borderColor = RGBACOLOR(200, 200, 200, 1).CGColor;
-    _AttentionButton.layer.cornerRadius = 10;
+     _AttentionButton.layer.cornerRadius = 7.5;
     _AttentionButton.backgroundColor = [UIColor whiteColor];
     
     NSString * buttonTitle = @"取消关注";
@@ -63,7 +64,7 @@
     _clickImage.image = [UIImage imageNamed:@"goshop"];
     
     
-    UIImage * image = [UIImage imageNamed:@"noimage"];
+ 
     
     for (int i=0; i<3; i++) {
         _goodsImageView = [[UIImageView alloc]init];

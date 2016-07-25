@@ -10,6 +10,7 @@
 #import "OrderModel.h"
 #import "OrderItem.h"
 #import "OrderGoodsCell.h"
+#import "TimeTool.h"
 @class OrderCell;
 
 @protocol OrderCellDelegate <NSObject>
@@ -31,6 +32,8 @@
 @property (nonatomic,strong)UITableView * orderList;
 @property (nonatomic,strong)UILabel * orderPrice;
 @property (nonatomic,strong)UILabel * orderIntegral;
+@property (nonatomic,strong)UILabel * orderStatus;
+
 
 @property (nonatomic,strong)NSMutableArray * tableArray;
 

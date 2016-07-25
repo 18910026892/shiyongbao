@@ -336,6 +336,9 @@
                     
                     [btn setTitle:@"已关注" forState:UIControlStateNormal];
                     
+                    
+                    [btn setTitleColor:HexRGBAlpha(0x999999, 1) forState:UIControlStateNormal];
+                    
                 }
                 
             } DataFaiure:^(id error) {

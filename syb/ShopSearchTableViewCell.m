@@ -23,11 +23,11 @@
 {
     _ShopsSearchModel = ShopsSearchModel;
     
-    
+       UIImage * image = [UIImage imageNamed:@"noimage"];
     //平台来源
     _platform = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 40,40)];
     NSString * platform = ShopsSearchModel.shop_logo;
-    [_platform sd_setImageWithURL:[NSURL URLWithString:platform]];
+     [_platform sd_setImageWithURL:[NSURL URLWithString:platform] placeholderImage:image];
     
     //店铺名称
     _shopName = [[UILabel alloc]initWithFrame:CGRectMake(60,10, SCREEN_WIDTH-90, 20)];
@@ -41,16 +41,21 @@
     _AttentionButton.frame = CGRectMake(SCREEN_WIDTH-140,15, 60, 30);
     _AttentionButton.layer.borderWidth = .5;
     _AttentionButton.layer.borderColor = RGBACOLOR(200, 200, 200, 1).CGColor;
-    _AttentionButton.layer.cornerRadius = 10;
+    _AttentionButton.layer.cornerRadius = 7.5;
     _AttentionButton.backgroundColor = [UIColor whiteColor];
     
     NSString * buttonTitle;
     
     if ([ShopsSearchModel.user_id isEmpty]) {
         buttonTitle = @"+关注";
+               [_AttentionButton setTitleColor:HexRGBAlpha(0xf02f70, 1) forState:UIControlStateNormal];
+        
+        
     }else
     {
         buttonTitle = @"已关注";
+        
+           [_AttentionButton setTitleColor:HexRGBAlpha(0x999999, 1) forState:UIControlStateNormal];
     }
     
     [_AttentionButton setTitle:buttonTitle forState:UIControlStateNormal];
@@ -69,9 +74,7 @@
     _clickImage = [[UIImageView alloc]init];
     _clickImage.frame = CGRectMake(kMainScreenWidth-60, 22.5, 41, 15);
     _clickImage.image = [UIImage imageNamed:@"goshop"];
-    
-    
-    UIImage * image = [UIImage imageNamed:@"noimage"];
+
     
     for (int i=0; i<3; i++) {
         _goodsImageView = [[UIImageView alloc]init];
