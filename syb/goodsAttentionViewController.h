@@ -11,6 +11,9 @@
 #import "goodsAttentionCell.h"
 @interface goodsAttentionViewController : BaseViewController
 <UITableViewDelegate,UITableViewDataSource,goodsAttentionCellDelegate>
+{
+    SybSession * userSession;
+}
 
 @property (nonatomic,strong)UITableView * TableView;
 

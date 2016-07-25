@@ -273,18 +273,38 @@
     NSString * goodId = [dict valueForKey:@"goods_id"];
     
     
-    TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
-    //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
-    
-    ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
-    taoKeParams.pid= goodId;
-    
-    ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodId params:nil];
-    //params 指定isv code等。
-    [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+    if(!userSession)
+    {
+        userSession = [SybSession sharedSession];
+    }
     
     
-    NSLog(@" %@  ",goodId);
+    
+    if (userSession.isLogin) {
+        
+      
+        TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+        //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+        
+        ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+        taoKeParams.pid= goodId;
+        
+        
+        NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
+        
+        NSLog(@"用户ID参数是 %@ ",customDict);
+        
+        ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodId params:customDict];
+        
+        
+        //params 指定isv code等。
+        [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        
+    }else if(!userSession.isLogin)
+    {
+        LoginViewController * loginVC = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
     
 }
 #pragma TableViewDelegate
@@ -305,7 +325,7 @@
         
         if(!userSession)
         {
-            userSession = [SingleManage shareManage];
+            userSession = [SybSession sharedSession];
         }
         
         

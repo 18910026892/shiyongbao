@@ -8,6 +8,19 @@
 
 #import "shopAttentionViewController.h"
 #import "shopGoodsViewController.h"
+#import "LoginViewController.h"
+#import <ALBBTradeSDK/ALBBTradeService.h>
+#import <ALBBTradeSDK/ALBBCartService.h>
+@interface shopAttentionViewController ()
+@property(nonatomic, strong) id<ALBBTradeService> tradeService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) addCartCacelledCallback addCartCacelledCallback;
+@property(nonatomic, strong) addCartSuccessCallback addCartSuccessCallback;
+
+@end
+
+
 @implementation shopAttentionViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -16,7 +29,7 @@
     
     [self setupDatas];
     [self setupViews];
-    
+        _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
     
 }
 
@@ -230,10 +243,54 @@
     return cell;
     
 }
+-(TaeWebViewUISettings *)getWebViewSetting{
+    
+    TaeWebViewUISettings *settings = [[TaeWebViewUISettings alloc] init];
+    settings.titleColor = [UIColor blueColor];
+    settings.tintColor = [UIColor redColor];
+    settings.barTintColor = kNavBackGround;
+    
+    return settings;
+}
 
 -(void)goodsButtonClickWithDict:(NSDictionary*)dict;
 {
-    NSLog(@" %@ ",dict);
+    NSString * goodId = [dict valueForKey:@"goods_id"];
+    
+    
+    if(!userSession)
+    {
+        userSession = [SybSession sharedSession];
+    }
+    
+    
+    
+    if (userSession.isLogin) {
+        
+        
+        TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+        //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+        
+        ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+        taoKeParams.pid= goodId;
+        
+        
+        NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
+        
+        NSLog(@"用户ID参数是 %@ ",customDict);
+        
+        ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodId params:customDict];
+        
+        
+        //params 指定isv code等。
+        [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        
+    }else if(!userSession.isLogin)
+    {
+        LoginViewController * loginVC = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;

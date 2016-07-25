@@ -551,17 +551,38 @@
         NSInteger index = indexPath.row- self.brandArray.count;
         
         ProductGoodsModel * goodsModel = self.goodsList[index];
+        if(!userSession)
+        {
+            userSession = [SybSession sharedSession];
+        }
         
-        TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
-        //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
         
-        ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
-        taoKeParams.pid= goodsModel.goods_id;
         
-        ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:nil];
-        //params 指定isv code等。
-        [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
-        
+        if (userSession.isLogin) {
+            
+            
+            TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+            //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+            
+            ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+            taoKeParams.pid= goodsModel.goods_id;
+            
+            
+            NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
+            
+            NSLog(@"用户ID参数是 %@ ",customDict);
+            
+            ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:customDict];
+            
+            
+            //params 指定isv code等。
+            [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            
+        }else if(!userSession.isLogin)
+        {
+            LoginViewController * loginVC = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }
         
     }
 }
@@ -591,7 +612,7 @@
         
         if(!userSession)
         {
-            userSession = [SingleManage shareManage];
+            userSession = [SybSession sharedSession];
         }
         
         

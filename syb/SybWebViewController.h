@@ -15,6 +15,7 @@
     
     NJKWebViewProgressView *_webViewProgressView;
     NJKWebViewProgress *_webViewProgress;
+    SybSession * userSession;
 }
 
 @property(nonatomic,strong)UIButton * BackButton;

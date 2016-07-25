@@ -28,5 +28,8 @@
 @property(nonatomic,copy)NSString * page;
 @property(nonatomic,copy)NSString * cat_id;
 
+@property (nonatomic,copy)NSString *navTitle;
+
+@property(nonatomic,strong)UILabel* navTitleLabel;
 
 @end

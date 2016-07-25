@@ -23,8 +23,17 @@
     [self setupDatas];
     
     [self setNavTitle:@"卖家汇"];
+    
+    UIImage * searchImage= [UIImage imageNamed:@"search"];
+    [self.RightBtn setBackgroundImage:searchImage forState:UIControlStateNormal];
+    [self.RightBtn addTarget:self action:@selector(gotoSearch:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
+-(void)gotoSearch:(UIButton*)sender
+{
+    
+}
 -(void)setupDatas
 {
     _categoryArray = [NSMutableArray array];
