@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="bottomLineCenter" destination="rfV-yP-Vsm" id="ugj-eV-veo"/>
                 <outlet property="numberTF" destination="7Ca-Cb-Xhl" id="dAR-Ge-1Le"/>
+                <outlet property="phoneTF" destination="TuW-Gu-nfb" id="EjE-oz-tuJ"/>
                 <outlet property="tableView" destination="rt0-yo-mTz" id="f9o-YX-92y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="zhongshihuaBtn" destination="8du-Dc-bVD" id="TUR-rk-TVC"/>
@@ -97,7 +98,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入油卡号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ca-Cb-Xhl">
-                            <rect key="frame" x="65" y="16.5" width="235" height="17"/>
+                            <rect key="frame" x="65" y="16" width="235" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -125,8 +126,45 @@
                         <constraint firstAttribute="trailing" secondItem="ZyG-r7-grG" secondAttribute="trailing" id="tzx-lt-QB1"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fR4-uI-Vgc">
+                    <rect key="frame" x="0.0" y="154" width="320" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMY-ZE-BTg">
+                            <rect key="frame" x="15" y="16" width="42" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TuW-Gu-nfb">
+                            <rect key="frame" x="65" y="16.5" width="88" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="rTU-Px-v7k"/>
+                            </connections>
+                        </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEx-Ec-1oy">
+                            <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="WUr-To-NMr"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="PEx-Ec-1oy" secondAttribute="trailing" id="3eE-FZ-1o4"/>
+                        <constraint firstItem="PEx-Ec-1oy" firstAttribute="leading" secondItem="fR4-uI-Vgc" secondAttribute="leading" id="EFM-ry-dDK"/>
+                        <constraint firstAttribute="bottom" secondItem="PEx-Ec-1oy" secondAttribute="bottom" id="Ica-WV-X70"/>
+                        <constraint firstAttribute="height" constant="50" id="Jgz-R8-E2e"/>
+                        <constraint firstItem="TuW-Gu-nfb" firstAttribute="centerY" secondItem="ZMY-ZE-BTg" secondAttribute="centerY" id="WXC-Tw-AOM"/>
+                        <constraint firstItem="ZMY-ZE-BTg" firstAttribute="leading" secondItem="fR4-uI-Vgc" secondAttribute="leading" constant="15" id="a6O-CD-vJB"/>
+                        <constraint firstItem="TuW-Gu-nfb" firstAttribute="leading" secondItem="ZMY-ZE-BTg" secondAttribute="trailing" constant="8" id="afY-7H-esS"/>
+                        <constraint firstItem="ZMY-ZE-BTg" firstAttribute="centerY" secondItem="fR4-uI-Vgc" secondAttribute="centerY" id="rc7-wg-tIg"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKA-m3-8ul">
-                    <rect key="frame" x="0.0" y="154" width="320" height="21"/>
+                    <rect key="frame" x="0.0" y="204" width="320" height="21"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="历史充值" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYq-Ds-zig">
                             <rect key="frame" x="15" y="0.0" width="305" height="21"/>
@@ -145,7 +183,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="rt0-yo-mTz">
-                    <rect key="frame" x="0.0" y="175" width="320" height="393"/>
+                    <rect key="frame" x="0.0" y="225" width="320" height="343"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="A16-ga-eh3"/>
@@ -156,8 +194,10 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="EKA-m3-8ul" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Yf-uf-YKF"/>
-                <constraint firstItem="EKA-m3-8ul" firstAttribute="top" secondItem="Fnh-MJ-5oj" secondAttribute="bottom" id="DAA-BO-dJv"/>
+                <constraint firstAttribute="trailing" secondItem="fR4-uI-Vgc" secondAttribute="trailing" id="Gs2-zD-kbC"/>
                 <constraint firstItem="Fnh-MJ-5oj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IKi-h8-Bps"/>
+                <constraint firstItem="fR4-uI-Vgc" firstAttribute="top" secondItem="Fnh-MJ-5oj" secondAttribute="bottom" id="JbQ-fm-KIQ"/>
+                <constraint firstItem="EKA-m3-8ul" firstAttribute="top" secondItem="fR4-uI-Vgc" secondAttribute="bottom" id="ODB-nt-csc"/>
                 <constraint firstItem="tKn-Zv-Avd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Sb6-2P-QSi"/>
                 <constraint firstAttribute="trailing" secondItem="tKn-Zv-Avd" secondAttribute="trailing" id="WF6-vN-bxG"/>
                 <constraint firstItem="Fnh-MJ-5oj" firstAttribute="top" secondItem="tKn-Zv-Avd" secondAttribute="bottom" id="Yik-oH-dmU"/>
@@ -167,9 +207,10 @@
                 <constraint firstItem="rt0-yo-mTz" firstAttribute="top" secondItem="EKA-m3-8ul" secondAttribute="bottom" id="lFb-uo-ONL"/>
                 <constraint firstItem="rt0-yo-mTz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oOO-sc-imQ"/>
                 <constraint firstAttribute="trailing" secondItem="EKA-m3-8ul" secondAttribute="trailing" id="ora-dJ-ltc"/>
+                <constraint firstItem="fR4-uI-Vgc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sNd-BL-op2"/>
                 <constraint firstAttribute="trailing" secondItem="Fnh-MJ-5oj" secondAttribute="trailing" id="ziv-Lg-T3U"/>
             </constraints>
-            <point key="canvasLocation" x="318" y="105"/>
+            <point key="canvasLocation" x="176" y="50"/>
         </view>
     </objects>
 </document>

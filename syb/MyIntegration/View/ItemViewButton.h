@@ -11,4 +11,5 @@
 @interface ItemViewButton : UIView
 @property (nonatomic,assign)BOOL isSelected;
 @property (strong,nonatomic) InteralGoodsModel *goods;
+@property (weak, nonatomic) IBOutlet UILabel *money;
 @end
