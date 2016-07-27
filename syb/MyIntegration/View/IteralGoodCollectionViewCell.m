@@ -29,6 +29,5 @@
 {
     [super setSelected:selected];
     self.itemView.isSelected = selected;
-    self.itemView.money.textColor = HexRGBAlpha(0xf1f1f1,1);
 }
 @end

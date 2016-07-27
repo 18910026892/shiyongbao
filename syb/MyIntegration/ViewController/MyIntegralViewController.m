@@ -128,7 +128,11 @@
     /*********用户头像**********/
     self.userIV.cornerRadius = self.userIV.height/2;
     [self.userIV sd_setImageWithURL:[NSURL URLWithString:user.imageURL] placeholderImage:[UIImage imageNamed:@"touxiang"]];
-    self.userName.text = user.userName;
+    NSString *nickName = user.nickName;
+    if (!nickName.length) {
+        nickName = user.userName;
+    }
+    self.userName.text = nickName;
     
     [self.lineHeights setValue:@0.5 forKey:@"constant"];
     [self.contentView sizeToFit];
