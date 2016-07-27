@@ -7,7 +7,18 @@
 //
 
 #import "goodsAttentionViewController.h"
+#import "LoginViewController.h"
 
+#import <ALBBTradeSDK/ALBBTradeService.h>
+#import <ALBBTradeSDK/ALBBCartService.h>
+@interface goodsAttentionViewController ()
+@property(nonatomic, strong) id<ALBBTradeService> tradeService;
+@property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
+@property(nonatomic, strong) tradeProcessFailedCallback tradeProcessFailedCallback;
+@property(nonatomic, strong) addCartCacelledCallback addCartCacelledCallback;
+@property(nonatomic, strong) addCartSuccessCallback addCartSuccessCallback;
+
+@end
 @implementation goodsAttentionViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -15,6 +26,8 @@
     
     [self setupDatas];
     [self setupViews];
+    
+      _tradeService = [[ALBBSDK  sharedInstance]getService:@protocol(ALBBTradeService)];
    
 }
 
@@ -268,4 +281,55 @@
     
     
 }
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(!userSession)
+    {
+        userSession = [SybSession sharedSession];
+    }
+    
+    
+    
+    if (userSession.isLogin) {
+        
+        goodsAttentionModel * goodsModel = _goodListArray[indexPath.section];
+        
+        TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+        //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+        
+        ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+        taoKeParams.pid= goodsModel.goods_id;
+        
+        
+        NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
+        
+        NSLog(@"用户ID参数是 %@ ",customDict);
+        
+        ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:customDict];
+        
+        
+        //params 指定isv code等。
+        [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        
+    }else if(!userSession.isLogin)
+    {
+        LoginViewController * loginVC = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
+}
+
+-(TaeWebViewUISettings *)getWebViewSetting{
+    
+    TaeWebViewUISettings *settings = [[TaeWebViewUISettings alloc] init];
+    settings.titleColor = [UIColor blueColor];
+    settings.tintColor = [UIColor redColor];
+    settings.barTintColor = kNavBackGround;
+    
+    return settings;
+}
+
+
 @end

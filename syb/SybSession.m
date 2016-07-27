@@ -76,6 +76,8 @@ static NSString *const kSessionuserdesc        = @"kSessionuserdesc";
 {
     if(self && [userInfo isKindOfClass:[NSDictionary class]]) {
    
+        
+        
         [UserDefaultsUtils saveValue:[userInfo valueForKey:@"user_id"] forKey:kSessionuserID];
         
         [UserDefaultsUtils saveValue:[userInfo valueForKey:@"user_name"] forKey:kSessionuserName];

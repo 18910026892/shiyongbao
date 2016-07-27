@@ -9,6 +9,7 @@
 #import "SybWebViewController.h"
 #import <ALBBTradeSDK/ALBBTradeService.h>
 #import <ALBBTradeSDK/ALBBCartService.h>
+#import "LoginViewController.h"
 @interface SybWebViewController ()
 @property(nonatomic, strong) id<ALBBTradeService> tradeService;
 @property(nonatomic, strong) tradeProcessSuccessCallback tradeProcessSuccessCallback;
@@ -152,33 +153,60 @@
 #pragma WebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    
+    
+    
     //判断是否是单击
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
     {
         NSURL *url = [request URL];
+    
         
         NSString * urlString = [NSString stringWithFormat:@"%@",url];
         
         NSString*goods_id  = [urlString substringFromIndex:28];
         
-        
-        TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
-        //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
-        
-        ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
-        taoKeParams.pid= goods_id;
-        
-        ALBBTradePage *page=[ALBBTradePage itemDetailPage:goods_id params:nil];
-        //params 指定isv code等。
-        [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        NSLog(@"%@ 商品ID是 %@ ",urlString, goods_id);
         
         
-        
-        if([[UIApplication sharedApplication]canOpenURL:url])
+        if(!userSession)
         {
-            [[UIApplication sharedApplication]openURL:url];
+            userSession = [SybSession sharedSession];
         }
-        return NO;
+        
+        
+        
+        if (userSession.isLogin) {
+            
+            
+            TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+            //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+            
+            ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+            taoKeParams.pid= goods_id;
+            
+            
+            NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
+            
+            NSLog(@"用户ID参数是 %@ ",customDict);
+            
+            ALBBTradePage *page=[ALBBTradePage itemDetailPage:goods_id params:customDict];
+            
+            
+            //params 指定isv code等。
+            [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+            
+        }else if(!userSession.isLogin)
+        {
+            LoginViewController * loginVC = [[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }
+
+        
+        
+        
+
+       
     }
     return YES;
 }

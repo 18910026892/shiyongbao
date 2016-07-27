@@ -374,9 +374,9 @@
     
 
     ClassifyCollectionModel * classifyCollectionModel = _collectionListArray[indexPath.item];
-    ProductGoodsViewCotroller * goodsVC = [[ProductGoodsViewCotroller alloc]init];
+    ProductGoodsViewCotroller * goodsVC = [ProductGoodsViewCotroller viewController];
     goodsVC.cat_id = classifyCollectionModel.cat_id;
-    goodsVC.title = classifyCollectionModel.cat_name;
+    goodsVC.navTitle = classifyCollectionModel.cat_name;
     [self.navigationController pushViewController:goodsVC animated:YES];
 }
 

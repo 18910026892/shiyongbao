@@ -39,12 +39,32 @@
     [super viewWillAppear:animated];
     
     [self setTabBarHide:YES];
+    
 }
 
 -(void)setupViews
 {
+
+    [self.Customview addSubview:self.navTitleLabel];
+    
+    _navTitleLabel.text = _navTitle;
+
     
     [self.view addSubview:self.TableView];
+}
+
+-(UILabel*)navTitleLabel
+{
+    if (!_navTitleLabel) {
+        _navTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kMainScreenWidth/4, 10*Proportion,kMainScreenWidth/2, 50*Proportion)];
+        _navTitleLabel.textColor = [UIColor blackColor];
+        _navTitleLabel.textAlignment = NSTextAlignmentCenter;
+        _navTitleLabel.font = [UIFont boldSystemFontOfSize:18];
+        _navTitleLabel.adjustsFontSizeToFitWidth =YES;
+        _navTitleLabel.minimumScaleFactor = 0.5;
+    
+    }
+    return _navTitleLabel;
 }
 
 #pragma mark - ********************** Functions **********************
@@ -242,6 +262,16 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    if(!userSession)
+    {
+        userSession = [SybSession sharedSession];
+    }
+    
+    
+    
+    if (userSession.isLogin) {
+    
+    
     ProductGoodsModel * goodsModel = _goodListArray[indexPath.section];
     
     TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
@@ -249,10 +279,24 @@
     
     ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
     taoKeParams.pid= goodsModel.goods_id;
-    
-    ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:nil];
+
+        
+    NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
+      
+    NSLog(@"用户ID参数是 %@ ",customDict);
+        
+    ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:customDict];
+        
+        
     //params 指定isv code等。
     [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+        
+    }else if(!userSession.isLogin)
+    {
+        LoginViewController * loginVC = [[LoginViewController alloc]init];
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
+
 }
 
 -(TaeWebViewUISettings *)getWebViewSetting{
@@ -280,7 +324,7 @@
         
         if(!userSession)
         {
-            userSession = [SingleManage shareManage];
+            userSession = [SybSession sharedSession];
         }
         
         
