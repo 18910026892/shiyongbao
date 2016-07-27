@@ -7,11 +7,13 @@
 //
 
 #import "BaseViewController.h"
-#import "GoodsViewController.h"
 #import "CCAdsPlayView.h"
 #import "ProductGoodsModel.h"
 #import "ProductGoodsCell.h"
 #import "SybSession.h"
+
+#import "brandModel.h"
+#import "BrandCell.h"
 @interface HomePageViewController : BaseViewController<ProductGoodsCellDelegate>
 {
     SybSession * userSession;

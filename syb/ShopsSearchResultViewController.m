@@ -275,7 +275,7 @@
   
     shopGoodsViewController * shopGoodsVc = [shopGoodsViewController viewController];
     shopGoodsVc.shop_id = shopModel.shop_id;
-        
+     shopGoodsVc.shop_name = shopModel.shop_name;   
     [self.navigationController pushViewController:shopGoodsVc animated:YES];
 
     

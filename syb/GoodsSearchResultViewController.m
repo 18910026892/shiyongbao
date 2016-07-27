@@ -233,7 +233,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    return 100;
+    return 102*Proportion;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 {
@@ -263,11 +263,6 @@
         cell = [[GoodsSearchTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         cell.delegate = self;
         
-    }else{
-        
-        while ([cell.contentView.subviews lastObject] != nil) {
-            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];
-        }
     }
     cell.goodsModel = goodsModel;
     return cell;

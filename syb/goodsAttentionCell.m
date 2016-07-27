@@ -47,13 +47,19 @@
     
     self.goodsNameLabel.text = goodsModel.goods_name;
     
-    NSString * price = [NSString stringWithFormat:@"￥%@",goodsModel.goods_price];
+    float price = [goodsModel.goods_price floatValue];
     
-    self.priceLabel.text = price;
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f" , price];
     
-    self.integralLabel.text = [NSString stringWithFormat:@" 积分:%@ " ,goodsModel.revert_point];
+    
+    float intergral = [goodsModel.revert_point floatValue];
+    
+    self.integralLabel.text = [NSString stringWithFormat:@" 积分:%.2f " ,intergral];
+    
     
     [self.integralLabel sizeToFit];
+    
+
     
     self.shopNameLabel.text = goodsModel.store_name;
     
@@ -67,7 +73,7 @@
 {
     if (!_goodsImageView) {
         _goodsImageView = [[UIImageView alloc]init];
-        _goodsImageView.frame= CGRectMake(5, 5, 90, 90);
+        _goodsImageView.frame= CGRectMake(6*Proportion, 6*Proportion, 90*Proportion, 90*Proportion);
         
     }
     return _goodsImageView;
@@ -77,7 +83,7 @@
 {
     if(!_goodsNameLabel)
     {
-        _goodsNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 10, SCREEN_WIDTH-110, 40)];
+        _goodsNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(110*Proportion, 10, SCREEN_WIDTH-120*Proportion, 40)];
         _goodsNameLabel.textColor = [UIColor blackColor];
         _goodsNameLabel.font = [UIFont systemFontOfSize:15.0];
         _goodsNameLabel.textAlignment = NSTextAlignmentLeft;
@@ -91,7 +97,7 @@
 -(UILabel*)priceLabel
 {
     if (!_priceLabel) {
-        _priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 50, 70, 20)];
+        _priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(110*Proportion, 50*Proportion, 70, 20)];
         _priceLabel.textColor = HexRGBAlpha(0xf02f70, 1);
         _priceLabel.font = [UIFont systemFontOfSize:15.0];
         _priceLabel.textAlignment = NSTextAlignmentLeft;
@@ -103,8 +109,10 @@
 -(UILabel*)integralLabel
 {
     if (!_integralLabel) {
-        _integralLabel = [UILabel labelWithFrame:CGRectMake(180,50, 70, 20) text:@"" textColor:[UIColor whiteColor] font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:HexRGBAlpha(0x6766ff, 1) alignment:NSTextAlignmentLeft];
-         _integralLabel.layer.cornerRadius = 2;
+        _integralLabel = [UILabel labelWithFrame:CGRectMake(180*Proportion,50*Proportion, 70, 20) text:@"" textColor:[UIColor whiteColor] font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:HexRGBAlpha(0x6766ff, 1) alignment:NSTextAlignmentLeft];
+        _integralLabel.layer.cornerRadius = 2;
+        _integralLabel.layer.masksToBounds = YES;
+        
     }
     return _integralLabel;
     
@@ -115,10 +123,10 @@
 -(UILabel*)shopNameLabel
 {
     if (!_shopNameLabel) {
-        _shopNameLabel = [UILabel labelWithFrame:CGRectMake(110,
-                                                            70,
-                                                            kMainScreenWidth-150,
-                                                            20) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
+        _shopNameLabel = [UILabel labelWithFrame:CGRectMake(110*Proportion,
+                                                            80*Proportion,
+                                                            kMainScreenWidth-150*Proportion,
+                                                            20) text:@"" textColor:HexRGBAlpha(0x444444, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
     }
     return _shopNameLabel;
 }
@@ -127,10 +135,10 @@
 {
     if (!_attentionButton) {
         _attentionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _attentionButton.frame = CGRectMake(SCREEN_WIDTH-70,40, 60, 30);
+        _attentionButton.frame = CGRectMake(SCREEN_WIDTH-70,45*Proportion, 60, 30);
         _attentionButton.layer.borderWidth = .5;
         _attentionButton.layer.borderColor = RGBACOLOR(200, 200, 200, 1).CGColor;
-        _attentionButton.layer.cornerRadius = 7.5;
+        _attentionButton.layer.cornerRadius = 6;
         _attentionButton.backgroundColor = [UIColor whiteColor];
         
         NSString * buttonTitle = @"取消关注";
@@ -150,7 +158,7 @@
 -(UILabel*)platformLabel
 {
     if (!_platformLabel) {
-        _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,75, 60, 15) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
+        _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,80*Proportion, 60, 15) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
     }
     return _platformLabel;
 }

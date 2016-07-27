@@ -14,4 +14,6 @@
 
 @property (nonatomic,strong)UIImageView * cellImage;
 
+@property (nonatomic,strong)UIView * grayView;
+
 @end

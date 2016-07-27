@@ -34,7 +34,7 @@
 {
     NSTimeInterval timeInterval = self.data.adjust_date.doubleValue;
     self.date.text = [self getDateByTimeInterval:timeInterval];
-    self.orderNumber.text = self.data.rel_order_id;
+    self.orderNumber.text = self.data.rel_order_title;
     self.integral.text = [NSString stringWithFormat:@"%@积分",self.data.point_num];
 }
 - (NSString *)getDateByTimeInterval:(NSTimeInterval)stamp

@@ -18,7 +18,7 @@
         
         [self.contentView addSubview:self.cellImage];
         
-        
+        [self.contentView addSubview:self.grayView];
     }
     
     return self;
@@ -35,7 +35,15 @@
     return _cellImage;
 }
 
-
+-(UIView*)grayView
+{
+    if (!_grayView) {
+        _grayView = [[UIView alloc]init];
+        _grayView.frame = CGRectMake(0,102*Proportion,kMainScreenWidth,6);
+        _grayView.backgroundColor= kDefaultBackgroundColor;
+    }
+    return _grayView;
+}
 -(void)setModel:(brandModel *)model
 {
     _model = model;

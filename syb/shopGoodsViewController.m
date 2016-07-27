@@ -41,7 +41,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
+    [self setNavTitle:_shop_name];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

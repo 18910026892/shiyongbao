@@ -43,6 +43,7 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [self setNavTitle:_group_name];
     
 }
 

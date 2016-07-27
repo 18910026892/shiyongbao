@@ -57,7 +57,10 @@
 -(UILabel*)goodsintegral
 {
     if (!_goodsintegral) {
-        _goodsintegral = [UILabel labelWithFrame:CGRectMake(210,60, 80, 20) text:@"" textColor:[UIColor whiteColor] font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor purpleColor] alignment:NSTextAlignmentLeft];
+        _goodsintegral = [UILabel labelWithFrame:CGRectMake(210,60, 80, 20) text:@"" textColor:[UIColor whiteColor] font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:HexRGBAlpha(0x6766ff, 1) alignment:NSTextAlignmentLeft];
+        
+        _goodsintegral.layer.cornerRadius = 2;
+        _goodsintegral.layer.masksToBounds = YES;
         
     }
     
@@ -76,13 +79,20 @@
     
     self.goodsName.text = orderItem.auction_title;
     
-    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@" , orderItem.real_pay];
     
-    self.goodsintegral.text = [NSString stringWithFormat:@" 积分:%@ " ,orderItem.obtain_point];
+    
+    float price = [orderItem.real_pay floatValue];
+ 
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%.2f" , price];
+    
+    
+    float intergral = [orderItem.obtain_point floatValue];
+    
+    self.goodsintegral.text = [NSString stringWithFormat:@" 积分:%.2f " ,intergral];
     
     [self.goodsintegral sizeToFit];
     
-    self.goodsintegral.layer.cornerRadius = 3;
+  
 }
 
 @end

@@ -62,11 +62,11 @@
 -(void)initTFView
 {
     //账号图标
-    userNameImg = [[UIImageView alloc]initWithFrame:CGRectMake(20,10, 14.5, 17)];
+    userNameImg = [[UIImageView alloc]initWithFrame:CGRectMake(20,17, 14.5, 17)];
     userNameImg.image = [UIImage imageNamed:@"username"];
     
     //账号输入视图
-    userNameTF = [[CustomTextField alloc]initWithFrame:CGRectMake(80, 10, SCREEN_WIDTH-100,20)];
+    userNameTF = [[CustomTextField alloc]initWithFrame:CGRectMake(80, 15, SCREEN_WIDTH-100,20)];
     userNameTF.placeholder = @"请输入手机号";
     userNameTF.clearButtonMode = UITextFieldViewModeWhileEditing;
     userNameTF.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -77,11 +77,11 @@
     userNameTF.textColor = [UIColor blackColor];
     
     //密码图标
-    passWordImg = [[UIImageView alloc]initWithFrame:CGRectMake(20, 47, 14.5, 17)];
+    passWordImg = [[UIImageView alloc]initWithFrame:CGRectMake(20, 65, 14.5, 17)];
     passWordImg.image = [UIImage imageNamed:@"password"];
     
     //密码输入视图
-    passWordTF = [[CustomTextField alloc]initWithFrame:CGRectMake(80, 47, SCREEN_WIDTH-100,20)];
+    passWordTF = [[CustomTextField alloc]initWithFrame:CGRectMake(80, 65, SCREEN_WIDTH-100,20)];
     passWordTF.placeholder = @"请输入密码";
     passWordTF.clearButtonMode = UITextFieldViewModeWhileEditing;
     passWordTF.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -92,12 +92,12 @@
     passWordTF.textColor = [UIColor blackColor];
     passWordTF.secureTextEntry = YES;
     
-    line = [[UILabel alloc]initWithFrame:CGRectMake(60, 38, SCREEN_WIDTH-80, 1)];
+    line = [[UILabel alloc]initWithFrame:CGRectMake(60, 50, SCREEN_WIDTH-80, 1)];
     line.backgroundColor = RGBACOLOR(215, 215, 215, 1);
     
     
     //输入区域父视图
-    TFView = [[UIView alloc]initWithFrame:CGRectMake(-1,84, SCREEN_WIDTH+2, 75)];
+    TFView = [[UIView alloc]initWithFrame:CGRectMake(-1,84, SCREEN_WIDTH+2, 100)];
     TFView.backgroundColor = [UIColor whiteColor];
     TFView.layer.borderWidth = 0.5;
     TFView.layer.borderColor = RGBACOLOR(210, 210, 210, 1).CGColor;
@@ -197,6 +197,7 @@
      
              
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:userDict];
+                
                 NSInteger index = [[self.navigationController viewControllers] indexOfObject:self];
                 [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:index-1] animated:YES];
                 

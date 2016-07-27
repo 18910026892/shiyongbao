@@ -14,7 +14,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        [self.contentView addSubview:self.orderFrom];
+       // [self.contentView addSubview:self.orderFrom];
         [self.contentView addSubview:self.orderStore];
         [self.contentView addSubview:self.orderStatus];
         [self.contentView addSubview:self.orderDate];
@@ -45,9 +45,9 @@
 -(UILabel*)orderStore
 {
     if (!_orderStore) {
-        _orderStore = [UILabel labelWithFrame:CGRectMake(90,
+        _orderStore = [UILabel labelWithFrame:CGRectMake(10,
                                                         0,
-                                                        kMainScreenWidth-250,
+                                                        kMainScreenWidth-170,
                                                         44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
 
         
@@ -98,6 +98,7 @@
                                                          [self.orderModel.order_items count]*100+44,
                                                          100,
                                                          44) text:@"" textColor:HexRGBAlpha(0x000000, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
+       
         
     }
     return _orderIntegral;
@@ -210,8 +211,13 @@
                                        [self.orderModel.order_items count]*100+44,
                                        kMainScreenWidth/2-20,44);
     
-    self.orderPrice.text = [NSString stringWithFormat:@"合计￥%@" ,orderModel.order_price];
-    self.orderIntegral.text = [NSString stringWithFormat:@"合计积分：%@" ,orderModel.total_point];
+    float price = [orderModel.order_price floatValue];
+    self.orderPrice.text = [NSString stringWithFormat:@"合计￥%.2f" ,price];
+    
+    
+    float integral = [orderModel.total_point floatValue];
+    
+    self.orderIntegral.text = [NSString stringWithFormat:@"合计积分：%.2f" ,integral];
     
     
 }

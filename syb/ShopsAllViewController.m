@@ -8,6 +8,7 @@
 
 #import "ShopsAllViewController.h"
 #import "ShopsViewController.h"
+#import "SearchViewController.h"
 @implementation ShopsAllViewController
 
 -(void)viewWillAppear:(BOOL)animated
@@ -23,7 +24,9 @@
     [self setupDatas];
     
     [self setNavTitle:@"卖家汇"];
+
     
+    [self.RightBtn setFrame:CGRectMake(kMainScreenWidth - 55, 20,44, 44)];
     UIImage * searchImage= [UIImage imageNamed:@"search"];
     [self.RightBtn setBackgroundImage:searchImage forState:UIControlStateNormal];
     [self.RightBtn addTarget:self action:@selector(gotoSearch:) forControlEvents:UIControlEventTouchUpInside];
@@ -32,7 +35,15 @@
 
 -(void)gotoSearch:(UIButton*)sender
 {
+      [Config currentConfig].searchType = [NSNumber numberWithInt:1];
+
+
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchTypeChange" object:nil];
+
+    SearchViewController * searchVc = [SearchViewController viewController];
+    searchVc.searchType = @"1";
     
+    [self.navigationController pushViewController:searchVc animated:YES];
 }
 -(void)setupDatas
 {

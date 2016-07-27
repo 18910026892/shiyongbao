@@ -65,7 +65,7 @@
 {
     if (!_avatarImageView) {
         _avatarImageView = [[UIImageView alloc]init];
-        _avatarImageView.frame = CGRectMake(20, 75, 60, 60);
+        _avatarImageView.frame = CGRectMake(20, 52, 60, 60);
         _avatarImageView.userInteractionEnabled = YES;
         _avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
         _avatarImageView.layer.borderWidth = 2;
@@ -81,7 +81,7 @@
         
         // 创建 用户名称
         CGRect rect = CGRectMake(100,
-                                 90 ,
+                                 67 ,
                                  kMainScreenWidth/2,
                                  30);
         

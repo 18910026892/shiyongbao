@@ -91,7 +91,7 @@
     phoneNumberLabel.textColor = [UIColor grayColor];
     [self.view addSubview:phoneNumberLabel];
     
-    verficationCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 60, 20)];
+    verficationCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 15, 60, 20)];
     verficationCodeLabel.text = @"验证码";
     verficationCodeLabel.textAlignment = NSTextAlignmentLeft;
     verficationCodeLabel.font = [UIFont systemFontOfSize:14.0];
@@ -102,7 +102,7 @@
     
     
     
-    tf = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(verficationCodeLabel)+10, 10, SCREEN_WIDTH-120,20)];
+    tf = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(verficationCodeLabel)+10, 15, SCREEN_WIDTH-120,20)];
     tf.placeholder = @"6位验证码";
     tf.clearButtonMode = UITextFieldViewModeWhileEditing;
     tf.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -112,13 +112,13 @@
     tf.textColor = [UIColor blackColor];
     tf.text = [NSString stringWithFormat:@"%@",_testcode];
     
-    password = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, 60, 20)];
+    password = [[UILabel alloc]initWithFrame:CGRectMake(20, 65, 60, 20)];
     password.text = @"密码";
     password.textAlignment = NSTextAlignmentLeft;
     password.font = [UIFont systemFontOfSize:14.0];
     password.textColor = [UIColor blackColor];
     
-    Tf = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(verficationCodeLabel)+10, 50, SCREEN_WIDTH-120,20)];
+    Tf = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(verficationCodeLabel)+10, 65, SCREEN_WIDTH-120,20)];
     Tf.placeholder = @"6-16位数字和字母";
     Tf.clearButtonMode = UITextFieldViewModeWhileEditing;
     Tf.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -128,23 +128,23 @@
     Tf.textColor = [UIColor blackColor];
     Tf.secureTextEntry = YES;
     
-    line = [[UILabel alloc]initWithFrame:CGRectMake(80, 38, SCREEN_WIDTH-100, 1)];
+    line = [[UILabel alloc]initWithFrame:CGRectMake(80, 50, SCREEN_WIDTH-100, 1)];
     line.backgroundColor = RGBACOLOR(215, 215, 215, 1);
     
     
     
     
-    invitationCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 90, 60, 20)];
+    invitationCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 115, 60, 20)];
     invitationCodeLabel.text = @"邀请码";
     invitationCodeLabel.textAlignment = NSTextAlignmentLeft;
     invitationCodeLabel.font = [UIFont systemFontOfSize:14.0];
     invitationCodeLabel.textColor = [UIColor blackColor];
     
-    line1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 78, SCREEN_WIDTH-100, 1)];
+    line1 = [[UILabel alloc]initWithFrame:CGRectMake(80, 100, SCREEN_WIDTH-100, 1)];
     line1.backgroundColor = RGBACOLOR(215, 215, 215, 1);
     
     
-    TF = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(invitationCodeLabel)+10, 90, SCREEN_WIDTH-120,20)];
+    TF = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(invitationCodeLabel)+10, 115, SCREEN_WIDTH-120,20)];
     TF.placeholder = @"选填";
     TF.clearButtonMode = UITextFieldViewModeWhileEditing;
     TF.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -156,7 +156,7 @@
     
     
     TFView = [[UIView alloc]init];
-    TFView.frame = CGRectMake(-1, 104, SCREEN_WIDTH+2, 120);
+    TFView.frame = CGRectMake(-1, 104, SCREEN_WIDTH+2, 150);
     TFView.backgroundColor = [UIColor whiteColor];
     TFView.layer.borderColor = RGBACOLOR(210, 210, 210, 1).CGColor;
     TFView.layer.borderWidth = 1;

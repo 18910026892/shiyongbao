@@ -41,7 +41,7 @@
     _AttentionButton.frame = CGRectMake(SCREEN_WIDTH-140,15, 60, 30);
     _AttentionButton.layer.borderWidth = .5;
     _AttentionButton.layer.borderColor = RGBACOLOR(200, 200, 200, 1).CGColor;
-    _AttentionButton.layer.cornerRadius = 7.5;
+    _AttentionButton.layer.cornerRadius = 6;
     _AttentionButton.backgroundColor = [UIColor whiteColor];
     
     NSString * buttonTitle;
@@ -63,6 +63,20 @@
     [_AttentionButton setTitleColor:ThemeColor forState:UIControlStateNormal];
     _AttentionButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [_AttentionButton addTarget:self action:@selector(attentionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _AttentionCount = [[UILabel alloc]init];
+    _AttentionCount.frame = CGRectMake(60,30, SCREEN_WIDTH/2-60, 20);
+    NSString  * userCount = ShopsSearchModel.atte_count;
+    if ([userCount integerValue] > 10000) {
+        userCount = [NSString stringWithFormat:@"共%.1ld万人关注",[userCount integerValue]/10000];
+    }else{
+        userCount = [NSString stringWithFormat:@"共%.0ld人关注",(long)[userCount integerValue]];
+    }
+    _AttentionCount.text = userCount;
+    _AttentionCount.textColor = HexRGBAlpha(0x444444, 1);
+    _AttentionCount.textAlignment = NSTextAlignmentLeft;
+    _AttentionCount.font = [UIFont systemFontOfSize:12];
+    _AttentionCount.tag = 9999;
     
   
     //中间那根线
