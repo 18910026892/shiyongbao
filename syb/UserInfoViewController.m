@@ -9,6 +9,24 @@
 #import "UserInfoViewController.h"
 #import "GeneralTextFiledViewController.h"
 #import "IntroductionViewController.h"
+
+static NSString *const kSessionuserID          = @"kSessionuserID";
+static NSString *const kSessionuserName        = @"kSessionuserName";
+static NSString *const kSessionimageURL        = @"kSessionimageURL";
+static NSString *const kSessionnickName        = @"kSessionnickName";
+static NSString *const kSessionuserSex         = @"kSessionuserSex";
+static NSString *const kSessionuserToken       = @"kSessionuserToken";
+static NSString *const kSessionbabyName        = @"kSessionbabyName";
+static NSString *const kSessionbabySex         = @"kSessionbabySex";
+static NSString *const kSessionbabyBirthday    = @"kSessionbabyBirthday";
+static NSString *const kSessionbirthday        = @"kSessionbirthday";
+static NSString *const kSessioncode            = @"kSessioncode";
+static NSString *const kSessionpassWord        = @"kSessionpassWord";
+static NSString *const kSessionuserMoney       = @"kSessionuserMoney";
+static NSString *const kSessionuserdesc        = @"kSessionuserdesc";
+
+
+
 @implementation UserInfoViewController
 - (id)init
 {
@@ -93,6 +111,10 @@
             }
             NSMutableDictionary * userDict = [response valueForKey:@"result"];
             
+            
+            NSLog(@" %@ ",userDict);
+            
+            
             [self saveUserInfo:userDict];
                 
             [[NSNotificationCenter defaultCenter]postNotificationName:@"userLogin" object:userDict];
@@ -120,32 +142,32 @@
 {
     NSLog(@"……………………^_^ %@",dict);
     
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_name"] forKey:@"user_name"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_photo"] forKey:@"user_photo"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"nickname"] forKey:@"nickname"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"birthday"] forKey:@"birthday"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"sex"] forKey:@"sex"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"app_money"] forKey:@"user_money"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_desc"] forKey:@"user_desc"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_name"] forKey:@"baby_name"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_sex"] forKey:@"baby_sex"];
-    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_birthday"] forKey:@"baby_birthday"];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_name"] forKey:kSessionuserID];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_photo"] forKey:kSessionimageURL];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"nickname"] forKey:kSessionnickName];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"birthday"] forKey:kSessionbirthday];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"sex"] forKey:kSessionuserSex];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"app_money"] forKey:kSessionuserMoney];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"user_desc"] forKey:kSessionuserdesc];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_name"] forKey:kSessionbabyName];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_sex"] forKey:kSessionbabySex];
+    [UserDefaultsUtils saveValue:[dict valueForKey:@"baby_birthday"] forKey:kSessionbabyBirthday];
     
     
     //单例取值
     if (!userSession) {
         userSession = [SybSession sharedSession];
     }
-    userSession.userName = [UserDefaultsUtils valueWithKey:@"user_name"];
-    userSession.imageURL = [UserDefaultsUtils valueWithKey:@"user_photo"];
-    userSession.nickName  = [UserDefaultsUtils valueWithKey:@"nickname"];
-    userSession.birthday = [UserDefaultsUtils valueWithKey:@"birthday"];
-    userSession.userSex = [UserDefaultsUtils valueWithKey:@"sex"];
-    userSession.userMoney = [UserDefaultsUtils valueWithKey:@"user_money"];
-    userSession.userdesc = [UserDefaultsUtils valueWithKey:@"user_desc"];
-    userSession.babyName = [UserDefaultsUtils valueWithKey:@"baby_name"];
-    userSession.babySex = [UserDefaultsUtils valueWithKey:@"baby_sex"];
-    userSession.babyBirthday = [UserDefaultsUtils valueWithKey:@"baby_birthday"];
+    userSession.userName = [UserDefaultsUtils valueWithKey:kSessionuserName];
+    userSession.imageURL = [UserDefaultsUtils valueWithKey:kSessionimageURL];
+    userSession.nickName  = [UserDefaultsUtils valueWithKey:kSessionnickName];
+    userSession.birthday = [UserDefaultsUtils valueWithKey:kSessionbirthday];
+    userSession.userSex = [UserDefaultsUtils valueWithKey:kSessionuserSex];
+    userSession.userMoney = [UserDefaultsUtils valueWithKey:kSessionuserMoney];
+    userSession.userdesc = [UserDefaultsUtils valueWithKey:kSessionuserdesc];
+    userSession.babyName = [UserDefaultsUtils valueWithKey:kSessionbabyName];
+    userSession.babySex = [UserDefaultsUtils valueWithKey:kSessionbabySex];
+    userSession.babyBirthday = [UserDefaultsUtils valueWithKey:kSessionbabyBirthday];
     userSession.isLogin = YES;
     
 }

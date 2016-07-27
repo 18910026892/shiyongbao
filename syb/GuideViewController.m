@@ -78,7 +78,9 @@
     if (!_firstGuideImageView) {
         _firstGuideImageView = [[UIImageView alloc]init];
         _firstGuideImageView.frame = CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight);
-        _firstGuideImageView.backgroundColor = GXRandomColor;
+        _firstGuideImageView.backgroundColor = [UIColor clearColor];
+        _firstGuideImageView.image= [UIImage imageNamed:@"guide1"];
+        
     }
     return _firstGuideImageView;
 }
@@ -88,7 +90,8 @@
     if (!_secondGuideImageView) {
         _secondGuideImageView  = [[UIImageView alloc]init];
         _secondGuideImageView.frame = CGRectMake(kMainScreenWidth, 0,kMainScreenWidth, kMainScreenHeight);
-        _secondGuideImageView.backgroundColor = GXRandomColor;
+        _secondGuideImageView.backgroundColor = [UIColor clearColor];
+        _secondGuideImageView.image = [UIImage imageNamed:@"guide2"];
     }
     return _secondGuideImageView;
 }
@@ -99,7 +102,8 @@
     if (!_thirdGuideImageView) {
         _thirdGuideImageView = [[UIImageView alloc]init];
         _thirdGuideImageView.frame =CGRectMake(kMainScreenWidth*2, 0,kMainScreenWidth, kMainScreenHeight);
-        _thirdGuideImageView.backgroundColor = GXRandomColor;
+        _thirdGuideImageView.backgroundColor = [UIColor clearColor];
+        _thirdGuideImageView.image = [UIImage imageNamed:@"guide3"];
         _thirdGuideImageView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(firstpressed)];
         [_thirdGuideImageView addGestureRecognizer:tapGesture];

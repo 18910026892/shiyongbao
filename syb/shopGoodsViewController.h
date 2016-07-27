@@ -25,4 +25,7 @@
 
 @property(nonatomic,copy)NSString * page;
 @property(nonatomic,copy)NSString * shop_id;
+
+@property(nonatomic,copy)NSString * shop_name;
+
 @end

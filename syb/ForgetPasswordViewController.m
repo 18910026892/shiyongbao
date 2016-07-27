@@ -94,13 +94,13 @@
 //初始化控件群
 -(void)setLayout
 {
-    phoneNumber = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 60, 20)];
+    phoneNumber = [[UILabel alloc]initWithFrame:CGRectMake(20, 15, 60, 20)];
     phoneNumber.text = @"手机号";
     phoneNumber.textAlignment = NSTextAlignmentLeft;
     phoneNumber.font = [UIFont systemFontOfSize:14.0];
     phoneNumber.textColor = [UIColor blackColor];
     
-    tf = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(phoneNumber)+10, 10, SCREEN_WIDTH-120,20)];
+    tf = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(phoneNumber)+10, 15, SCREEN_WIDTH-120,20)];
     tf.placeholder = @"请输入手机号";
     tf.clearButtonMode = UITextFieldViewModeWhileEditing;
     tf.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -114,24 +114,24 @@
     
     TFView = [[UIView alloc]init];
     if (!_isShow) {
-        TFView.frame = CGRectMake(-1, 84, SCREEN_WIDTH+2, 40);
+        TFView.frame = CGRectMake(-1, 84, SCREEN_WIDTH+2, 50);
     }else if (_isShow)
     {
-        TFView.frame = CGRectMake(-1, 84, SCREEN_WIDTH+2, 80);
+        TFView.frame = CGRectMake(-1, 84, SCREEN_WIDTH+2, 100);
         
         //中间的线条
-        line = [[UILabel alloc]initWithFrame:CGRectMake(60, 40, SCREEN_WIDTH-80, .5)];
+        line = [[UILabel alloc]initWithFrame:CGRectMake(60, 50, SCREEN_WIDTH-80, .5)];
         line.backgroundColor = RGBACOLOR(215, 215, 215, 1);
         [TFView addSubview:line];
         
-        codeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, 60, 20)];
+        codeLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 65, 60, 20)];
         codeLabel.text = @"验证码";
         codeLabel.textAlignment = NSTextAlignmentLeft;
         codeLabel.font = [UIFont systemFontOfSize:14.0];
         codeLabel.textColor = [UIColor blackColor];
         [TFView addSubview:codeLabel];
         
-        codeTF = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(codeLabel)+10, 50, SCREEN_WIDTH-120, 20)];
+        codeTF = [[CustomTextField alloc]initWithFrame:CGRectMake(VIEW_MAXX(codeLabel)+10, 65, SCREEN_WIDTH-120, 20)];
         codeTF.textColor = [UIColor blackColor];
         codeTF.placeholder = @"请输入右侧验证码";
         codeTF.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -142,7 +142,7 @@
         
         [TFView addSubview:codeTF];
         
-        pooCode = [[PooCodeView alloc] initWithFrame:CGRectMake(WIDTH_VIEW(self.view)-80,40, 80, 40)];
+        pooCode = [[PooCodeView alloc] initWithFrame:CGRectMake(WIDTH_VIEW(self.view)-80,50, 80, 50)];
         [TFView addSubview:pooCode];
         
         

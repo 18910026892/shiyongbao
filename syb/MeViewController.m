@@ -221,7 +221,7 @@
         
         if (userSession.isLogin) {
           
-             _TableView.tableHeaderView = self.loginHeaderView;
+        
  
             self.loginHeaderView.imageUrl = userSession.imageURL;
             
@@ -232,6 +232,8 @@
                self.loginHeaderView.nickName = userSession.userName;
             }
 
+            _TableView.tableHeaderView = self.loginHeaderView;
+            
             
         }else
         {

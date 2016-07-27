@@ -27,7 +27,8 @@
     
     _CanAddRecord = YES;
     
-    _searchType = @"0";
+
+    NSLog(@" 搜索类型是  %@ ",_searchType);
     
     if([_searchType isEqualToString:@"0"])
     {
@@ -405,7 +406,7 @@
     {
          [self addRecord:_SearchBar.text];
        
-        NSLog(@" %@ " ,_searchType);
+        NSLog(@" 搜索类型是 %@ " ,_searchType);
         
         if ([_searchType isEqualToString:@"0"]) {
             

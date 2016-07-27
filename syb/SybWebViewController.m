@@ -127,8 +127,22 @@
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
 {
     [_webViewProgressView setProgress:progress animated:YES];
+  
+    
+    
+  
+    
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView;
+{
+    
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView;
+{
     self.title = [_WebView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
+    [self setNavTitle:[_WebView stringByEvaluatingJavaScriptFromString:@"document.title"]];
     
     
     //获取Html字符串
@@ -139,15 +153,6 @@
     
     
     NSLog(@" %@  %@",_htmlString,_endUrl);
-    
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView;
-{
-    
-}
-- (void)webViewDidFinishLoad:(UIWebView *)webView;
-{
     
 }
 #pragma WebView Delegate

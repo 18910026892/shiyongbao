@@ -304,7 +304,7 @@
     [cell.contentView addSubview:ClassifyImage];
     
     //标题
-    ClassifyTitle = [[UILabel alloc]initWithFrame:CGRectMake(12*Proportion, 76*Proportion, 56*Proportion, 20*Proportion)];
+    ClassifyTitle = [[UILabel alloc]initWithFrame:CGRectMake(12*Proportion, 76*Proportion, 46*Proportion, 20*Proportion)];
     ClassifyTitle.textAlignment = NSTextAlignmentCenter;
     ClassifyTitle.textColor = [UIColor blackColor];
     ClassifyTitle.font = [UIFont systemFontOfSize:12];
@@ -353,7 +353,7 @@
     
     
     NSDictionary * indexDict = _collectionSectionArray[indexPath.section];
-    NSString * titleString = [indexDict valueForKey:@"cat_name"];
+    NSString * titleString = [NSString stringWithFormat:@"   %@", [indexDict valueForKey:@"cat_name"]];
     
     
     CollectionHeader.header = titleString;

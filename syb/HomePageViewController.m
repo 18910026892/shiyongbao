@@ -275,7 +275,7 @@
 {
     if (!_logoImageView) {
         _logoImageView = [[UIImageView alloc]init];
-        _logoImageView.frame = CGRectMake(30, 35, 45, 15);
+        _logoImageView.frame = CGRectMake(15, 35, 45, 15);
         _logoImageView.image = [UIImage imageNamed:@"shiyongbaologo"];
     }
     return _logoImageView;
@@ -285,8 +285,9 @@
 {
     if (!_searchButton) {
         _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _searchButton.frame = CGRectMake(kMainScreenWidth/2-67.5, 30, 175, 25);
+        _searchButton.frame = CGRectMake(kMainScreenWidth/2-102.5, 30, 225, 25);
         [_searchButton setImage:[UIImage imageNamed:@"searchButton"] forState:UIControlStateNormal];
+   
         [_searchButton addTarget:self action:@selector(searchButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _searchButton;
@@ -310,7 +311,15 @@
 -(void)searchButtonClick:(UIButton*)sender
 
 {
-    [self.navigationController pushViewController:[SearchViewController viewController] animated:YES];
+    [Config currentConfig].searchType = [NSNumber numberWithInt:0];
+    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchTypeChange" object:nil];
+    
+    SearchViewController * searchVc = [SearchViewController viewController];
+    searchVc.searchType = @"0";
+    
+    [self.navigationController pushViewController:searchVc animated:YES];
 }
 
 
@@ -484,27 +493,31 @@
         
         NSInteger index = indexPath.row- self.brandArray.count;
         
-        ProductGoodsModel * goodsModel = self.goodsList[index];
-        
-        goodsModel.tag = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        
-        
-        static NSString * goodsTableViewCell = @"ProductGoodsCell";
-        
-        ProductGoodsCell * goodscell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCell];
-        
-        if (!goodscell) {
+        if ([self.goodsList count]>0) {
             
-            goodscell = [[ProductGoodsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goodsTableViewCell];
+            ProductGoodsModel * goodsModel = self.goodsList[index];
             
-            goodscell.delegate = self;
+            goodsModel.tag = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
             
+            
+            static NSString * goodsTableViewCell = @"ProductGoodsCell";
+            
+            ProductGoodsCell * goodscell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCell];
+            
+            if (!goodscell) {
+                
+                goodscell = [[ProductGoodsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:goodsTableViewCell];
+                
+                goodscell.delegate = self;
+                
+            }
+            
+            goodscell.goodsModel = goodsModel;
+            
+            
+            return goodscell;
         }
-        
-        goodscell.goodsModel = goodsModel;
-        
-        
-        return goodscell;
+     
     }
     
     return nil;
@@ -524,9 +537,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row<self.brandArray.count) {
-        return 102*Proportion;
+        return 102*Proportion+6;
     }else{
-        return 100;
+        return 102*Proportion;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -542,7 +555,7 @@
         
         brandGoodsViewController * Vc = [brandGoodsViewController viewController];
         Vc.group_id = brandModel.group_id;
-        
+        Vc.group_name = brandModel.group_name;
         [self.navigationController pushViewController:Vc animated:YES];
         
         
@@ -550,39 +563,44 @@
       
         NSInteger index = indexPath.row- self.brandArray.count;
         
-        ProductGoodsModel * goodsModel = self.goodsList[index];
-        if(!userSession)
-        {
-            userSession = [SybSession sharedSession];
-        }
+       if ([self.goodsList count]>0) {
+            ProductGoodsModel * goodsModel = self.goodsList[index];
+            
+            
+            if(!userSession)
+            {
+                userSession = [SybSession sharedSession];
+            }
+            
+            
+            if (userSession.isLogin) {
+                
+                
+                TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
+                //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
+                
+                ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
+                taoKeParams.pid= goodsModel.goods_id;
+                
+                
+                NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
+                
+                NSLog(@"用户ID参数是 %@ ",customDict);
+                
+                ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:customDict];
+                
+                
+                //params 指定isv code等。
+                [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
+                
+            }else if(!userSession.isLogin)
+            {
+                LoginViewController * loginVC = [[LoginViewController alloc]init];
+                [self.navigationController pushViewController:loginVC animated:YES];
+            }
+      }
         
-        
-        
-        if (userSession.isLogin) {
-            
-            
-            TaeWebViewUISettings *viewSettings =[self getWebViewSetting];
-            //    NSNumber *realitemId= [[[NSNumberFormatter alloc]init] numberFromString:_tradeTestData.realItemId];
-            
-            ALBBTradeTaokeParams *taoKeParams=[[ALBBTradeTaokeParams alloc] init];
-            taoKeParams.pid= goodsModel.goods_id;
-            
-            
-            NSMutableDictionary * customDict =[[NSMutableDictionary alloc]initWithObjectsAndKeys:userSession.userID,@"isv_code",nil];
-            
-            NSLog(@"用户ID参数是 %@ ",customDict);
-            
-            ALBBTradePage *page=[ALBBTradePage itemDetailPage:goodsModel.goods_id params:customDict];
-            
-            
-            //params 指定isv code等。
-            [_tradeService  show:self.navigationController isNeedPush:NO webViewUISettings:viewSettings page:page taoKeParams:taoKeParams tradeProcessSuccessCallback:_tradeProcessSuccessCallback tradeProcessFailedCallback:_tradeProcessFailedCallback];
-            
-        }else if(!userSession.isLogin)
-        {
-            LoginViewController * loginVC = [[LoginViewController alloc]init];
-            [self.navigationController pushViewController:loginVC animated:YES];
-        }
+    
         
     }
 }
@@ -746,8 +764,8 @@
 -(void)stopLoadData
 {
     [HDHud hideHUDInView:self.view];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
+   [self.tableView.mj_header endRefreshing];
+   [self.tableView.mj_footer endRefreshing];
 }
 #pragma mark - end request
 - (void)didReceiveMemoryWarning {

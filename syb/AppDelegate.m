@@ -28,7 +28,8 @@
      [self initAliBBSDK];
      [self InitUserSession];
     
-    [self getHtml];
+      [self getHtml];
+    
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
 
     _window.backgroundColor = [UIColor whiteColor];

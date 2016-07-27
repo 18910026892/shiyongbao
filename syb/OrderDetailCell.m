@@ -16,7 +16,7 @@
         
         [self.contentView addSubview:self.orderNumber];
         [self.contentView addSubview:self.lineLabel];
-        [self.contentView addSubview:self.orderFrom];
+        //[self.contentView addSubview:self.orderFrom];
         [self.contentView addSubview:self.orderStore];
         [self.contentView addSubview:self.orderDate];
         [self.contentView addSubview:self.orderPrice];
@@ -68,9 +68,9 @@
 -(UILabel*)orderStore
 {
     if (!_orderStore) {
-        _orderStore = [UILabel labelWithFrame:CGRectMake(50,
+        _orderStore = [UILabel labelWithFrame:CGRectMake(10,
                                                          40,
-                                                         kMainScreenWidth-150,
+                                                         kMainScreenWidth-110,
                                                          44) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:16]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
         
     }
@@ -187,9 +187,9 @@
     _orderModel = orderModel;
     
     self.orderNumber.text = orderModel.order_id;
-    self.orderFrom.text = @"淘宝";
+    self.orderFrom.text = orderModel.site_name;
     self.orderStore.text = orderModel.shop_title;
-    self.orderDate.text = orderModel.create_order_time;
+    self.orderDate.text =  [TimeTool timePrToTime:orderModel.create_order_time];
     
     _tableArray = orderModel.order_items;
     
@@ -207,8 +207,17 @@
                                           [self.orderModel.order_items count]*100+84,
                                           kMainScreenWidth/2-20,44);
     
-    self.orderPrice.text = [NSString stringWithFormat:@"合计￥%@" ,orderModel.order_price];
-    self.orderIntegral.text = [NSString stringWithFormat:@"合计积分：%@" ,orderModel.total_point];
+    
+    
+    
+    float price = [orderModel.order_price floatValue];
+    
+
+    float intergral = [orderModel.total_point floatValue];
+    
+
+    self.orderPrice.text = [NSString stringWithFormat:@"合计￥%.2f" ,price];
+    self.orderIntegral.text = [NSString stringWithFormat:@"合计积分：%.2f" ,intergral];
     
     
 }

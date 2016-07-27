@@ -26,4 +26,6 @@
 @property(nonatomic,copy)NSString * page;
 @property(nonatomic,copy)NSString * group_id;
 
+@property (nonatomic,copy)NSString *  group_name;
+
 @end
