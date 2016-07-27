@@ -23,6 +23,8 @@
 
     [MobClick beginLogPageView:@"账户与安全"];
         [self setTabBarHide:YES];
+    
+    
 
 }
 -(void)viewWillDisappear:(BOOL)animated
