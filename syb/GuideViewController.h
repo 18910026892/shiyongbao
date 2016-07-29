@@ -10,6 +10,7 @@
 @protocol GuideViewControllerDelegate;
 
 @interface GuideViewController : BaseViewController
+@property(nonatomic,strong) NSTimer *timer;
 
 @property(nonatomic,weak) id<GuideViewControllerDelegate>delegate;
 @end

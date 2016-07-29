@@ -221,6 +221,17 @@
 
 #pragma mark TableView Datasorce;
 
+-(void)viewDidLayoutSubviews
+{
+    if ([self.TableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.TableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.TableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.TableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
+}
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -233,7 +244,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    return 102*Proportion;
+    return 107*Proportion;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 {

@@ -17,8 +17,10 @@
 #import <ALBBTradeSDK/ALBBCartService.h>
 #import "MyMessageViewController.h"
 #import "SybWebViewController.h"
+@interface HomePageViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,HYSegmentedControlDelegate>
 
-@interface HomePageViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+
+
 @property (strong,nonatomic) UITableView *tableView;
 @property (nonatomic,assign)int page;
 @property (nonatomic,copy)NSString *cat_id;
@@ -42,7 +44,7 @@
 
 @implementation HomePageViewController{
     UIScrollView * bigScrollView;
-    UIScrollView *smallScrollView;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -231,6 +233,9 @@
         self.goodsList = [NSMutableArray array];
         [weakSelf addParameter];
         [weakSelf requestDataWithPage:1];
+        
+        weakSelf.tableView.scrollEnabled = NO;
+        
     }];
     
     
@@ -348,6 +353,8 @@
             [_catIdArray addObject:catid];
             [_titleArray addObject:title];
         }
+        
+        self.itemArray = (NSArray*)_titleArray;
         [self initScroll];
     }
 }
@@ -362,109 +369,28 @@
     [fenlei addTarget:self action:@selector(fenleiAction) forControlEvents:UIControlEventTouchUpInside];
     [self.contentSmallSV addSubview:fenlei];
     
+  
+    _control = [[HYSegmentedControl alloc]initWithOriginY:0 Width:kMainScreenWidth-60 Titles:self.itemArray delegate:self selectIndex:0];
+     _control.backgroundColor = [UIColor whiteColor];
     
-    smallScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,SCREEN_WIDTH-60, 40)];
-    smallScrollView.backgroundColor = [UIColor whiteColor];
-    smallScrollView.bounces = YES;
-    smallScrollView.pagingEnabled = YES;
-    smallScrollView.showsHorizontalScrollIndicator = NO;
-    smallScrollView.showsVerticalScrollIndicator = NO;
-    smallScrollView.opaque = YES;
-    [self addLable];
     
-    ShopsTitle *lable = [smallScrollView.subviews firstObject];
-    lable.scale = 1.0;
-    [self.contentSmallSV addSubview:smallScrollView];
+    [self.contentSmallSV addSubview:_control];
     [self.contentSmallSV bringSubviewToFront:fenlei];
 }
-/** 添加标题栏 */
-- (void)addLable
+
+
+- (void)hySegmentedControlSelectAtIndex:(NSInteger)index;
 {
-    for (int i = 0; i < [self.categoryArray count]; i++) {
-        CGFloat lblW = 60;
-        CGFloat lblH = 40;
-        CGFloat lblY = 0;
-        CGFloat lblX = i * lblW;
-        ShopsTitle *lbl1 = [[ShopsTitle alloc]init];
-        lbl1.text = [_titleArray objectAtIndex:i];
-        NSLog(@"%@",_titleArray[i]);
-        lbl1.frame = CGRectMake(lblX, lblY, lblW, lblH);
-        lbl1.font = [UIFont fontWithName:@"HYQiHei" size:19];
-        [smallScrollView addSubview:lbl1];
-        lbl1.tag = i;
-        lbl1.userInteractionEnabled = YES;
-        
-        [lbl1 addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lblClick:)]];
-    }
-    smallScrollView.contentSize = CGSizeMake(60 * [_titleArray count]+SCREEN_WIDTH/6, 0);
+    NSLog(@" 索引的位置是  %ld",(long)index);
     
-}
-/** 标题栏label的点击事件 */
-- (void)lblClick:(UITapGestureRecognizer *)recognizer
-{
-    ShopsTitle *titlelable = (ShopsTitle *)recognizer.view;
-    CGFloat offsetX = titlelable.tag * bigScrollView.frame.size.width;
-    CGFloat offsetY = bigScrollView.contentOffset.y;
-    CGPoint offset = CGPointMake(offsetX, offsetY);
-    [bigScrollView setContentOffset:offset animated:YES];
-    _cat_id = self.catIdArray[titlelable.tag];
+    _cat_id = self.catIdArray[index];
 
-    NSUInteger index = titlelable.tag;
-    [smallScrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (idx != index) {
-            ShopsTitle *temlabel = smallScrollView.subviews[idx];
-            temlabel.scale = 0.0;
-        }else if (idx==index)
-        {
-            ShopsTitle *temlabel = smallScrollView.subviews[idx];
-            temlabel.scale = 1.0;
-        }
-    }];
-    
-    
-   [self.tableView.mj_header beginRefreshing];
-}
-#pragma mark - ******************** scrollView代理方法
-
-/** 滚动结束后调用（代码导致） */
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
-{
-    if (scrollView==smallScrollView) {
-        // 获得索引
-        NSUInteger index = scrollView.contentOffset.x /smallScrollView.frame.size.width;
-        // 滚动标题栏
-        ShopsTitle *titleLable = (ShopsTitle *)smallScrollView.subviews[index];
-        
-        CGFloat offsetx = titleLable.center.x - smallScrollView.frame.size.width * 0.5;
-        
-        CGFloat offsetMax =smallScrollView.contentSize.width -smallScrollView.frame.size.width;
-        
-        
-        
-        if (offsetx < 0) {
-            offsetx = 0;
-        }else if (offsetx > offsetMax){
-            offsetx = offsetMax;
-        }
-        
-        CGPoint offset = CGPointMake(offsetx,smallScrollView.contentOffset.y);
-        [smallScrollView setContentOffset:offset animated:YES];
-        
-
-
-        
-    }
-    
-    
+    [self.tableView.mj_header beginRefreshing];
     
     
 }
 
-/** 滚动结束（手势导致） */
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self scrollViewDidEndScrollingAnimation:scrollView];
-}
+
 
 /*********分类**********/
 - (void)fenleiAction
@@ -478,8 +404,7 @@
 {
     if (indexPath.row<self.brandArray.count) {
         static NSString * brandCell = @"brandCell";
-        
-        
+ 
         BrandCell * cell = [tableView dequeueReusableCellWithIdentifier:brandCell];
         
         if (!cell) {
@@ -489,6 +414,7 @@
         brandModel * brandModel = self.brandArray[indexPath.row];
         cell.model = brandModel;
         return cell;
+        
     }else{
         
         NSInteger index = indexPath.row- self.brandArray.count;
@@ -522,6 +448,31 @@
     
     return nil;
 }
+
+#pragma TableViewDelegate
+-(void)viewDidLayoutSubviews
+{
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.brandArray.count+self.goodsList.count;
@@ -539,7 +490,7 @@
     if (indexPath.row<self.brandArray.count) {
         return 102*Proportion+6;
     }else{
-        return 102*Proportion;
+        return 107*Proportion;
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -701,8 +652,6 @@
     
     NSDictionary * parameter = @{@"num":@"10",@"page":@(_page),@"cat_id":_cat_id};
     
-    NSLog(@"  %@ ",parameter);
-    
     
     GXHttpRequest *request = [[GXHttpRequest alloc]init];
     
@@ -712,7 +661,7 @@
         /// 加保护
         if ([response isKindOfClass:[NSDictionary class]])
         {
-            NSLog(@" %@ ",response);
+            
             
             if (Type==1) {
                 self.brandArray = [NSMutableArray array];
@@ -766,6 +715,9 @@
     [HDHud hideHUDInView:self.view];
    [self.tableView.mj_header endRefreshing];
    [self.tableView.mj_footer endRefreshing];
+    
+    
+   self.tableView.scrollEnabled = YES;
 }
 #pragma mark - end request
 - (void)didReceiveMemoryWarning {

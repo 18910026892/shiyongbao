@@ -38,6 +38,15 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
+    
+    if ([self.timer isValid]) {
+        
+        [self.timer invalidate];
+        //这行代码很关键
+        _timer=nil;
+        
+    }
+    
 }
 
 -(UIScrollView*)mainScrollView
@@ -113,6 +122,40 @@
 
 
 #pragma scrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  
+
+    float w = scrollView.contentOffset.x;
+    
+    
+    if (w==750) {
+        
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(goHomePage) userInfo:nil repeats:YES];
+    }else
+        
+    {
+        if ([self.timer isValid]) {
+            
+            [self.timer invalidate];
+            //这行代码很关键
+            _timer=nil;
+            
+        }
+    }
+    
+    
+}
+
+-(void)goHomePage
+{
+    if (_delegate) {
+        [_delegate GuideViewControllerSureBtnClicked];
+    }
+}
+
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     UIPageControl* page = (UIPageControl*)[self.view viewWithTag:100];

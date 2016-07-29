@@ -22,7 +22,7 @@
 {
     _shopsModel = shopsModel;
     
-       UIImage * image = [UIImage imageNamed:@"noimage"];
+    UIImage * image = [UIImage imageNamed:@"noimage"];
     //平台来源
     _platform = [[UIImageView alloc]initWithFrame:CGRectMake(10,10, 40,40)];
     NSString * platform = shopsModel.shop_logo;
@@ -55,6 +55,12 @@
     _AttentionCount = [[UILabel alloc]init];
     _AttentionCount.frame = CGRectMake(60,30, SCREEN_WIDTH/2-60, 20);
     NSString  * userCount = shopsModel.atte_count;
+    
+    if([userCount isEqualToString:@"0"])
+    {
+        userCount = @"共有0人关注";
+    }else
+    
     if ([userCount integerValue] > 10000) {
         userCount = [NSString stringWithFormat:@"共%.1ld万人关注",[userCount integerValue]/10000];
     }else{

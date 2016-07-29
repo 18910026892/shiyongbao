@@ -28,7 +28,7 @@
      [self initAliBBSDK];
      [self InitUserSession];
     
-      [self getHtml];
+
     
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
 

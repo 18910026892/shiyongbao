@@ -100,7 +100,7 @@
 {
     if(!_goodsNameLabel)
     {
-        _goodsNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(110*Proportion, 10, SCREEN_WIDTH-120*Proportion, 40)];
+        _goodsNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(110*Proportion, 6*Proportion, SCREEN_WIDTH-120*Proportion, 40)];
         _goodsNameLabel.textColor = [UIColor blackColor];
         _goodsNameLabel.font = [UIFont systemFontOfSize:15.0];
         _goodsNameLabel.textAlignment = NSTextAlignmentLeft;
@@ -110,11 +110,10 @@
     }
     return _goodsNameLabel;
 }
-
 -(UILabel*)priceLabel
 {
     if (!_priceLabel) {
-        _priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(110*Proportion, 50*Proportion, 70, 20)];
+        _priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(110*Proportion, 47*Proportion, kMainScreenWidth-180*Proportion, 15)];
         _priceLabel.textColor = HexRGBAlpha(0xf02f70, 1);
         _priceLabel.font = [UIFont systemFontOfSize:15.0];
         _priceLabel.textAlignment = NSTextAlignmentLeft;
@@ -126,12 +125,13 @@
 -(UILabel*)integralLabel
 {
     if (!_integralLabel) {
-        _integralLabel = [UILabel labelWithFrame:CGRectMake(180*Proportion,50*Proportion, 70, 20) text:@"" textColor:[UIColor whiteColor] font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:HexRGBAlpha(0x6766ff, 1) alignment:NSTextAlignmentLeft];
+        _integralLabel = [UILabel labelWithFrame:CGRectMake(110*Proportion,65*Proportion,kMainScreenWidth-180*Proportion, 15) text:@"" textColor:[UIColor whiteColor] font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:HexRGBAlpha(0x6766ff, 1) alignment:NSTextAlignmentLeft];
         _integralLabel.layer.cornerRadius = 2;
         _integralLabel.layer.masksToBounds = YES;
         
     }
     return _integralLabel;
+    
     
 }
 
@@ -140,7 +140,7 @@
 {
     if (!_shopNameLabel) {
         _shopNameLabel = [UILabel labelWithFrame:CGRectMake(110*Proportion,
-                                                            80*Proportion,
+                                                            83*Proportion,
                                                             kMainScreenWidth-150*Proportion,
                                                             20) text:@"" textColor:HexRGBAlpha(0x444444, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentLeft];
     }
@@ -151,7 +151,7 @@
 {
     if (!_attentionButton) {
         _attentionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _attentionButton.frame = CGRectMake(SCREEN_WIDTH-70,45*Proportion, 60, 30);
+        _attentionButton.frame = CGRectMake(SCREEN_WIDTH-70,45*Proportion, 58, 28);
         _attentionButton.layer.borderWidth = .5;
         _attentionButton.layer.borderColor = RGBACOLOR(200, 200, 200, 1).CGColor;
          _attentionButton.layer.cornerRadius = 6;
@@ -172,7 +172,7 @@
 -(UILabel*)platformLabel
 {
     if (!_platformLabel) {
-        _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,80*Proportion, 60, 15) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
+        _platformLabel = [UILabel labelWithFrame:CGRectMake(SCREEN_WIDTH-70,83*Proportion, 60, 15) text:@"" textColor:HexRGBAlpha(0xa2a5a9, 1) font:[UIFont fontWithName:KContentFont size:14]  backgroundColor:[UIColor clearColor] alignment:NSTextAlignmentRight];
     }
     return _platformLabel;
 }

@@ -17,8 +17,8 @@ PODS:
   - IQKeyboardManager (4.0.4)
   - JPush (2.1.8)
   - MBProgressHUD (1.0.0)
-  - MJExtension (3.0.11)
-  - MJRefresh (3.1.10)
+  - MJExtension (3.0.13)
+  - MJRefresh (3.1.12)
   - NJKWebViewProgress (0.2.3):
     - NJKWebViewProgress/Core (= 0.2.3)
     - NJKWebViewProgress/ProgressView (= 0.2.3)
@@ -45,8 +45,8 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 4a6f83b540283c2645aaeba2bd8dc0f09b5c77f8
   JPush: 2d1286494eae216433f6d7709b2721565b4babc9
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  MJExtension: f9ae6ddc0f1c482c3c9af750280ccebd14381958
-  MJRefresh: bb72948c985914b0b5cecac573a2c69a8915fb02
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   UMengAnalytics-NO-IDFA: 965a219b05475ff2a4c09a164139a27bbaa0e25b

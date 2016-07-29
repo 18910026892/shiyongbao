@@ -14,6 +14,11 @@
     UIScrollView * bigScrollView;
     UIScrollView *smallScrollView;
 }
+
+@property(nonatomic,strong)HYSegmentedControl * control;
+
+@property(nonatomic,strong)NSArray * itemArray;
+
 //标题数组
 @property (nonatomic,strong)NSMutableArray * TitleArray;
 //分类ID数组

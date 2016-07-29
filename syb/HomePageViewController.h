@@ -11,13 +11,21 @@
 #import "ProductGoodsModel.h"
 #import "ProductGoodsCell.h"
 #import "SybSession.h"
-
 #import "brandModel.h"
 #import "BrandCell.h"
+#import "HYSegmentedControl.h"
+
+
 @interface HomePageViewController : BaseViewController<ProductGoodsCellDelegate>
 {
     SybSession * userSession;
 }
+
+
+@property(nonatomic,strong)HYSegmentedControl * control;
+
+@property(nonatomic,strong)NSArray * itemArray;
+
 @property(nonatomic,strong)UIButton * searchButton;
 
 @property(nonatomic,strong)UIButton * messageButton;

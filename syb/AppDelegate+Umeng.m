@@ -13,7 +13,7 @@
     
     //友盟统计
 
-    [MobClick setLogEnabled:YES];
+    [MobClick setLogEnabled:NO];
     UMConfigInstance.appKey = @"552f1092fd98c59fbd00227a";
     //    UMConfigInstance.eSType = E_UM_GAME;
     [MobClick startWithConfigure:UMConfigInstance];

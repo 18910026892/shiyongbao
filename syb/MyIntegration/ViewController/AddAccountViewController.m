@@ -27,13 +27,18 @@
     if (self.bandingType==zhifubaoType) {
         [self setNavTitle:@"绑定支付宝"];
         self.typeName.text = @"支付宝账户";
+      
+        
     }else if (self.bandingType == bankType){
         [self setNavTitle:@"绑定银行卡"];
         self.typeName.text = @"银行卡号";
+      
         self.accountTF.placeholder = @"请输入银行卡号";
     }
+    
+     self.typeName.font = [UIFont systemFontOfSize:16];
     self.bandingBtn.cornerRadius = 5;
-    self.bandingBtn.backgroundColor = kNavBackGround;
+    self.bandingBtn.backgroundColor = ThemeColor;
 }
 -(void)viewWillAppear:(BOOL)animated
 {

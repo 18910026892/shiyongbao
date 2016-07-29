@@ -61,6 +61,8 @@
         [_catIdArray addObject:catid];
         [_TitleArray addObject:title];
     }
+     self.itemArray = (NSArray*)_TitleArray;
+    
     [self initScroll];
 }
 -(void)initScroll
@@ -100,13 +102,33 @@
     [bigScrollView addSubview:vc.view];
     
     
-    ShopsTitle *lable = [smallScrollView.subviews firstObject];
-    lable.scale = 1.0;
+
     
     [self.view addSubview:bigScrollView];
-    [self.view addSubview:smallScrollView];
+    
+    
+    _control = [[HYSegmentedControl alloc]initWithOriginY:64 Width:kMainScreenWidth Titles:self.itemArray delegate:self selectIndex:0];
+    _control.backgroundColor = [UIColor whiteColor];
+
+    [self.view addSubview:_control];
     
 }
+
+- (void)hySegmentedControlSelectAtIndex:(NSInteger)index;
+{
+    NSLog(@" 索引的位置是  %ld",(long)index);
+    
+  
+    CGFloat offsetX = index * bigScrollView.frame.size.width;
+    CGFloat offsetY = bigScrollView.contentOffset.y;
+    CGPoint offset = CGPointMake(offsetX, offsetY);
+    
+    [bigScrollView setContentOffset:offset animated:YES];
+    
+}
+
+
+
 -(void)addController
 {
     
@@ -159,32 +181,36 @@
     // 获得索引
     NSUInteger index = scrollView.contentOffset.x /bigScrollView.frame.size.width;
     // 滚动标题栏
-    ShopsTitle *titleLable = (ShopsTitle *)smallScrollView.subviews[index];
+//    ShopsTitle *titleLable = (ShopsTitle *)smallScrollView.subviews[index];
+//    
+//    CGFloat offsetx = titleLable.center.x - smallScrollView.frame.size.width * 0.5;
+//    
+//    CGFloat offsetMax =smallScrollView.contentSize.width -smallScrollView.frame.size.width;
+//    
+//    
+//    
+//    if (offsetx < 0) {
+//        offsetx = 0;
+//    }else if (offsetx > offsetMax){
+//        offsetx = offsetMax;
+//    }
+//    
+//    CGPoint offset = CGPointMake(offsetx,smallScrollView.contentOffset.y);
+//    [smallScrollView setContentOffset:offset animated:YES];
     
-    CGFloat offsetx = titleLable.center.x - smallScrollView.frame.size.width * 0.5;
     
-    CGFloat offsetMax =smallScrollView.contentSize.width -smallScrollView.frame.size.width;
+    [self.control changeSegmentedControlWithIndex:index];
     
-    
-    
-    if (offsetx < 0) {
-        offsetx = 0;
-    }else if (offsetx > offsetMax){
-        offsetx = offsetMax;
-    }
-    
-    CGPoint offset = CGPointMake(offsetx,smallScrollView.contentOffset.y);
-    [smallScrollView setContentOffset:offset animated:YES];
     // 添加控制器
     ShopsViewController * shopVc = self.childViewControllers[index];
     shopVc.cat_id1 = _catIdArray[index];
     
-    [smallScrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if (idx != index) {
-            ShopsTitle *temlabel = smallScrollView.subviews[idx];
-            temlabel.scale = 0.0;
-        }
-    }];
+//    [smallScrollView.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        if (idx != index) {
+//            ShopsTitle *temlabel = smallScrollView.subviews[idx];
+//            temlabel.scale = 0.0;
+//        }
+//    }];
     
     if (shopVc.view.superview) return;
     shopVc.view.frame = scrollView.bounds;

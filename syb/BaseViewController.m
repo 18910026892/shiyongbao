@@ -70,9 +70,7 @@
     _titleLabel.textColor = [UIColor blackColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.font = [UIFont boldSystemFontOfSize:18];
-    _titleLabel.adjustsFontSizeToFitWidth =YES;
-    _titleLabel.minimumScaleFactor = 0.5;
-    
+  
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         _Customview.frame = CGRectMake(0, 0,kMainScreenWidth,64);

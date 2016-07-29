@@ -56,7 +56,7 @@
 -(UILabel*)navTitleLabel
 {
     if (!_navTitleLabel) {
-        _navTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kMainScreenWidth/4, 10*Proportion,kMainScreenWidth/2, 50*Proportion)];
+        _navTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(kMainScreenWidth/4,32,kMainScreenWidth/2, 20)];
         _navTitleLabel.textColor = [UIColor blackColor];
         _navTitleLabel.textAlignment = NSTextAlignmentCenter;
         _navTitleLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -204,11 +204,32 @@
     return _TableView;
 }
 #pragma TableViewDelegate
+-(void)viewDidLayoutSubviews
+{
+    if ([self.TableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.TableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.TableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.TableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     
-    return 102*Proportion;
+    return 107*Proportion;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;

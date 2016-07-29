@@ -16,5 +16,5 @@
 //获取商品分类列表
 -(void)getGoodsCatList;
 
--(void)getHtml;
+
 @end

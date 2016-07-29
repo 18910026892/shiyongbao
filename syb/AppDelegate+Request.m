@@ -47,38 +47,11 @@
         if ([response isKindOfClass:[NSDictionary class]])
         {
     
-            NSLog(@" 商品分类的数据 %@ ",response);
-            
+    
             NSMutableArray * goodCatList = [response valueForKey:@"result"];
             
             [UserDefaultsUtils saveValue:goodCatList forKey:@"goodCatList"];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshHomePageCategory" object:nil];
-        }
-        
-    } DataFaiure:^(id error) {
-        
-    } Failure:^(id error) {
-        
-    }];
-    
-    
-}
--(void)getHtml;
-{
-    
-    
-    GXHttpRequest *request = [[GXHttpRequest alloc]init];
-
-    [request RequestDataWithUrl:URL_SysHtmlInfo pragma:nil];
-    
-    [request getResultWithSuccess:^(id response) {
-        /// 加保护
-        if ([response isKindOfClass:[NSDictionary class]])
-        {
-            
-            NSLog(@" %@ ",response);
-            
-         
         }
         
     } DataFaiure:^(id error) {

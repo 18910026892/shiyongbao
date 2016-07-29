@@ -8,3 +8,4 @@ pod 'NJKWebViewProgress'
 pod 'UMengAnalytics-NO-IDFA'
 pod 'IQKeyboardManager'
 pod 'JPush'
+

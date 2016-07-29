@@ -67,6 +67,10 @@
     _AttentionCount = [[UILabel alloc]init];
     _AttentionCount.frame = CGRectMake(60,30, SCREEN_WIDTH/2-60, 20);
     NSString  * userCount = ShopsSearchModel.atte_count;
+    if([userCount isEqualToString:@"0"])
+    {
+        userCount = @"共有0人关注";
+    }else
     if ([userCount integerValue] > 10000) {
         userCount = [NSString stringWithFormat:@"共%.1ld万人关注",[userCount integerValue]/10000];
     }else{
